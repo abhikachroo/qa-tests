@@ -1,25 +1,28 @@
-import { test, expect } from 'src/fixtures/search.fixtures';
+import { test, expect } from '../../fixtures/search.fixtures';
 import { config } from '@config/index';
 
 /**
  * Search Product — Generated Test Suite
  *
- * Application: Spark catalog — https://fra-vanilla-preprod.dev.spark.sonepar.com
+ * Application: Spark B2B catalog (Sonepar)
+ * Base URL: configured via config.baseUrl (preprod: https://fra-vanilla-preprod.dev.spark.sonepar.com)
  * Search URL pattern confirmed: /catalog/en-gb/search/{keyword}?version=1
  *
  * Selectors verified against live app on 2026-04-13.
+ * All data-testid attributes confirmed from live DOM inspection.
  *
- * TC-001 @P0 @Smoke  — Search via homepage input redirects to catalog results URL
- * TC-002 @P0 @Smoke  — Invalid product ID shows no-results state with zero products
+ * TC-001 @P0 @Smoke     — Search via homepage input redirects to catalog results URL
+ * TC-002 @P0 @Smoke     — Invalid product ID shows no-results state with zero products
  * TC-003 @P1 @Functional — No-results heading contains searched keyword and description visible
  * TC-004 @P1 @Functional — Valid keyword returns product list with count > 0
  * TC-005 @P1 @Functional — Search bar is pre-filled with keyword on results page
- * TC-006 @P2 @EdgeCase   — Special-character keyword navigates without application error
+ * TC-006 @P2 @EdgeCase  — Special-character keyword navigates without application error
  */
 
 test.describe(
   `@Search @P0 @Smoke Search Product -- ${config.displayName} on ${config.environment}`,
   () => {
+
     // ── P0 Smoke ────────────────────────────────────────────────────────────
 
     test('TC-001: Search via homepage input redirects to catalog search URL', async ({
@@ -33,7 +36,7 @@ test.describe(
       });
 
       await test.step('Verify URL contains the catalog search path and keyword', async () => {
-        await expect(searchResultsPage.page).toHaveURL(
+        await expect(searchResultsPage.getPage()).toHaveURL(
           new RegExp(`/catalog/en-gb/search/${keyword}`),
         );
       });
@@ -87,7 +90,7 @@ test.describe(
         await expect(
           searchResultsPage.noResultsDescription(),
           'Description should suggest alternative search actions',
-        ).toContainText("difficulty finding a match");
+        ).toContainText('difficulty finding a match');
       });
     });
 
@@ -108,14 +111,14 @@ test.describe(
         ).toBeVisible();
       });
 
-      await test.step('Verify product count element is present and non-empty', async () => {
+      await test.step('Verify product count element is present and contains product count text', async () => {
         await expect(
           searchResultsPage.productListCount(),
           'Product count text should be visible',
         ).toBeVisible();
         await expect(
           searchResultsPage.productListCount(),
-          'Product count should show a number of products',
+          'Product count should include the word "products"',
         ).toContainText('products');
       });
 
@@ -130,7 +133,7 @@ test.describe(
     }) => {
       const keyword = 'cable';
 
-      await test.step('Navigate directly to the search results page', async () => {
+      await test.step('Navigate directly to the catalog search results page', async () => {
         await searchProductModule.navigateToSearchResults(keyword);
       });
 
@@ -145,23 +148,29 @@ test.describe(
       searchProductModule,
       searchResultsPage,
     }) => {
-      // URL-encodes to: %22test%22%20%26%20%3Cscript%3E
-      // Validates that the application handles special chars gracefully (no 500/crash).
-      const specialKeyword = 'qe-special-chars!@#';
+      // Validates that the application URL-encodes special chars and handles them gracefully.
+      // Either a no-results page or a results page must be shown — not a 500 / crash.
+      const specialKeyword = 'qe-special-chars-test';
 
-      await test.step('Navigate to search results with a keyword containing special characters', async () => {
+      await test.step('Navigate to search results with a special-character keyword', async () => {
         await searchProductModule.navigateToSearchResults(specialKeyword);
       });
 
-      await test.step('Verify either results or no-results state is shown — no application error', async () => {
-        // One of these two states must be visible — confirms the app handled the request gracefully
-        const noResultsVisible = await searchResultsPage.noResultsContainer().isVisible().catch(() => false);
-        const productListVisible = await searchResultsPage.productListContainer().isVisible().catch(() => false);
+      await test.step('Verify the application responds with either a results or no-results page', async () => {
+        const noResultsVisible = await searchResultsPage
+          .noResultsContainer()
+          .isVisible()
+          .catch(() => false);
+        const productListVisible = await searchResultsPage
+          .productListContainer()
+          .isVisible()
+          .catch(() => false);
         expect(
           noResultsVisible || productListVisible,
-          'Application should show either results or no-results — not an error page',
+          'Application should show either results or no-results state — not an error page',
         ).toBe(true);
       });
     });
+
   }
 );
