@@ -1,0 +1,1 @@
+export class DataGenerator { static test(): string { return "hello"; } }
