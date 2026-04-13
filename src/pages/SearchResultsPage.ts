@@ -8,12 +8,16 @@ import { BasePage } from './BasePage';
  * URL pattern: /catalog/en-gb/search/{keyword}?version=1
  *
  * Selectors verified against live app at:
- *   https://fra-vanilla-preprod.dev.spark.sonepar.com
+ *   https://fra-vanilla-preprod.dev.spark.sonepar.com (2026-04-13)
  */
 export class SearchResultsPage extends BasePage {
   constructor(page: Page) {
     super(page);
   }
+
+  // ── Page accessor ────────────────────────────────────────────────
+  /** Exposes the underlying Playwright Page for URL assertions in tests. */
+  getPage(): Page { return this.page; }
 
   // ── Header search ────────────────────────────────────────────────
   /** The search input in the global header. data-testid="search-bar-input" */
@@ -33,7 +37,7 @@ export class SearchResultsPage extends BasePage {
   // ── No-results state ─────────────────────────────────────────────
   /** Container shown when no products match the query. data-testid="searchNoResultsFound" */
   noResultsContainer   = () => this.page.getByTestId('searchNoResultsFound');
-  /** Heading: "Sorry, no result for \"<keyword>\"". data-testid="heading" inside noResultsContainer */
+  /** Heading: "Sorry, no result for \"<keyword>\"". Scoped inside noResultsContainer. */
   noResultsHeading     = () => this.page.getByTestId('searchNoResultsFound').getByTestId('heading');
   /** Description paragraph inside the no-results container. */
   noResultsDescription = () => this.page.getByTestId('searchNoResultsFound').getByTestId('description');
