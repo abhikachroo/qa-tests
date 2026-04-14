@@ -9,6 +9,7 @@ export interface EnvConfig {
   baseUrl: string;
   searchPath: string;
   noResultsKeyword: string;
+  loginPath: string;
 }
 
 const environment = (process.env.ENVIRONMENT ?? 'preprod').toLowerCase();
