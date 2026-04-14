@@ -1,10 +1,12 @@
-import { test as base } from '@playwright/test';
-import { SearchPage } from '@pages/index';
-import { SearchModule } from '@modules/index';
+import { test as base }     from '@playwright/test';
+import { SearchPage, HeaderSearchPage, SearchResultsPage } from '@pages/index';
+import { SearchModule }     from '@modules/index';
 
 type TestFixtures = {
-  searchPage:   SearchPage;
-  searchModule: SearchModule;
+  searchPage:        SearchPage;
+  headerSearchPage:  HeaderSearchPage;
+  searchResultsPage: SearchResultsPage;
+  searchModule:      SearchModule;
 };
 
 export const test = base.extend<TestFixtures>({
@@ -12,8 +14,16 @@ export const test = base.extend<TestFixtures>({
     await use(new SearchPage(page));
   },
 
-  searchModule: async ({ searchPage }, use) => {
-    await use(new SearchModule(searchPage));
+  headerSearchPage: async ({ page }, use) => {
+    await use(new HeaderSearchPage(page));
+  },
+
+  searchResultsPage: async ({ page }, use) => {
+    await use(new SearchResultsPage(page));
+  },
+
+  searchModule: async ({ searchPage, headerSearchPage, searchResultsPage }, use) => {
+    await use(new SearchModule(searchPage, headerSearchPage, searchResultsPage));
   },
 });
 
