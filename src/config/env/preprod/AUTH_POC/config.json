@@ -1,6 +1,8 @@
 {
   "displayName": "AUTH POC",
   "baseUrl": "https://fra-vanilla-preprod.dev.spark.sonepar.com",
-  "searchPath": "/search",
-  "noResultsKeyword": "xyznotaproduct999"
+  "searchPath": "/catalog/en-gb/search",
+  "noResultsKeyword": "xyznotaproduct999",
+  "productPath": "/catalog/en-gb/products/fluke-digital-thermometer-1-input-0362772",
+  "cartPath": "/checkout/en-gb/"
 }
