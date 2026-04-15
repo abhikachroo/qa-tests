@@ -7,8 +7,13 @@ dotenv.config();
 export interface EnvConfig {
   displayName: string;
   baseUrl: string;
+  /** Path for search results, e.g. /catalog/en-gb/search */
   searchPath: string;
   noResultsKeyword: string;
+  /** Full path to a known purchasable product PDP, e.g. /catalog/en-gb/products/{slug} */
+  productPath: string;
+  /** Path to the cart / basket page, e.g. /checkout/en-gb/ */
+  cartPath: string;
 }
 
 const environment = (process.env.ENVIRONMENT ?? 'preprod').toLowerCase();
