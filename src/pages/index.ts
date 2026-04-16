@@ -1,2 +1,4 @@
-export { BasePage }   from './BasePage';
-export { SearchPage } from './SearchPage';
+export { BasePage }          from './BasePage';
+export { SearchPage }        from './SearchPage';
+export { HeaderSearchPage }  from './HeaderSearchPage';
+export { SearchResultsPage } from './SearchResultsPage';
