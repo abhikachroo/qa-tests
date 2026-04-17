@@ -6,22 +6,23 @@ import { BasePage } from './BasePage';
  * authentication page that the application redirects to during login.
  *
  * Confirmed selectors from live UI inspection (2026-04-17):
- * - URL domain: login-fra-vanilla-test.dev.spark.sonepar.com (custom B2C domain)
- * - Email input:    textbox labelled "Email Address" — matches getByLabel(/email/i)
- * - Password input: textbox labelled "Password" — matches getByLabel(/^password$/i)
- * - Submit button:  button "Log in" — matches getByRole('button', { name: /log in/i })
- * - Show/hide pwd:  button "Show password" — matches getByRole('button', { name: /show password/i })
+ * - URL domain:     login-fra-vanilla-test.dev.spark.sonepar.com (custom B2C domain)
+ * - Email input:    <input id="email" aria-label="Email Address"> — getByLabel('Email Address', { exact: true })
+ *                   NOTE: regex /email/i also matches the form's aria-label — use exact string
+ * - Password input: <input id="password" aria-label="Password"> — getByLabel('Password', { exact: true })
+ * - Submit button:  <button>"Log in"</button> — getByRole('button', { name: /log in/i })
+ * - Show/hide pwd:  <button>"Show password"</button> — getByRole('button', { name: /show password/i })
  */
 export class AzureB2CLoginPage extends BasePage {
   constructor(page: Page) {
     super(page);
   }
 
-  // Email input — use getByLabel for resilience against ID changes
-  emailInput         = () => this.page.getByLabel(/email/i);
+  // Email input — exact label match avoids ambiguity with form aria-label "Sign in with your email address"
+  emailInput         = () => this.page.getByLabel('Email Address', { exact: true });
 
-  // Password input — use getByLabel
-  passwordInput      = () => this.page.getByLabel(/^password$/i);
+  // Password input — exact label match
+  passwordInput      = () => this.page.getByLabel('Password', { exact: true });
 
   // Primary submit button — confirmed text "Log in" on live B2C page
   signInButton       = () => this.page.getByRole('button', { name: /log in/i });
