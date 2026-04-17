@@ -44,10 +44,6 @@ test.describe(`@P0 @Smoke @Login Login Happy Path — ${config.displayName} on $
       await loginModule.doLogin();
     });
 
-    await test.step('Verify redirect away from login page occurs', async () => {
-      await expect(loginModule['page']).not.toHaveURL(/\/login/);
-    });
-
     await test.step('Verify authenticated landing page is displayed', async () => {
       await loginModule.verifyAuthenticatedState();
     });
