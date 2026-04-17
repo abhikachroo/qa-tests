@@ -5,12 +5,12 @@ import { BasePage } from './BasePage';
  * AzureB2CLoginPage — locators and simple UI actions for the Azure B2C
  * authentication page that the application redirects to during login.
  *
- * Confirmed selectors from live UI inspection:
- * - URL pattern: login.microsoftonline.com (external domain — no baseURL prefix)
- * - Email input:    <input type="email" id="signInName"> — labelled "Email Address"
- * - Password input: <input type="password" id="password"> — labelled "Password"
- * - Submit button:  <button id="next"> "Sign in"
- * - Show/hide pwd:  aria-label="Show password" toggle button
+ * Confirmed selectors from live UI inspection (2026-04-17):
+ * - URL domain: login-fra-vanilla-test.dev.spark.sonepar.com (custom B2C domain)
+ * - Email input:    textbox labelled "Email Address" — matches getByLabel(/email/i)
+ * - Password input: textbox labelled "Password" — matches getByLabel(/^password$/i)
+ * - Submit button:  button "Log in" — matches getByRole('button', { name: /log in/i })
+ * - Show/hide pwd:  button "Show password" — matches getByRole('button', { name: /show password/i })
  */
 export class AzureB2CLoginPage extends BasePage {
   constructor(page: Page) {
@@ -23,11 +23,11 @@ export class AzureB2CLoginPage extends BasePage {
   // Password input — use getByLabel
   passwordInput      = () => this.page.getByLabel(/^password$/i);
 
-  // Primary submit / "Sign in" button
-  signInButton       = () => this.page.getByRole('button', { name: /sign in|next/i });
+  // Primary submit button — confirmed text "Log in" on live B2C page
+  signInButton       = () => this.page.getByRole('button', { name: /log in/i });
 
-  // Password show/hide toggle
-  passwordToggleBtn  = () => this.page.getByRole('button', { name: /show password|masquer|afficher/i });
+  // Password show/hide toggle — confirmed text "Show password" on live B2C page
+  passwordToggleBtn  = () => this.page.getByRole('button', { name: /show password/i });
 
   // Error message container shown on failed authentication
   errorMessage       = () => this.page.locator('#requiredFieldMissing, .error, [class*="error"]').first();
