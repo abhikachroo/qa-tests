@@ -20,6 +20,10 @@ import { config }       from '@config/index';
  *             interim assertion (Login link absent)
  *   - G-003: Pricing banner post-login behaviour not confirmed → TC-008 skipped
  */
+
+/** True when running without real CI credentials injected (placeholder values) */
+const credentialsNotInjected = config.username.includes('REPLACE_WITH_CI_SECRET');
+
 test.describe(`@P0 @Smoke @Login Login — Happy Path — ${config.displayName} on ${config.environment}`, () => {
 
   // ── P0 Smoke ──────────────────────────────────────────────────────────────
@@ -59,12 +63,17 @@ test.describe(`@P0 @Smoke @Login Login — Happy Path — ${config.displayName} 
    * TC-004: Valid credentials authenticate user and redirect to homepage
    * AC Reference: AC-003
    * Priority:     P0 Smoke
-   * Precondition: Valid credentials available in config
+   * Precondition: Valid credentials injected via CI secrets (config.username / config.password)
    */
   test('TC-004: Valid credentials authenticate and redirect to homepage', async ({
     loginModule,
     page,
   }) => {
+    test.skip(
+      credentialsNotInjected,
+      'Skipped: CI credentials not injected — set OPCO config.username and config.password via CI secrets to enable this test.',
+    );
+
     await test.step('Navigate to homepage and trigger login flow', async () => {
       await loginModule.navigateToLogin();
     });
@@ -145,12 +154,17 @@ test.describe(`@P0 @Smoke @Login Login — Happy Path — ${config.displayName} 
    * TC-005: Post-login URL is the application homepage
    * AC Reference: AC-004
    * Priority:     P1 Functional
-   * Precondition: Valid credentials available
+   * Precondition: Valid credentials injected via CI secrets
    */
   test('TC-005: Post-login URL is the application homepage', async ({
     loginModule,
     page,
   }) => {
+    test.skip(
+      credentialsNotInjected,
+      'Skipped: CI credentials not injected — set OPCO config.username and config.password via CI secrets to enable this test.',
+    );
+
     await test.step('Perform full login flow', async () => {
       await loginModule.doLogin();
     });
