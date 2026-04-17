@@ -2,5 +2,8 @@
   "displayName": "AUTH POC",
   "baseUrl": "https://fra-vanilla-preprod.dev.spark.sonepar.com",
   "searchPath": "/search",
-  "noResultsKeyword": "xyznotaproduct999"
+  "noResultsKeyword": "xyznotaproduct999",
+  "loginPath": "/login",
+  "username": "mark.reinger.6213@exka6oev.mailosaur.net",
+  "password": "Demo202201"
 }
