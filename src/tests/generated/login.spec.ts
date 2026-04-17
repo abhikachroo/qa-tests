@@ -4,7 +4,8 @@ import { config }       from '@config/index';
 /**
  * Login — Happy Path
  * Application: https://fra-vanilla-preprod.dev.spark.sonepar.com/
- * Auth provider: Azure B2C (Microsoft Identity)
+ * Auth provider: Azure B2C (Microsoft Identity) — custom domain:
+ *   login-fra-vanilla-test.dev.spark.sonepar.com
  *
  * Scenarios: TC-001 through TC-008
  * Scope: Happy path only — negative/sad path out of scope per requirements
@@ -43,7 +44,9 @@ test.describe(`@P0 @Smoke @Login Login — Happy Path — ${config.displayName} 
     });
 
     await test.step('Verify browser has redirected to Azure B2C login page', async () => {
-      await expect(page).toHaveURL(/login\.microsoftonline\.com|b2clogin\.com/);
+      // Custom B2C domain confirmed: login-fra-vanilla-test.dev.spark.sonepar.com
+      // Standard Microsoft domains retained as fallbacks for portability
+      await expect(page).toHaveURL(/login-fra-vanilla-test\.dev\.spark\.sonepar\.com|login\.microsoftonline\.com|b2clogin\.com/);
     });
 
     await test.step('Verify the Sign In form is displayed', async () => {
@@ -75,7 +78,7 @@ test.describe(`@P0 @Smoke @Login Login — Happy Path — ${config.displayName} 
     });
 
     await test.step('Verify application homepage is displayed in authenticated state', async () => {
-      await expect(page).not.toHaveURL(/login\.microsoftonline\.com|b2clogin\.com/);
+      await expect(page).not.toHaveURL(/login-fra-vanilla-test\.dev\.spark\.sonepar\.com|login\.microsoftonline\.com|b2clogin\.com/);
     });
   });
 
@@ -103,8 +106,8 @@ test.describe(`@P0 @Smoke @Login Login — Happy Path — ${config.displayName} 
 
     await test.step('Verify the redirect URL contains OAuth2 parameters', async () => {
       await expect(page).toHaveURL(/client_id|response_type|redirect_uri/);
-      // Verify Azure B2C domain
-      await expect(page).toHaveURL(/login\.microsoftonline\.com|b2clogin\.com/);
+      // Custom B2C domain confirmed: login-fra-vanilla-test.dev.spark.sonepar.com
+      await expect(page).toHaveURL(/login-fra-vanilla-test\.dev\.spark\.sonepar\.com|login\.microsoftonline\.com|b2clogin\.com/);
     });
   });
 
@@ -154,7 +157,7 @@ test.describe(`@P0 @Smoke @Login Login — Happy Path — ${config.displayName} 
 
     await test.step('Verify post-login URL is the application root', async () => {
       await expect(page).toHaveURL(/fra-vanilla-preprod\.dev\.spark\.sonepar\.com/);
-      await expect(page).not.toHaveURL(/login\.microsoftonline\.com|b2clogin\.com/);
+      await expect(page).not.toHaveURL(/login-fra-vanilla-test\.dev\.spark\.sonepar\.com|login\.microsoftonline\.com|b2clogin\.com/);
     });
   });
 
