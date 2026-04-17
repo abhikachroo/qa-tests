@@ -3,7 +3,7 @@
   "baseUrl": "https://fra-vanilla-preprod.dev.spark.sonepar.com",
   "searchPath": "/search",
   "noResultsKeyword": "xyznotaproduct999",
-  "loginPath": "/login",
+  "loginPath": "/account/api/login?redirect_to=https%3A%2F%2Ffra-vanilla-preprod.dev.spark.sonepar.com%2F",
   "username": "mark.reinger.6213@exka6oev.mailosaur.net",
   "password": "Demo202201"
 }
