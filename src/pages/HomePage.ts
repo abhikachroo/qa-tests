@@ -6,7 +6,7 @@ import { BasePage } from './BasePage';
  * authenticated states of https://fra-vanilla-preprod.dev.spark.sonepar.com/
  *
  * Confirmed from live UI inspection (previous session):
- * - Two login entry points exist: header link and personalized-pricing banner link
+ * - Two login entry points exist: header CTA button and personalized-pricing banner link
  * - After login the Login link is replaced by an account/user indicator
  */
 export class HomePage extends BasePage {
@@ -14,15 +14,15 @@ export class HomePage extends BasePage {
     super(page);
   }
 
-  // Header login link — visible in unauthenticated state
-  // TODO: verify selector against live UI — role+name confirmed in accessibility snapshot
-  headerLoginLink    = () => this.page.getByRole('link', { name: /se connecter|login|sign in/i });
+  // Header login CTA — visible in unauthenticated state
+  // Selector confirmed against live UI: data-testid="login-button" (single element)
+  headerLoginLink    = () => this.page.getByTestId('login-button');
 
   // Personalized pricing banner — visible in unauthenticated state
   pricingBanner      = () => this.page.locator('[data-testid="personalized-pricing-banner"], .personalized-pricing-banner, [class*="pricingBanner"]');
 
-  // Banner CTA login link inside the pricing banner
-  bannerLoginLink    = () => this.pricingBanner().getByRole('link', { name: /login|se connecter|sign in/i });
+  // Banner CTA login link inside the guest/pricing banner
+  bannerLoginLink    = () => this.page.getByTestId('guest-banner').getByRole('link', { name: /login|se connecter|sign in/i });
 
   // Post-login: user/account indicator in header (Login link replaced)
   userAccountWidget  = () => this.page.locator('[data-testid="account-widget"], [data-testid="user-menu"], [aria-label*="account"], [aria-label*="compte"]');
