@@ -14,8 +14,11 @@ export class LoginPage extends BasePage {
   // Locators (arrow functions — never plain Locator properties)
   // ---------------------------------------------------------------------------
 
-  emailInput    = () => this.page.getByLabel(/email/i);
-  passwordInput = () => this.page.getByLabel(/password|mot de passe/i);
+  // Scoped to role="textbox" to avoid strict mode violation:
+  // the <form> element carries aria-label="Sign in with your email address"
+  // which matched /email/i alongside the actual <input aria-label="Email Address">.
+  emailInput    = () => this.page.getByRole('textbox', { name: 'Email Address' });
+  passwordInput = () => this.page.getByRole('textbox', { name: /password/i });
   submitBtn     = () => this.page.getByRole('button', { name: /sign in|log in|connexion|se connecter/i });
   errorMessage  = () => this.page.locator('[data-testid="login-error"], .login-error, [role="alert"]').first();
 
