@@ -1,0 +1,12 @@
+{
+  "displayName": "ECOSET PPR",
+  "baseUrl": "https://ecoset-config-ppr.se.com",
+  "loginPath": "/",
+  "workbenchPath": "/workbench",
+  "sldPath": "/sld",
+  "exportPath": "/export",
+  "username": "gregorio0@ngainitr.com",
+  "password": "HM_Auto_tests1",
+  "country": "France",
+  "language": "English"
+}
