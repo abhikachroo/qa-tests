@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 
 export abstract class BasePage {
-  // Cookie consent banner — site-wide, appears on first visit
+  // Cookie / consent banner — site-wide, appears on first visit
   private cookieAcceptBtn = () => this.page.getByRole('button', { name: /accepter tout/i });
 
   constructor(protected page: Page) {}

@@ -1,0 +1,12 @@
+{
+  "displayName": "EcoSet Config FR (prod)",
+  "baseUrl": "https://ecoset-config.se.com",
+  "apiUrl": "https://ecoset-config.se.com",
+  "loginPath": "/",
+  "username": "",
+  "password": "",
+  "searchPath": "/search",
+  "noResultsKeyword": "xyznotaproduct999",
+  "contactEmail": "za-ccc@schneider-electric.com",
+  "contactPhone": "+27 (0)11 230 5880"
+}
