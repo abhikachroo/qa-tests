@@ -5,10 +5,20 @@ import * as path from 'path';
 dotenv.config();
 
 export interface EnvConfig {
-  displayName: string;
-  baseUrl: string;
-  searchPath: string;
-  noResultsKeyword: string;
+  displayName:    string;
+  baseUrl:        string;
+  // Search feature
+  searchPath?:       string;
+  noResultsKeyword?: string;
+  // SLD / EcoSet feature
+  loginPath?:     string;
+  workbenchPath?: string;
+  sldPath?:       string;
+  exportPath?:    string;
+  username?:      string;
+  password?:      string;
+  country?:       string;
+  language?:      string;
 }
 
 const environment = (process.env.ENVIRONMENT ?? 'preprod').toLowerCase();
