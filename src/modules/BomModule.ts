@@ -1,10 +1,8 @@
 import { expect } from '@playwright/test';
 import { BomPage } from '@pages/BomPage';
 import { Logger } from '@utils/Logger';
+import { EUR_FORMAT_REGEX } from '@modules/ProductsModule';
 import { config } from '@config/index';
-
-/** EUR format: €X,XX.XX */
-const EUR_FORMAT_REGEX = /^€[0-9]{1,3}(,[0-9]{3})*\.[0-9]{2}$/;
 
 export class BomModule {
   private logger: Logger;
@@ -24,9 +22,11 @@ export class BomModule {
       this.bomPage.bomLineItems().first(),
       'BOM should have at least one product row',
     ).toBeVisible();
-    const count = await this.bomPage.getBomRowCount();
-    expect(count, 'BOM row count should be > 0').toBeGreaterThan(0);
-    this.logger.info(`BOM has ${count} rows`);
+    await expect(
+      this.bomPage.bomLineItems(),
+      'BOM row count should be > 0',
+    ).not.toHaveCount(0);
+    this.logger.info('BOM product rows verified');
   }
 
   /**
@@ -54,23 +54,21 @@ export class BomModule {
   }
 
   /**
-   * Verify BOM prices match EUR format regex.
+   * Verify BOM prices are visible and contain EUR symbol.
    * Assumption: EUR format is €X,XX.XX (comma = thousands separator).
    * TODO: confirm format with product team before sign-off.
    */
   async verifyBomPricesEurFormat(): Promise<void> {
-    this.logger.info('Verifying BOM prices match EUR format regex');
-    const prices = await this.bomPage.getBomPriceTexts();
-    for (const priceText of prices) {
-      const normalized = priceText.replace(/\s/g, '');
-      this.logger.debug(`BOM price: "${priceText}" — normalized: "${normalized}" — EUR match: ${EUR_FORMAT_REGEX.test(normalized)}`);
-    }
-    // Assert at least one BOM price cell is visible
+    this.logger.info('Verifying BOM prices are in EUR format');
     await expect(
       this.bomPage.bomPriceItems().first(),
       'At least one BOM price should be visible',
     ).toBeVisible();
-    this.logger.info('BOM price format check complete');
+    await expect(
+      this.bomPage.bomPriceItems().first(),
+      'BOM price should contain EUR symbol',
+    ).toContainText('€');
+    this.logger.info('BOM price EUR format check complete');
   }
 
   /**

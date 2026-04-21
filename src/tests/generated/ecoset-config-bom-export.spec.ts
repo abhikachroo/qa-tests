@@ -12,34 +12,13 @@
  *   - TC-019/TC-020-023: BOM.csv format — "3 worksheets in a CSV" is technically invalid;
  *     may mean 3 separate CSV files or a multi-sheet XLSX. TODO: confirm with product team.
  *   - TC-024: TotalPrice reconciliation assumes BOM and Products page share the same total.
+ *   - TC-020-023: Zip content inspection (CSV/PDF/JSON) requires a zip library (e.g. adm-zip).
+ *     Current implementation verifies download existence; full file-type assertions are TODO.
  */
+import * as fs        from 'fs';
 import { test, expect } from '@fixtures';
 import { config }        from '@config/index';
 import { DataGenerator } from '@utils/DataGenerator';
-
-/**
- * Full setup helper: login → country → T&C → project → switchboard → add products → BOM tab.
- */
-async function setupThroughBom(
-  loginModule:    Parameters<Parameters<typeof test>[2]>[0]['loginModule'],
-  projectModule:  Parameters<Parameters<typeof test>[2]>[0]['projectModule'],
-  productsModule: Parameters<Parameters<typeof test>[2]>[0]['productsModule'],
-  bomModule:      Parameters<Parameters<typeof test>[2]>[0]['bomModule'],
-  productCount = 1,
-): Promise<void> {
-  await loginModule.doLogin();
-  await loginModule.selectFranceEnglish();
-  await loginModule.acceptTermsIfPresent();
-  await projectModule.createProject();
-  await projectModule.createSwitchboard();
-  await productsModule.addProducts(productCount);
-  // Navigate to BOM tab via Design page path
-  await productsModule.goToSld();
-  await productsModule.designAndVerify2dView();
-  await productsModule.mountAllDevices();
-  // TODO: verify the exact navigation to BOM tab from design page
-  await bomModule.goToExport(); // placeholder — will need adjustment once BOM tab confirmed
-}
 
 test.describe(`@P1 @Regression @EcoSetConfig @BOM EcoSet Config — BOM & Export — ${config.displayName} on ${config.environment}`, () => {
 
@@ -53,7 +32,7 @@ test.describe(`@P1 @Regression @EcoSetConfig @BOM EcoSet Config — BOM & Export
     bomModule,
     bomPage,
   }) => {
-    await test.step('Login, create project + switchboard, add products, navigate to BOM', async () => {
+    await test.step('Login, create project + switchboard, add products, reach Design page', async () => {
       await loginModule.doLogin();
       await loginModule.selectFranceEnglish();
       await loginModule.acceptTermsIfPresent();
@@ -66,7 +45,7 @@ test.describe(`@P1 @Regression @EcoSetConfig @BOM EcoSet Config — BOM & Export
     });
 
     await test.step('Navigate to the Bill of Materials tab', async () => {
-      // TODO: adjust navigation once BOM tab selector is confirmed
+      // TODO: replace with dedicated BOM tab navigation once selector is confirmed
       await bomPage.clickExportTab();
       await bomPage.waitForPageLoad();
     });
@@ -103,7 +82,6 @@ test.describe(`@P1 @Regression @EcoSetConfig @BOM EcoSet Config — BOM & Export
     });
 
     await test.step('Navigate to the Bill of Materials tab', async () => {
-      // TODO: adjust once BOM tab selector is confirmed
       await bomPage.clickExportTab();
       await bomPage.waitForPageLoad();
     });
@@ -122,7 +100,6 @@ test.describe(`@P1 @Regression @EcoSetConfig @BOM EcoSet Config — BOM & Export
     productsModule,
     bomModule,
     exportModule,
-    exportPage,
   }) => {
     await test.step('Login, create project + switchboard, add products, reach Export page', async () => {
       await loginModule.doLogin();
@@ -179,13 +156,10 @@ test.describe(`@P1 @Regression @EcoSetConfig @BOM EcoSet Config — BOM & Export
       await exportModule.saveDownload(download, 'ecoset-export-tc020.zip');
     });
 
-    await test.step('Assert zip file was downloaded (BOM Data folder inspection requires unzip step — TODO)', async () => {
-      // TODO: add AdmZip or similar to inspect zip contents programmatically
-      // For now, we assert the download occurred and the file size is > 0
-      const { existsSync, statSync } = require('fs') as typeof import('fs');
-      const zipPath = 'test-results/ecoset-export-tc020.zip';
-      expect(existsSync(zipPath), 'Zip file should exist after export').toBe(true);
-      expect(statSync(zipPath).size, 'Zip file should not be empty').toBeGreaterThan(0);
+    await test.step('Verify zip file exists and is non-empty (BOM Data folder check — TODO: add adm-zip inspection)', async () => {
+      // TODO: inspect zip entry names for a "BOM Data" folder using adm-zip or similar
+      expect(fs.existsSync('test-results/ecoset-export-tc020.zip'), 'Zip file should exist after export').toBe(true);
+      expect(fs.statSync('test-results/ecoset-export-tc020.zip').size, 'Zip file should not be empty').toBeGreaterThan(0);
     });
   });
 
@@ -214,12 +188,10 @@ test.describe(`@P1 @Regression @EcoSetConfig @BOM EcoSet Config — BOM & Export
       await exportModule.saveDownload(download, 'ecoset-export-tc021.zip');
     });
 
-    await test.step('Verify zip contains at least one CSV file (zip content inspection — TODO)', async () => {
-      // TODO: inspect zip entry names for .csv files using AdmZip or similar
-      // Placeholder assertion: verify download succeeded
-      const { existsSync } = require('fs') as typeof import('fs');
+    await test.step('Verify zip contains CSV files (zip content inspection — TODO: add adm-zip)', async () => {
+      // TODO: inspect zip entry names for .csv files using adm-zip
       expect(
-        existsSync('test-results/ecoset-export-tc021.zip'),
+        fs.existsSync('test-results/ecoset-export-tc021.zip'),
         'Zip file should exist',
       ).toBe(true);
     });
@@ -250,11 +222,10 @@ test.describe(`@P1 @Regression @EcoSetConfig @BOM EcoSet Config — BOM & Export
       await exportModule.saveDownload(download, 'ecoset-export-tc022.zip');
     });
 
-    await test.step('Verify zip contains at least one PDF file (zip content inspection — TODO)', async () => {
-      // TODO: inspect zip entry names for .pdf files using AdmZip or similar
-      const { existsSync } = require('fs') as typeof import('fs');
+    await test.step('Verify zip contains PDF files (zip content inspection — TODO: add adm-zip)', async () => {
+      // TODO: inspect zip entry names for .pdf files using adm-zip
       expect(
-        existsSync('test-results/ecoset-export-tc022.zip'),
+        fs.existsSync('test-results/ecoset-export-tc022.zip'),
         'Zip file should exist',
       ).toBe(true);
     });
@@ -285,11 +256,10 @@ test.describe(`@P1 @Regression @EcoSetConfig @BOM EcoSet Config — BOM & Export
       await exportModule.saveDownload(download, 'ecoset-export-tc023.zip');
     });
 
-    await test.step('Verify zip contains at least one JSON file (zip content inspection — TODO)', async () => {
-      // TODO: inspect zip entry names for .json files using AdmZip or similar
-      const { existsSync } = require('fs') as typeof import('fs');
+    await test.step('Verify zip contains a JSON file (zip content inspection — TODO: add adm-zip)', async () => {
+      // TODO: inspect zip entry names for .json files using adm-zip
       expect(
-        existsSync('test-results/ecoset-export-tc023.zip'),
+        fs.existsSync('test-results/ecoset-export-tc023.zip'),
         'Zip file should exist',
       ).toBe(true);
     });
@@ -318,11 +288,10 @@ test.describe(`@P1 @Regression @EcoSetConfig @BOM EcoSet Config — BOM & Export
 
     await test.step('Capture Total Amount from the Products page', async () => {
       await productsModule.verifyTotalAmountInEur();
-      // TODO: expose a getTotalAmountText() on ProductsModule for exact value comparison
-      productsTotalText = await productsModule['productsPage'].getTotalAmountText();
+      productsTotalText = await productsModule.getTotalAmountText();
     });
 
-    await test.step('Navigate to BOM via SLD and Design path', async () => {
+    await test.step('Navigate through SLD and Design to reach BOM', async () => {
       await productsModule.goToSld();
       await productsModule.designAndVerify2dView();
       await productsModule.mountAllDevices();
@@ -331,7 +300,7 @@ test.describe(`@P1 @Regression @EcoSetConfig @BOM EcoSet Config — BOM & Export
       await bomPage.waitForPageLoad();
     });
 
-    await test.step('Capture BOM Total Amount and compare to Products page total', async () => {
+    await test.step('Capture BOM Total Amount and verify it matches Products page total', async () => {
       const bomTotal = await bomModule.getBomTotalAmountText();
       expect(
         bomTotal,
@@ -353,12 +322,15 @@ test.describe(`@P1 @Regression @EcoSetConfig @BOM EcoSet Config — BOM & Export
       await loginModule.doLogin(config.username, badPassword);
     });
 
-    await test.step('Verify error message is visible and contains error text', async () => {
-      await loginModule.verifyLoginFailed('Invalid');
+    await test.step('Verify error message is visible', async () => {
+      await expect(
+        loginPage.errorMessage(),
+        'Error message should be visible after failed login',
+      ).toBeVisible();
     });
 
-    await test.step('Verify user is NOT redirected to the application', async () => {
-      await expect(loginPage.errorMessage()).toBeVisible();
+    await test.step('Verify error message contains expected error text', async () => {
+      await loginModule.verifyLoginFailed('Invalid');
     });
   });
 

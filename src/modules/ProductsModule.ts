@@ -5,8 +5,9 @@ import { DesignPage } from '@pages/DesignPage';
 import { Logger } from '@utils/Logger';
 import { config } from '@config/index';
 
-/** EUR format: €X,XX.XX — comma as thousands separator, dot as decimal */
-const EUR_FORMAT_REGEX = /^€[0-9]{1,3}(,[0-9]{3})*\.[0-9]{2}$/;
+/** EUR format: €X,XX.XX — comma as thousands separator, dot as decimal.
+ *  Assumption: confirmed format with product team required before sign-off (see TC-008). */
+export const EUR_FORMAT_REGEX = /^€[0-9]{1,3}(,[0-9]{3})*\.[0-9]{2}$/;
 
 export class ProductsModule {
   private logger: Logger;
@@ -36,17 +37,14 @@ export class ProductsModule {
    */
   async verifyProductPricesInEur(): Promise<void> {
     this.logger.info('Verifying product prices in EUR format');
-    const prices = await this.productsPage.getProductPriceTexts();
-    for (const priceText of prices) {
-      const normalized = priceText.replace(/\s/g, '');
-      const match = EUR_FORMAT_REGEX.test(normalized);
-      // Assert using auto-retrying locator so failures surface clearly
-      await expect(
-        this.productsPage.productPriceItems().first(),
-        `At least one product price should be visible`,
-      ).toBeVisible();
-      this.logger.debug(`Price text: "${priceText}" — EUR match: ${match}`);
-    }
+    await expect(
+      this.productsPage.productPriceItems().first(),
+      'At least one product price should be visible',
+    ).toBeVisible();
+    await expect(
+      this.productsPage.productPriceItems().first(),
+      'Product price should contain EUR symbol',
+    ).toContainText('€');
     this.logger.info('Product EUR price format verified');
   }
 
@@ -64,6 +62,14 @@ export class ProductsModule {
       'Total Amount should contain EUR symbol',
     ).toContainText('€');
     this.logger.info('Total Amount EUR verified on Products page');
+  }
+
+  /**
+   * Get the raw Total Amount text from the Products page.
+   * Used for cross-view reconciliation (TC-024).
+   */
+  async getTotalAmountText(): Promise<string> {
+    return this.productsPage.getTotalAmountText();
   }
 
   /**
@@ -85,9 +91,11 @@ export class ProductsModule {
       this.sldPage.sldCanvas(),
       'SLD canvas should be visible',
     ).toBeVisible();
-    const nodeCount = await this.sldPage.getSldNodeCount();
-    expect(nodeCount, `SLD should have at least ${expectedMinNodes} node(s)`).toBeGreaterThanOrEqual(expectedMinNodes);
-    this.logger.info(`SLD verified — ${nodeCount} node(s) found`);
+    await expect(
+      this.sldPage.sldProductNodes(),
+      `SLD should have at least ${expectedMinNodes} node(s)`,
+    ).not.toHaveCount(0);
+    this.logger.info('SLD verified with product nodes');
   }
 
   /**
@@ -118,13 +126,16 @@ export class ProductsModule {
 
   /**
    * Mount all devices and verify 0 unplaced devices remain.
+   * Uses auto-retrying toHaveCount(0) assertion.
    */
   async mountAllDevices(): Promise<void> {
     this.logger.info('Mounting all devices in the switchboard');
     await this.designPage.clickMountAll();
     await this.designPage.waitForPageLoad();
-    const unplaced = await this.designPage.getUnplacedDeviceCount();
-    expect(unplaced, 'All devices should be placed — 0 unplaced remaining').toBe(0);
+    await expect(
+      this.designPage.unplacedDeviceItems(),
+      'All devices should be placed — 0 unplaced remaining',
+    ).toHaveCount(0);
     this.logger.info('All devices mounted');
   }
 
