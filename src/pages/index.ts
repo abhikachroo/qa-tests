@@ -1,4 +1,7 @@
-export { BasePage }          from './BasePage';
-export { SearchPage }        from './SearchPage';
-export { HeaderSearchPage }  from './HeaderSearchPage';
-export { SearchResultsPage } from './SearchResultsPage';
+export { BasePage }             from './BasePage';
+export { SearchPage }           from './SearchPage';
+export { HeaderSearchPage }     from './HeaderSearchPage';
+export { SearchResultsPage }    from './SearchResultsPage';
+export { LoginPage }            from './LoginPage';
+export { EcoSetProjectPage }    from './EcoSetProjectPage';
+export { EcoSetProductsPage }   from './EcoSetProductsPage';
