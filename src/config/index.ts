@@ -7,8 +7,13 @@ dotenv.config();
 export interface EnvConfig {
   displayName: string;
   baseUrl: string;
+  // Search config
   searchPath: string;
   noResultsKeyword: string;
+  // Login config
+  loginPath: string;
+  username: string;
+  password: string;
 }
 
 const environment = (process.env.ENVIRONMENT ?? 'preprod').toLowerCase();

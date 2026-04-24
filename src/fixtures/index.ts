@@ -1,15 +1,27 @@
 import { test as base }     from '@playwright/test';
-import { SearchPage, HeaderSearchPage, SearchResultsPage } from '@pages/index';
-import { SearchModule }     from '@modules/index';
+import {
+  SearchPage,
+  HeaderSearchPage,
+  SearchResultsPage,
+  LoginPage,
+  HomePage,
+} from '@pages/index';
+import { SearchModule, LoginModule } from '@modules/index';
 
 type TestFixtures = {
+  // Search fixtures
   searchPage:        SearchPage;
   headerSearchPage:  HeaderSearchPage;
   searchResultsPage: SearchResultsPage;
   searchModule:      SearchModule;
+  // Login fixtures
+  loginPage:   LoginPage;
+  homePage:    HomePage;
+  loginModule: LoginModule;
 };
 
 export const test = base.extend<TestFixtures>({
+  // --- Search ---
   searchPage: async ({ page }, use) => {
     await use(new SearchPage(page));
   },
@@ -24,6 +36,19 @@ export const test = base.extend<TestFixtures>({
 
   searchModule: async ({ searchPage, headerSearchPage, searchResultsPage }, use) => {
     await use(new SearchModule(searchPage, headerSearchPage, searchResultsPage));
+  },
+
+  // --- Login ---
+  loginPage: async ({ page }, use) => {
+    await use(new LoginPage(page));
+  },
+
+  homePage: async ({ page }, use) => {
+    await use(new HomePage(page));
+  },
+
+  loginModule: async ({ loginPage, homePage }, use) => {
+    await use(new LoginModule(loginPage, homePage));
   },
 });
 
