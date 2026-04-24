@@ -6,11 +6,11 @@ export class LoginPage extends BasePage {
 
   // Azure B2C login form locators
 
-  // Email input field (strategy: aria-label)
-  emailInput = () => this.page.getByLabel('Email Address');
+  // Email input field (strategy: role=textbox — avoids form aria-label collision)
+  emailInput = () => this.page.getByRole('textbox', { name: 'Email Address' });
 
-  // Password input field (strategy: aria-label)
-  passwordInput = () => this.page.getByLabel('Password');
+  // Password input field (strategy: role=textbox — consistent with emailInput)
+  passwordInput = () => this.page.getByRole('textbox', { name: 'Password' });
 
   // Azure B2C primary submit button (strategy: id — verified via live app)
   submitBtn = () => this.page.locator('#next');
