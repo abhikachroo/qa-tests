@@ -4,12 +4,12 @@ import { BasePage } from './BasePage';
 export class HomePage extends BasePage {
   constructor(page: Page) { super(page); }
 
-  // Header navigation — pre-login state (strategy: role+text)
-  headerLoginLink = () => this.page.getByRole('link', { name: /connexion|login/i });
+  // Header navigation — pre-login state (strategy: data-testid, unique on page)
+  headerLoginLink = () => this.page.getByTestId('login-button');
 
   // Header navigation — post-login authenticated state (strategy: data-testid)
   userDetailsButton = () => this.page.getByTestId('user-details-button');
-  cartButton = () => this.page.getByTestId('cart-button');
+  cartButton        = () => this.page.getByTestId('cart-button');
 
   // Homepage hero content (strategy: role+name, level=1)
   welcomeHeading = () => this.page.getByRole('heading', { name: 'Welcome', level: 1 });
