@@ -36,4 +36,46 @@ test.describe(`@P0 @Smoke @Search Product Search — ${config.displayName} on ${
     });
   });
 
+  /**
+   * TC-001: Add to Cart button is disabled for an unauthenticated guest user
+   * AC Reference: AC-GUEST-CART-001
+   * Priority:     P0 Smoke
+   * Type:         Functional
+   * Surface:      SRP (Search Results Page)
+   *
+   * Precondition: No active session — user is browsing as a guest (unauthenticated)
+   *
+   * Flow:
+   *   1. Navigate to homepage as a guest
+   *   2. Submit a search for product ID 6968173 via the header search bar
+   *   3. Wait for the search results page to load ("1 product" summary confirms render)
+   *   4. Assert that the Add to Cart button (data-testid="quantity-counter-cta-add")
+   *      carries a native HTML `disabled` attribute
+   *
+   * Assertion: expect(addToCartBtn).toBeDisabled()
+   * Note: Confirmed via live accessibility snapshot — native `disabled` attr present,
+   *       NOT aria-disabled — so toBeDisabled() is the correct Playwright assertion.
+   */
+  test('TC-001: Add to Cart button is disabled for unauthenticated guest user', async ({
+    searchModule,
+    searchResultsPage,
+  }) => {
+    const productId = '6968173';
+
+    await test.step(`Navigate to the search results page for product ID ${productId} as a guest`, async () => {
+      await searchModule.submitSearch(productId);
+    });
+
+    await test.step('Wait for search results to render (product count summary visible)', async () => {
+      await expect(
+        searchResultsPage.productCountSummary(),
+        'Product count summary must be visible before asserting button state',
+      ).toBeVisible();
+    });
+
+    await test.step('Verify Add to Cart button is disabled for the guest user', async () => {
+      await searchModule.verifyAddToCartDisabled();
+    });
+  });
+
 });

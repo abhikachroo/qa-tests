@@ -76,4 +76,21 @@ export class SearchModule {
     expect(count, 'Product cards should not be present when no results').toBe(0);
     this.logger.info('No-results state verified');
   }
+
+  /**
+   * Verify that the Add to Cart button is disabled for an unauthenticated (guest) user.
+   * The button uses a native HTML `disabled` attribute — not aria-disabled — confirmed via
+   * live accessibility snapshot on preprod SRP.
+   * Used by: TC-001
+   */
+  async verifyAddToCartDisabled(): Promise<void> {
+    this.logger.info(
+      `[${config.opco}][${config.environment}] Verifying Add to Cart button is disabled for guest user`,
+    );
+    await expect(
+      this.searchResultsPage.addToCartBtn(),
+      'Add to Cart button (data-testid="quantity-counter-cta-add") should be disabled for unauthenticated guest users',
+    ).toBeDisabled();
+    this.logger.info('Add to Cart button disabled state confirmed for guest user');
+  }
 }
