@@ -167,7 +167,10 @@ test.describe(`@Login User Login Flow — ${config.displayName} on ${config.envi
     });
 
     await test.step('Verify required field error is shown for missing password', async () => {
-      await loginModule.verifyLoginError('password');
+      // FIX TC-005: toContainText is case-sensitive — 'password' (lowercase) was not found in
+      // 'Password can not be empty' (capital P). Updated to match the exact Azure B2C
+      // validation message for the empty password field case.
+      await loginModule.verifyLoginError('Password can not be empty');
     });
   });
 
