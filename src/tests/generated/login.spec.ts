@@ -83,7 +83,9 @@ test.describe(`@Login User Login Flow — ${config.displayName} on ${config.envi
     });
 
     await test.step('Verify error message is displayed for incorrect password', async () => {
-      await loginModule.verifyLoginError('incorrect');
+      // FIX TC-002: Updated expected substring to match actual Azure B2C error:
+      // "The email and password your entered did not match our record. Please double check and try again."
+      await loginModule.verifyLoginError('did not match our record');
     });
   });
 
@@ -110,7 +112,9 @@ test.describe(`@Login User Login Flow — ${config.displayName} on ${config.envi
     });
 
     await test.step('Verify email format validation error is displayed', async () => {
-      await loginModule.verifyLoginError('email');
+      // FIX TC-003: toContainText is case-sensitive — 'email' (lowercase) was not found in
+      // 'Email format is invalid' (capital E). Updated to match exact B2C error message.
+      await loginModule.verifyLoginError('Email format is invalid');
     });
   });
 
@@ -138,7 +142,10 @@ test.describe(`@Login User Login Flow — ${config.displayName} on ${config.envi
     });
 
     await test.step('Verify required field error is shown for missing email', async () => {
-      await loginModule.verifyLoginError('email');
+      // FIX TC-004: Azure B2C treats empty email the same as invalid format,
+      // returning 'Email format is invalid'. Updated from lowercase 'email' to match
+      // the actual case-sensitive error message returned by Azure B2C.
+      await loginModule.verifyLoginError('Email format is invalid');
     });
   });
 
@@ -182,7 +189,9 @@ test.describe(`@Login User Login Flow — ${config.displayName} on ${config.envi
     });
 
     await test.step('Verify required field error is shown when both fields are empty', async () => {
-      await loginModule.verifyLoginError('email');
+      // FIX TC-006: Same case-sensitivity fix as TC-003/TC-004 — Azure B2C returns
+      // 'Email format is invalid' (capital E); lowercase 'email' was not matched.
+      await loginModule.verifyLoginError('Email format is invalid');
     });
   });
 
