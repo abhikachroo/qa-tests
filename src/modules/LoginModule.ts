@@ -54,6 +54,9 @@ export class LoginModule {
    *   1. Navigate to app homepage and reach Azure B2C login form
    *   2. Fill only the email field
    *   3. Click submit without filling the password
+   *   4. Wait for the error message element to become visible
+   *      (Azure B2C stays on the same page — no navigation occurs,
+   *       so waitForLoadState('networkidle') must NOT be used here)
    *
    * @param email - Email to pre-fill
    */
@@ -63,11 +66,17 @@ export class LoginModule {
     await this.homePage.waitForPageLoad();
     await this.homePage.dismissCookieBannerIfPresent();
     await this.homePage.clickHeaderLoginLink();
-    await this.loginPage.waitForPageLoad();
+    await this.loginPage.emailInput().waitFor({ state: 'visible' });
     this.logger.info('Azure B2C login form loaded');
     await this.loginPage.fillEmail(email);
     await this.loginPage.clickSubmit();
-    this.logger.info('Submitted with empty password field');
+    // FIX TC-005: Azure B2C does not navigate when submitting with empty password —
+    // it stays on the same page and shows an inline validation error.
+    // Replaced waitForLoadState('networkidle') with an explicit wait for the
+    // error message element to appear, which is the reliable signal that B2C
+    // has processed the submission and rendered the validation result.
+    await this.loginPage.errorMessage().waitFor({ state: 'visible', timeout: 15000 });
+    this.logger.info('Submitted with empty password field — error element is visible');
   }
 
   /**
