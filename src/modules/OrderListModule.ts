@@ -17,14 +17,17 @@ export class OrderListModule {
    *   1. Click the "Orders" nav button to open the mega-menu dropdown
    *   2. Wait for the "Orders" sub-link to become visible
    *   3. Click the "Orders" sub-link → navigates to /account/en-gb/orders
-   *   4. Wait for page to reach networkidle
+   *   4. Wait for the H1 "Orders" heading to become visible — used instead of
+   *      waitForLoadState('networkidle') because the Orders page renders a
+   *      "Share Your Feedback!" modal that continuously fires background
+   *      requests, preventing networkidle from resolving within the timeout.
    */
   async navigateToOrderList(): Promise<void> {
     this.logger.info(`[${config.opco}][${config.environment}] Navigating to Order list via mega-menu`);
     await this.orderListPage.clickOrdersNavButton();
     await this.orderListPage.ordersSubLink().waitFor({ state: 'visible' });
     await this.orderListPage.clickOrdersSubLink();
-    await this.orderListPage.waitForPageLoad();
+    await this.orderListPage.ordersHeading().waitFor({ state: 'visible', timeout: 30_000 });
     this.logger.info('Order list page loaded');
   }
 
