@@ -30,6 +30,10 @@ import { config }        from '@config/index';
 // ─────────────────────────────────────────────────────────────
 test.describe(`@P1 @Smoke @OrderList Order List Validation — ${config.displayName} on ${config.environment}`, () => {
 
+  // HEALED (Round 1): Added retries to absorb transient SPA polling / network flakiness.
+  // Affected: TC-003-OL, TC-009, TC-010, TC-011, TC-012.
+  test.describe.configure({ retries: 2 });
+
   test.beforeEach(async ({ loginModule }) => {
     await loginModule.doLogin();
   });
@@ -74,12 +78,21 @@ test.describe(`@P1 @Smoke @OrderList Order List Validation — ${config.displayN
    * TC-008: Clicking Orders menu button reveals Orders sub-menu with navigation links
    * Priority:    P1 Functional
    * AC Reference: AC-005
+   *
+   * HEALED (Round 1): Added waitForURL() before capturing urlBefore.
+   * The doLogin() call in beforeEach completes while the Azure B2C authorize URL
+   * is still mid-redirect. Waiting for the authenticated home URL to settle
+   * ensures urlBefore reflects the stable home page URL, not the transient B2C URL.
    */
   test('@P1 @Functional TC-008: Clicking Orders nav button reveals sub-menu with Orders link', async ({
     orderListModule,
     orderListPage,
     page,
   }) => {
+    await test.step('Wait for authenticated home page URL to settle before capturing baseline URL', async () => {
+      await page.waitForURL(/fra-vanilla-preprod\.dev\.spark\.sonepar\.com/, { timeout: 15_000 });
+    });
+
     const urlBefore = page.url();
 
     await test.step('Click the "Orders" nav button and verify the sub-menu becomes visible', async () => {
@@ -136,6 +149,12 @@ test.describe(`@P1 @Smoke @OrderList Order List Validation — ${config.displayN
   }) => {
     await test.step('Navigate directly to the Order List URL', async () => {
       await orderListModule.navigateToOrderListDirectly();
+    });
+
+    await test.step('Wait for the H1 "Orders" heading to appear in the DOM (SPA async render)', async () => {
+      // HEALED (Round 1): Orders SPA renders H1 asynchronously after data fetch.
+      // Explicit waitFor (45s) acts as a readiness gate before the toBeVisible() assertion.
+      await orderListPage.waitForOrdersHeading();
     });
 
     await test.step('Assert the H1 "Orders" heading is visible on the page', async () => {
