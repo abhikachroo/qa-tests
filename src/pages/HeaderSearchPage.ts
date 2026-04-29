@@ -1,1 +1,59 @@
-aW1wb3J0IHsgUGFnZSB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwppbXBvcnQgeyBCYXNlUGFnZSB9IGZyb20gJy4vQmFzZVBhZ2UnOwoKZXhwb3J0IGNsYXNzIEhlYWRlclNlYXJjaFBhZ2UgZXh0ZW5kcyBCYXNlUGFnZSB7CiAgY29uc3RydWN0b3IocGFnZTogUGFnZSkgewogICAgc3VwZXIocGFnZSk7CiAgfQoKICAvLyBDb25maXJtZWQgc2VsZWN0b3IgZnJvbSBsaXZlIFVJIGluc3BlY3Rpb246IGRhdGEtdGVzdGlkPSJzZWFyY2gtYmFyLWlucHV0IgogIHNlYXJjaElucHV0ICA9ICgpID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZCgnc2VhcmNoLWJhci1pbnB1dCcpOwoKICAvLyBTdWJtaXQgYnV0dG9uIGlkZW50aWZpZWQgYnkgYWNjZXNzaWJsZSByb2xlICsgbmFtZQogIHN1Ym1pdEJ1dHRvbiA9ICgpID0+IHRoaXMucGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogJ1N1Ym1pdCBzZWFyY2gnIH0pOwoKICAvLyBDYXJ0IGhlYWRlciBidXR0b24gLyBiYWRnZSDigJQgZGF0YS10ZXN0aWQgY29uZmlybWVkIGxpdmUgKHN0cmF0ZWd5OiBkYXRhLXRlc3RpZCkKICBjYXJ0QnV0dG9uICAgPSAoKSA9PiB0aGlzLnBhZ2UuZ2V0QnlUZXN0SWQoJ2NhcnQtYnV0dG9uJyk7CgogIGFzeW5jIGZpbGxTZWFyY2hJbnB1dChrZXl3b3JkOiBzdHJpbmcpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMuc2VhcmNoSW5wdXQoKS5jbGljaygpOwogICAgYXdhaXQgdGhpcy5zZWFyY2hJbnB1dCgpLmZpbGwoa2V5d29yZCk7CiAgfQoKICAvKioKICAgKiBXYWl0IGZvciB0aGUgc2VhcmNoIGlucHV0IHRvIGJlIHZpc2libGUg4oCUIHJlbGlhYmxlIHJlYWRpbmVzcyBzaWduYWwgZm9yIGJvdGgKICAgKiBndWVzdCBhbmQgYXV0aGVudGljYXRlZCBwYWdlcywgcmVnYXJkbGVzcyBvZiBiYWNrZ3JvdW5kIG5ldHdvcmsgYWN0aXZpdHkuCiAgICoKICAgKiBIRUFMIChSb3VuZCAxKTogQWRkZWQgYXMgdGhlIHN0YWJsZSBhbHRlcm5hdGl2ZSB0byB3YWl0Rm9yUGFnZUxvYWQoJ25ldHdvcmtpZGxlJyksCiAgICogd2hpY2ggdGltZXMgb3V0IG9uIHRoZSBhdXRoZW50aWNhdGVkIGhvbWVwYWdlIGR1ZSB0byBvbmdvaW5nIHVzZXItc3BlY2lmaWMgQVBJIGNhbGxzLgogICAqIENhbGxlZCBieSBTZWFyY2hNb2R1bGUuc3VibWl0U2VhcmNoKCkgYmVmb3JlIGludGVyYWN0aW5nIHdpdGggdGhlIHNlYXJjaCBiYXIuCiAgICovCiAgYXN5bmMgd2FpdEZvclNlYXJjaElucHV0VmlzaWJsZSgpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMuc2VhcmNoSW5wdXQoKS53YWl0Rm9yKHsgc3RhdGU6ICd2aXNpYmxlJyB9KTsKICB9CgogIC8qKgogICAqIENsaWNrIHRoZSBTdWJtaXQgU2VhcmNoIGJ1dHRvbi4KICAgKgogICAqIEhFQUwgKFJvdW5kIDEpOiBPbmVUcnVzdCBjb29raWUgY29uc2VudCBiYW5uZXIgKCNvbmV0cnVzdC1jb25zZW50LXNkaykKICAgKiB3YXMgaW50ZXJjZXB0aW5nIHBvaW50ZXIgZXZlbnRzIG9uIHRoaXMgYnV0dG9uIOKAlCBvYnNlcnZlZCBwb3N0LWxvZ2luCiAgICogKEIyQyByZWRpcmVjdCkgYW5kIGluIHN0YW5kYWxvbmUgc2VhcmNoIGZsb3dzLgogICAqIEFkZGVkIGRpc21pc3NDb29raWVCYW5uZXJJZlByZXNlbnQoKSBiZWZvcmUgdGhlIGNsaWNrIGFzIGEgZGVmZW5zaXZlIGd1YXJkLgogICAqLwogIGFzeW5jIGNsaWNrU3VibWl0QnV0dG9uKCk6IFByb21pc2U8dm9pZD4gewogICAgYXdhaXQgdGhpcy5kaXNtaXNzQ29va2llQmFubmVySWZQcmVzZW50KCk7CiAgICBhd2FpdCB0aGlzLnN1Ym1pdEJ1dHRvbigpLmNsaWNrKCk7CiAgfQoKICBhc3luYyB3YWl0Rm9yU2VhcmNoTmF2aWdhdGlvbihrZXl3b3JkOiBzdHJpbmcpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMucGFnZS53YWl0Rm9yVVJMKGAqKi9zZWFyY2gvJHtrZXl3b3JkfSoqYCwgeyB0aW1lb3V0OiAzMF8wMDAgfSk7CiAgfQoKICBhc3luYyBnZXRTZWFyY2hJbnB1dFZhbHVlKCk6IFByb21pc2U8c3RyaW5nPiB7CiAgICByZXR1cm4gKGF3YWl0IHRoaXMuc2VhcmNoSW5wdXQoKS5pbnB1dFZhbHVlKCkpID8/ICcnOwogIH0KCiAgYXN5bmMgY2xpY2tDYXJ0QnV0dG9uKCk6IFByb21pc2U8dm9pZD4gewogICAgYXdhaXQgdGhpcy5jYXJ0QnV0dG9uKCkuY2xpY2soKTsKICB9Cn0K
+import { Page } from '@playwright/test';
+import { BasePage } from './BasePage';
+
+export class HeaderSearchPage extends BasePage {
+  constructor(page: Page) {
+    super(page);
+  }
+
+  // Confirmed selector from live UI inspection: data-testid="search-bar-input"
+  searchInput  = () => this.page.getByTestId('search-bar-input');
+
+  // Submit button identified by accessible role + name
+  submitButton = () => this.page.getByRole('button', { name: 'Submit search' });
+
+  // Cart header button / badge — data-testid confirmed live (strategy: data-testid)
+  cartButton   = () => this.page.getByTestId('cart-button');
+
+  async fillSearchInput(keyword: string): Promise<void> {
+    await this.searchInput().click();
+    await this.searchInput().fill(keyword);
+  }
+
+  /**
+   * Wait for the search input to be visible — reliable readiness signal for both
+   * guest and authenticated pages, regardless of background network activity.
+   *
+   * HEAL (Round 1): Added as the stable alternative to waitForPageLoad('networkidle'),
+   * which times out on the authenticated homepage due to ongoing user-specific API calls.
+   * Called by SearchModule.submitSearch() before interacting with the search bar.
+   */
+  async waitForSearchInputVisible(): Promise<void> {
+    await this.searchInput().waitFor({ state: 'visible' });
+  }
+
+  /**
+   * Click the Submit Search button.
+   *
+   * HEAL (Round 1): OneTrust cookie consent banner (#onetrust-consent-sdk)
+   * was intercepting pointer events on this button — observed post-login
+   * (B2C redirect) and in standalone search flows.
+   * Added dismissCookieBannerIfPresent() before the click as a defensive guard.
+   */
+  async clickSubmitButton(): Promise<void> {
+    await this.dismissCookieBannerIfPresent();
+    await this.submitButton().click();
+  }
+
+  async waitForSearchNavigation(keyword: string): Promise<void> {
+    await this.page.waitForURL(`**/search/${keyword}**`, { timeout: 30_000 });
+  }
+
+  async getSearchInputValue(): Promise<string> {
+    return (await this.searchInput().inputValue()) ?? '';
+  }
+
+  async clickCartButton(): Promise<void> {
+    await this.cartButton().click();
+  }
+}

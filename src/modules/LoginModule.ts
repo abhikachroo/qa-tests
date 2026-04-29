@@ -1,1 +1,105 @@
-aW1wb3J0IHsgZXhwZWN0IH0gICAgZnJvbSAnQHBsYXl3cmlnaHQvdGVzdCc7CmltcG9ydCB7IExvZ2luUGFnZSB9IGZyb20gJ0BwYWdlcy9Mb2dpblBhZ2UnOwppbXBvcnQgeyBIb21lUGFnZSB9ICBmcm9tICdAcGFnZXMvSG9tZVBhZ2UnOwppbXBvcnQgeyBMb2dnZXIgfSAgICBmcm9tICdAdXRpbHMvTG9nZ2VyJzsKaW1wb3J0IHsgY29uZmlnIH0gICAgZnJvbSAnQGNvbmZpZy9pbmRleCc7CgpleHBvcnQgY2xhc3MgTG9naW5Nb2R1bGUgewogIHByaXZhdGUgbG9nZ2VyOiBMb2dnZXI7CgogIGNvbnN0cnVjdG9yKAogICAgcHJpdmF0ZSBsb2dpblBhZ2U6IExvZ2luUGFnZSwKICAgIHByaXZhdGUgaG9tZVBhZ2U6ICBIb21lUGFnZSwKICApIHsKICAgIHRoaXMubG9nZ2VyID0gbmV3IExvZ2dlcignTG9naW5Nb2R1bGUnKTsKICB9CgogIC8qKgogICAqIEZ1bGwgZW5kLXRvLWVuZCBsb2dpbiBmbG93LgogICAqCiAgICogU3RlcHM6CiAgICogICAxLiBOYXZpZ2F0ZSB0byBhcHAgaG9tZXBhZ2UKICAgKiAgIDIuIERpc21pc3MgY29va2llIGJhbm5lciBpZiBwcmVzZW50CiAgICogICAzLiBDbGljayB0aGUgaGVhZGVyIGxvZ2luIGxpbmsg4oCUIHJlZGlyZWN0cyB0byBBenVyZSBCMkMgZG9tYWluCiAgICogICA0LiBGaWxsIGVtYWlsIGFuZCBwYXNzd29yZCBvbiB0aGUgQXp1cmUgQjJDIGZvcm0KICAgKiAgIDUuIENsaWNrIHN1Ym1pdCDigJQgQXp1cmUgQjJDIHJlZGlyZWN0cyBiYWNrIHRvIHRoZSBhcHAKICAgKiAgIDYuIFdhaXQgZm9yIHBhZ2UgbG9hZAogICAqICAgNy4gRGlzbWlzcyBjb29raWUgYmFubmVyIGlmIGl0IHJlLWFwcGVhcnMgYWZ0ZXIgQjJDIHJlZGlyZWN0CiAgICoKICAgKiBIRUFMIChSb3VuZCAxKTogT25lVHJ1c3QgY29va2llIGJhbm5lciByZS1hcHBlYXJzIGFmdGVyIHRoZSBBenVyZSBCMkMKICAgKiBhdXRoZW50aWNhdGlvbiByZWRpcmVjdC4gQWRkZWQgZGlzbWlzc0Nvb2tpZUJhbm5lcklmUHJlc2VudCgpIGFmdGVyCiAgICogd2FpdEZvclBhZ2VMb2FkKCkgdG8gY2xlYXIgdGhlIG92ZXJsYXkgYmVmb3JlIGFueSBzdWJzZXF1ZW50IGludGVyYWN0aW9ucy4KICAgKgogICAqIEBwYXJhbSB1c2VybmFtZSAtIERlZmF1bHRzIHRvIGNvbmZpZy51c2VybmFtZSAoZnJvbSBjb25maWcuanNvbikKICAgKiBAcGFyYW0gcGFzc3dvcmQgLSBEZWZhdWx0cyB0byBjb25maWcucGFzc3dvcmQgKGZyb20gY29uZmlnLmpzb24pCiAgICovCiAgYXN5bmMgZG9Mb2dpbigKICAgIHVzZXJuYW1lOiBzdHJpbmcgPSBjb25maWcudXNlcm5hbWUsCiAgICBwYXNzd29yZDogc3RyaW5nID0gY29uZmlnLnBhc3N3b3JkLAogICk6IFByb21pc2U8dm9pZD4gewogICAgdGhpcy5sb2dnZXIuaW5mbyhgWyR7Y29uZmlnLm9wY299XVske2NvbmZpZy5lbnZpcm9ubWVudH1dIFN0YXJ0aW5nIGxvZ2luIGZvcjogJHt1c2VybmFtZX1gKTsKICAgIGF3YWl0IHRoaXMuaG9tZVBhZ2UubmF2aWdhdGUoJy8nKTsKICAgIGF3YWl0IHRoaXMuaG9tZVBhZ2Uud2FpdEZvclBhZ2VMb2FkKCk7CiAgICBhd2FpdCB0aGlzLmhvbWVQYWdlLmRpc21pc3NDb29raWVCYW5uZXJJZlByZXNlbnQoKTsKICAgIGF3YWl0IHRoaXMuaG9tZVBhZ2UuY2xpY2tIZWFkZXJMb2dpbkxpbmsoKTsKICAgIGF3YWl0IHRoaXMubG9naW5QYWdlLndhaXRGb3JQYWdlTG9hZCgpOwogICAgdGhpcy5sb2dnZXIuaW5mbygnQXp1cmUgQjJDIGxvZ2luIGZvcm0gbG9hZGVkJyk7CiAgICBhd2FpdCB0aGlzLmxvZ2luUGFnZS5maWxsRW1haWwodXNlcm5hbWUpOwogICAgYXdhaXQgdGhpcy5sb2dpblBhZ2UuZmlsbFBhc3N3b3JkKHBhc3N3b3JkKTsKICAgIGF3YWl0IHRoaXMubG9naW5QYWdlLmNsaWNrU3VibWl0KCk7CiAgICBhd2FpdCB0aGlzLmhvbWVQYWdlLndhaXRGb3JQYWdlTG9hZCgpOwogICAgYXdhaXQgdGhpcy5ob21lUGFnZS5kaXNtaXNzQ29va2llQmFubmVySWZQcmVzZW50KCk7CiAgICB0aGlzLmxvZ2dlci5pbmZvKCdMb2dpbiBmbG93IGNvbXBsZXRlZCDigJQgcG9zdC1sb2dpbiBzdGF0ZSBwZW5kaW5nIHZlcmlmaWNhdGlvbicpOwogIH0KCiAgLyoqCiAgICogSEVBTCAoUm91bmQgMSBjbGVhbnVwKTogRml4ZWQgdHlwbyDigJQgdGhpcy5ob21lT2FnZSDihpIgdGhpcy5ob21lUGFnZS4KICAgKi8KICBhc3luYyBkb0xvZ2luRW1haWxPbmx5KGVtYWlsOiBzdHJpbmcgPSBjb25maWcudXNlcm5hbWUpOiBQcm9taXNlPHZvaWQ+IHsKICAgIHRoaXMubG9nZ2VyLmluZm8oYFske2NvbmZpZy5vcGNvfV1bJHtjb25maWcuZW52aXJvbm1lbnR9XSBBdHRlbXB0aW5nIGxvZ2luIHdpdGggZW1haWwgb25seTogJHtlbWFpbH1gKTsKICAgIGF3YWl0IHRoaXMuaG9tZVBhZ2UubmF2aWdhdGUoJy8nKTsKICAgIGF3YWl0IHRoaXMuaG9tZVBhZ2Uud2FpdEZvclBhZ2VMb2FkKCk7CiAgICBhd2FpdCB0aGlzLmhvbWVQYWdlLmRpc21pc3NDb29raWVCYW5uZXJJZlByZXNlbnQoKTsKICAgIGF3YWl0IHRoaXMuaG9tZVBhZ2UuY2xpY2tIZWFkZXJMb2dpbkxpbmsoKTsKICAgIGF3YWl0IHRoaXMubG9naW5QYWdlLmVtYWlsSW5wdXQoKS53YWl0Rm9yKHsgc3RhdGU6ICd2aXNpYmxlJyB9KTsKICAgIHRoaXMubG9nZ2VyLmluZm8oJ0F6dXJlIEIyQyBsb2dpbiBmb3JtIGxvYWRlZCcpOwogICAgYXdhaXQgdGhpcy5sb2dpblBhZ2UuZmlsbEVtYWlsKGVtYWlsKTsKICAgIGF3YWl0IHRoaXMubG9naW5QYWdlLmNsaWNrU3VibWl0KCk7CiAgICBhd2FpdCB0aGlzLmxvZ2luUGFnZS5lcnJvck1lc3NhZ2UoKS53YWl0Rm9yKHsgc3RhdGU6ICd2aXNpYmxlJywgdGltZW91dDogMTUwMDAgfSk7CiAgICB0aGlzLmxvZ2dlci5pbmZvKCdTdWJtaXR0ZWQgd2l0aCBlbXB0eSBwYXNzd29yZCBmaWVsZCDigJQgZXJyb3IgZWxlbWVudCBpcyB2aXNpYmxlJyk7CiAgfQoKICBhc3luYyBkb0xvZ2luV2l0aG91dENyZWRlbnRpYWxzKCk6IFByb21pc2U8dm9pZD4gewogICAgdGhpcy5sb2dnZXIuaW5mbyhgWyR7Y29uZmlnLm9wY299XVske2NvbmZpZy5lbnZpcm9ubWVudH1dIFN1Ym1pdHRpbmcgbG9naW4gZm9ybSB3aXRoIG5vIGNyZWRlbnRpYWxzYCk7CiAgICBhd2FpdCB0aGlzLmhvbWVQYWdlLm5hdmlnYXRlKCcvJyk7CiAgICBhd2FpdCB0aGlzLmhvbWVQYWdlLndhaXRGb3JQYWdlTG9hZCgpOwogICAgYXdhaXQgdGhpcy5ob21lUGFnZS5kaXNtaXNzQ29va2llQmFubmVySWZQcmVzZW50KCk7CiAgICBhd2FpdCB0aGlzLmhvbWVQYWdlLmNsaWNrSGVhZGVyTG9naW5MaW5rKCk7CiAgICBhd2FpdCB0aGlzLmxvZ2luUGFnZS53YWl0Rm9yUGFnZUxvYWQoKTsKICAgIHRoaXMubG9nZ2VyLmluZm8oJ0F6dXJlIEIyQyBsb2dpbiBmb3JtIGxvYWRlZCDigJQgc3VibWl0dGluZyBlbXB0eScpOwogICAgYXdhaXQgdGhpcy5sb2dpblBhZ2UuY2xpY2tTdWJtaXQoKTsKICAgIHRoaXMubG9nZ2VyLmluZm8oJ0VtcHR5IGZvcm0gc3VibWl0dGVkJyk7CiAgfQoKICBhc3luYyB2ZXJpZnlMb2dpblN1Y2Nlc3MoKTogUHJvbWlzZTx2b2lkPiB7CiAgICB0aGlzLmxvZ2dlci5pbmZvKCdWZXJpZnlpbmcgcG9zdC1sb2dpbiBhdXRoZW50aWNhdGVkIHN0YXRlJyk7CiAgICBhd2FpdCBleHBlY3QoCiAgICAgIHRoaXMuaG9tZVBhZ2UudXNlckRldGFpbHNCdXR0b24oKSwKICAgICAgJyJBY2NvdW50ICYgc2V0dGluZ3MiIGJ1dHRvbiBzaG91bGQgYmUgdmlzaWJsZSBhZnRlciBzdWNjZXNzZnVsIGxvZ2luJywKICAgICkudG9CZVZpc2libGUoKTsKICAgIHRoaXMubG9nZ2VyLmluZm8oJ0xvZ2luIHN1Y2Nlc3MgdmVyaWZpZWQg4oCUIHVzZXItZGV0YWlscy1idXR0b24gaXMgcHJlc2VudCcpOwogIH0KCiAgYXN5bmMgdmVyaWZ5TG9naW5FcnJvcihleHBlY3RlZFRleHQ6IHN0cmluZyk6IFByb21pc2U8dm9pZD4gewogICAgdGhpcy5sb2dnZXIuaW5mbyhgVmVyaWZ5aW5nIGxvZ2luIGVycm9yIG1lc3NhZ2UgY29udGFpbnM6ICIke2V4cGVjdGVkVGV4dH0iYCk7CiAgICBhd2FpdCBleHBlY3QoCiAgICAgIHRoaXMubG9naW5QYWdlLmVycm9yTWVzc2FnZSgpLAogICAgICBgRXJyb3IgbWVzc2FnZSBlbGVtZW50IHNob3VsZCBiZSB2aXNpYmxlIG9uIHRoZSBBenVyZSBCMkMgbG9naW4gcGFnZWAsCiAgICApLnRvQmVWaXNpYmxlKCk7CiAgICBhd2FpdCBleHBlY3QoCiAgICAgIHRoaXMubG9naW5QYWdlLmVycm9yTWVzc2FnZSgpLAogICAgICBgRXJyb3IgbWVzc2FnZSBzaG91bGQgY29udGFpbjogIiR7ZXhwZWN0ZWRUZXh0fSJgLAogICAgKS50b0NvbnRhaW5UZXh0KGV4cGVjdGVkVGV4dCk7CiAgICB0aGlzLmxvZ2dlci5pbmZvKCdMb2dpbiBlcnJvciB2ZXJpZmllZCBzdWNjZXNzZnVsbHknKTsKICB9Cn0K
+import { expect }    from '@playwright/test';
+import { LoginPage } from '@pages/LoginPage';
+import { HomePage }  from '@pages/HomePage';
+import { Logger }    from '@utils/Logger';
+import { config }    from '@config/index';
+
+export class LoginModule {
+  private logger: Logger;
+
+  constructor(
+    private loginPage: LoginPage,
+    private homePage:  HomePage,
+  ) {
+    this.logger = new Logger('LoginModule');
+  }
+
+  /**
+   * Full end-to-end login flow.
+   *
+   * Steps:
+   *   1. Navigate to app homepage
+   *   2. Dismiss cookie banner if present
+   *   3. Click the header login link — redirects to Azure B2C domain
+   *   4. Fill email and password on the Azure B2C form
+   *   5. Click submit — Azure B2C redirects back to the app
+   *   6. Wait for page load
+   *   7. Dismiss cookie banner if it re-appears after B2C redirect
+   *
+   * HEAL (Round 1): OneTrust cookie banner re-appears after the Azure B2C
+   * authentication redirect. Added dismissCookieBannerIfPresent() after
+   * waitForPageLoad() to clear the overlay before any subsequent interactions.
+   *
+   * @param username - Defaults to config.username (from config.json)
+   * @param password - Defaults to config.password (from config.json)
+   */
+  async doLogin(
+    username: string = config.username,
+    password: string = config.password,
+  ): Promise<void> {
+    this.logger.info(`[${config.opco}][${config.environment}] Starting login for: ${username}`);
+    await this.homePage.navigate('/');
+    await this.homePage.waitForPageLoad();
+    await this.homePage.dismissCookieBannerIfPresent();
+    await this.homePage.clickHeaderLoginLink();
+    await this.loginPage.waitForPageLoad();
+    this.logger.info('Azure B2C login form loaded');
+    await this.loginPage.fillEmail(username);
+    await this.loginPage.fillPassword(password);
+    await this.loginPage.clickSubmit();
+    await this.homePage.waitForPageLoad();
+    await this.homePage.dismissCookieBannerIfPresent();
+    this.logger.info('Login flow completed — post-login state pending verification');
+  }
+
+  /**
+   * HEAL (Round 1 cleanup): Fixed typo — this.homeOage → this.homePage.
+   */
+  async doLoginEmailOnly(email: string = config.username): Promise<void> {
+    this.logger.info(`[${config.opco}][${config.environment}] Attempting login with email only: ${email}`);
+    await this.homePage.navigate('/');
+    await this.homePage.waitForPageLoad();
+    await this.homePage.dismissCookieBannerIfPresent();
+    await this.homePage.clickHeaderLoginLink();
+    await this.loginPage.emailInput().waitFor({ state: 'visible' });
+    this.logger.info('Azure B2C login form loaded');
+    await this.loginPage.fillEmail(email);
+    await this.loginPage.clickSubmit();
+    await this.loginPage.errorMessage().waitFor({ state: 'visible', timeout: 15000 });
+    this.logger.info('Submitted with empty password field — error element is visible');
+  }
+
+  async doLoginWithoutCredentials(): Promise<void> {
+    this.logger.info(`[${config.opco}][${config.environment}] Submitting login form with no credentials`);
+    await this.homePage.navigate('/');
+    await this.homePage.waitForPageLoad();
+    await this.homePage.dismissCookieBannerIfPresent();
+    await this.homePage.clickHeaderLoginLink();
+    await this.loginPage.waitForPageLoad();
+    this.logger.info('Azure B2C login form loaded — submitting empty');
+    await this.loginPage.clickSubmit();
+    this.logger.info('Empty form submitted');
+  }
+
+  async verifyLoginSuccess(): Promise<void> {
+    this.logger.info('Verifying post-login authenticated state');
+    await expect(
+      this.homePage.userDetailsButton(),
+      '"Account & settings" button should be visible after successful login',
+    ).toBeVisible();
+    this.logger.info('Login success verified — user-details-button is present');
+  }
+
+  async verifyLoginError(expectedText: string): Promise<void> {
+    this.logger.info(`Verifying login error message contains: "${expectedText}"`);
+    await expect(
+      this.loginPage.errorMessage(),
+      `Error message element should be visible on the Azure B2C login page`,
+    ).toBeVisible();
+    await expect(
+      this.loginPage.errorMessage(),
+      `Error message should contain: "${expectedText}"`,
+    ).toContainText(expectedText);
+    this.logger.info('Login error verified successfully');
+  }
+}
