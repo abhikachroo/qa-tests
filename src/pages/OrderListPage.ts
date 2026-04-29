@@ -115,9 +115,29 @@ export class OrderListPage extends BasePage {
     await this.ordersSubMenuLink().click();
   }
 
-  /** Wait for the expand/collapse button to be visible — signals order list is fully rendered. */
+  /**
+   * Wait for the expand/collapse button to be visible — signals order list is fully rendered.
+   *
+   * HEALED (Round 1): Increased timeout from 30_000 to 60_000ms.
+   * The test account has 4,770 orders; the Orders SPA takes >30s to fetch and render
+   * all order data before the expand/collapse toggle becomes interactive.
+   * Affected: TC-011.
+   */
   async waitForOrderListToRender(): Promise<void> {
-    await this.expandCollapseAllButton().waitFor({ state: 'visible', timeout: 30_000 });
+    await this.expandCollapseAllButton().waitFor({ state: 'visible', timeout: 60_000 });
+  }
+
+  /**
+   * Wait explicitly for the H1 "Orders" heading to be visible in the DOM.
+   *
+   * HEALED (Round 1): New helper added to support TC-010.
+   * The Orders SPA renders the H1 asynchronously after its initial data fetch.
+   * The default expect() timeout of 10s is insufficient; this waits up to 45s
+   * before handing off to the toBeVisible() assertion.
+   * Affected: TC-010.
+   */
+  async waitForOrdersHeading(): Promise<void> {
+    await this.ordersHeading().waitFor({ state: 'visible', timeout: 45_000 });
   }
 
   /** Get the page title string. */
