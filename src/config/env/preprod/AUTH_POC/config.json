@@ -4,6 +4,7 @@
   "searchPath": "/search",
   "noResultsKeyword": "xyznotaproduct999",
   "loginPath": "/",
+  "ordersPath": "/account/en-gb/orders",
   "username": "test01achier+editaccountaccess@gmail.com",
   "password": "Testing2020"
 }
