@@ -22,8 +22,17 @@ export abstract class BasePage {
     return this.page.title();
   }
 
+  /**
+   * Wait for the page to finish loading.
+   *
+   * HEALED (Round 1): Changed from 'networkidle' to 'load'.
+   * The Orders page makes continuous background API polling that prevents
+   * 'networkidle' from ever firing, even though the page has fully rendered.
+   * Both 'domcontentloaded' and 'load' events fire reliably on all pages tested.
+   * Affected: TC-003-OL, TC-009, TC-012.
+   */
   async waitForPageLoad(): Promise<void> {
-    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForLoadState('load');
   }
 
   async takeScreenshot(name: string): Promise<Buffer> {
