@@ -3,46 +3,40 @@ import { BasePage } from './BasePage';
 
 /**
  * CheckoutLogisticsPage — /checkout/en-gb/tunnel/{cartId}/logistics
- * Step 1/2 of the checkout tunnel.
- * All locators verified via live DOM inspection on 2026-04-29.
+ *
+ * Checkout Step 1 of 2. All locators confirmed live via DOM inspection on 2026-04-29.
+ * Strategy: data-testid (priority 1) and aria-label (priority 2).
+ *
+ * Note: The {cartId} segment is dynamic — use waitForURL(/logistics/) for navigation sync.
  */
 export class CheckoutLogisticsPage extends BasePage {
-  constructor(page: Page) {
-    super(page);
-  }
+  constructor(page: Page) { super(page); }
 
-  // ── Locators ────────────────────────────────────────────────────────────
-
-  /** "continue to verification" CTA (strategy: data-testid — verified) */
+  // ── CTAs ──────────────────────────────────────────────────────────
+  /** "continue to verification" button — same data-testid as cart proceed button */
   continueToVerificationButton = () => this.page.getByTestId('checkout-button');
 
-  /** "Back to cart" button (strategy: data-testid — verified) */
-  backToCartButton = () => this.page.getByTestId('back-button');
+  /** "Back to cart" button */
+  backButton                   = () => this.page.getByTestId('back-button');
 
-  /** Line item product link for a product in the logistics step (strategy: data-testid — verified) */
-  lineItemProductLink = () => this.page.getByTestId('line-item-product-link');
+  /** "Change delivery date" drawer trigger */
+  changeDeliveryDateButton     = () => this.page.getByTestId('button-shipping-date-drawer');
 
-  /** Change delivery date button (strategy: data-testid — verified) */
-  changeDeliveryDateButton = () => this.page.getByTestId('button-shipping-date-drawer');
+  // ── Content ───────────────────────────────────────────────────────
+  /** Line item product link for SKU 6968173 — data-testid confirmed live */
+  lineItemProductLink          = () => this.page.getByTestId('line-item-product-link');
 
-  /** Step indicator text e.g. "1/2" (strategy: text match) */
-  stepIndicator = () => this.page.getByText(/1\s*\/\s*2/i);
-
-  /** Order total including VAT in the summary panel (strategy: text match) */
-  totalIncludingVat = () => this.page.getByText('1.379,92 €').first();
-
-  // ── Actions ─────────────────────────────────────────────────────────────
+  // ── Simple UI actions ─────────────────────────────────────────────
 
   async clickContinueToVerification(): Promise<void> {
     await this.continueToVerificationButton().click();
   }
 
-  async clickBackToCart(): Promise<void> {
-    await this.backToCartButton().click();
+  async clickBackButton(): Promise<void> {
+    await this.backButton().click();
   }
 
-  async waitForLogisticsPage(): Promise<void> {
-    await this.page.waitForURL(/\/logistics/, { timeout: 30_000 });
-    await this.waitForPageLoad();
+  async waitForLogisticsUrl(): Promise<void> {
+    await this.page.waitForURL(/logistics/, { timeout: 30_000 });
   }
 }

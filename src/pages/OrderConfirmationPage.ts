@@ -2,58 +2,55 @@ import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 /**
- * OrderConfirmationPage — terminal success page after order submission.
+ * OrderConfirmationPage — URL pattern unknown (not browsed live).
  *
- * ⚠️  WARNING: This page was NOT browsed live during test plan generation.
- * All locators below are approximations based on accessibility-tree best-practice
- * patterns. They MUST be confirmed on the first manual run of the complete flow
- * and updated with the verified selectors.
+ * WARNING: All locators in this class are UNVERIFIED.
+ * The order confirmation page was not browsed during test plan generation
+ * to avoid submitting a real order on preprod.
  *
- * Run the flow once manually, inspect the confirmation page DOM, then:
- *  1. Replace the `// TODO: verify selector` locators with confirmed ones.
- *  2. Update the LOCATOR_MAP section in the e2e-order-flow-test-plan artifact.
+ * ACTION REQUIRED on first manual run:
+ *   1. Complete TC-001 manually and observe the confirmation page URL
+ *   2. Inspect the DOM for the success heading and order reference elements
+ *   3. Replace the TODO locators below with confirmed data-testid or role-based selectors
+ *   4. Update the LOCATOR_MAP in the test plan artifact with confirmed values
  */
 export class OrderConfirmationPage extends BasePage {
-  constructor(page: Page) {
-    super(page);
-  }
+  constructor(page: Page) { super(page); }
 
-  // ── Locators ────────────────────────────────────────────────────────────
+  // ── Confirmation content ─────────────────────────────────────────
 
   /**
-   * Success heading or confirmation message.
-   * TODO: verify selector — run manually and confirm the exact heading text.
+   * Success heading — TODO: verify selector on first run.
+   * Attempts role-based match on common confirmation phrases.
    */
+  // TODO: verify selector — confirmation page not browsed live
   successHeading = () =>
-    this.page.getByRole('heading', { name: /order confirmed|your order|commande/i }); // TODO: verify selector
+    this.page.getByRole('heading', { name: /order confirmed|your order|commande confirm/i });
 
   /**
-   * Order reference number element.
-   * Tries common data-testid patterns used in Sonepar/Spark apps.
-   * TODO: verify selector — confirm the exact data-testid on first run.
+   * Order reference number element — TODO: verify selector on first run.
+   * Attempts a broad data-testid wildcard match on common patterns.
    */
+  // TODO: verify selector — confirmation page not browsed live
   orderReferenceNumber = () =>
-    this.page
-      .locator(
-        '[data-testid*="order-reference"],[data-testid*="order-number"],[data-testid*="confirmation"]',
-      )
-      .first(); // TODO: verify selector
+    this.page.locator(
+      '[data-testid*="order-reference"],[data-testid*="order-number"],[data-testid*="confirmation-number"]',
+    ).first();
 
   /**
-   * Continue shopping / home CTA on confirmation page.
-   * TODO: verify selector — confirm visible link text on first run.
+   * "Continue shopping" / home CTA — TODO: verify selector on first run.
    */
+  // TODO: verify selector — confirmation page not browsed live
   continueShoppingLink = () =>
-    this.page.getByRole('link', { name: /continue|home|shop|catalogue/i }); // TODO: verify selector
+    this.page.getByRole('link', { name: /continue|home|shop|catalogue/i });
 
-  // ── Actions ─────────────────────────────────────────────────────────────
+  // ── Simple UI actions ─────────────────────────────────────────────
 
-  async waitForConfirmationPage(): Promise<void> {
-    await this.page.waitForURL(/confirmation|order-confirmation|success/i, { timeout: 60_000 });
-    await this.waitForPageLoad();
+  async getOrderReference(): Promise<string> {
+    return (await this.orderReferenceNumber().textContent()) ?? '';
   }
 
-  async getOrderReferenceText(): Promise<string> {
-    return (await this.orderReferenceNumber().textContent()) ?? '';
+  async waitForConfirmationUrl(): Promise<void> {
+    await this.page.waitForURL(/confirmation|order-confirmation|success/i, { timeout: 60_000 });
   }
 }

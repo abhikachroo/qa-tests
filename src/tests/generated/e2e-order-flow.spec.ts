@@ -2,168 +2,174 @@ import { test, expect } from '@fixtures';
 import { config }       from '@config/index';
 
 /**
- * TC-001: Complete E2E Order Flow
- * Login → Search SKU 6968173 → Add to Cart → Checkout (Logistics + Verification) → Order Confirmation
+ * E2E Order Flow — Full Happy Path
  *
- * Priority: P0
- * Type:     E2E (Full Happy Path)
- * AC Ref:   AC-001, AC-004, AC-006, AC-007, AC-008, AC-010, AC-011
+ * Feature:   E2E Order Flow
+ * App:       https://fra-vanilla-preprod.dev.spark.sonepar.com
+ * Module:    OrderFlowModule (cart → checkout logistics → verification → confirmation)
+ * Reused:    LoginModule (login), SearchModule (search + product assertion)
  *
- * Test Data:
- *   - Login:          config.username / config.password  (mark.reinger.6213@exka6oev.mailosaur.net / Demo202201)
- *   - Product SKU:    6968173 (LISTA Schuifladekast)
- *   - Unit price:     1.140,43 € excl. VAT
- *   - Total incl VAT: 1.379,92 € (21% VAT = 239,49 €)
- *   - Purchase Order: 'PO-TEST-001' (required field on Verification step)
- *   - Project ID:     'PROJ-TEST-001' (required field on Verification step)
- *   - Payment:        Invoice / Credit Line (pre-selected default)
+ * Scenario coverage:
+ *   TC-001  P0 E2E  — Full happy path: Login → Search → Add to Cart → Checkout → Confirmation
  *
- * ⚠️  NOTE: This test places a real order on the preprod environment.
- *    Run sparingly. If a preprod order cancellation API is available,
- *    add an afterEach teardown to cancel the order.
+ * Test data:
+ *   SKU: 6968173 (LISTA Schuifladekast)
+ *   Purchase Order: PO-TEST-001
+ *   Project ID:     PROJ-TEST-001
+ *   Prices confirmed on preprod 2026-04-29:
+ *     Unit (excl. VAT):  1.140,43 €
+ *     Total (incl. VAT): 1.379,92 €
  *
- * ⚠️  NOTE: Order Confirmation page locators are approximated (page not browsed live).
- *    Confirm selectors on first run and update OrderConfirmationPage + test plan.
+ * IMPORTANT — Order Confirmation step:
+ *   The confirmation page URL pattern and element selectors are UNVERIFIED.
+ *   On the first manual run, update OrderConfirmationPage.ts with confirmed selectors.
+ *   See: src/pages/OrderConfirmationPage.ts — TODO comments.
  */
+test.describe(`@P0 @E2E @OrderFlow E2E Order Flow — ${config.displayName} on ${config.environment}`, () => {
 
-const SKU         = '6968173';
-const TOTAL_VAT   = '1.379,92 €';
-const UNIT_PRICE  = '1.140,43 €';
-const PURCHASE_ORDER = 'PO-TEST-001';
-const PROJECT_ID     = 'PROJ-TEST-001';
+  /**
+   * TC-001: Complete E2E order flow
+   *
+   * Priority:     P0 E2E (Full Happy Path)
+   * AC Reference: AC-001, AC-004, AC-006, AC-007, AC-008, AC-010, AC-011
+   *
+   * Preconditions:
+   *   - User account: config.username / config.password (preprod AUTH_POC)
+   *   - SKU 6968173 in catalog with delivery stock >= 1
+   *   - Delivery address pre-configured on account
+   *   - Cart starts empty (clean browser state)
+   *
+   * NOTE: This test places a real order on preprod.
+   * Implement an afterEach teardown with an API cancel call once the
+   * order management API endpoint is identified.
+   */
+  test('TC-001: Complete E2E order flow — Login → Search SKU 6968173 → Add to Cart → Checkout → Order Confirmation', async ({
+    page,
+    loginModule,
+    searchModule,
+    orderFlowModule,
+    cartPage,
+    checkoutLogisticsPage,
+    checkoutVerificationPage,
+    orderConfirmationPage,
+  }) => {
+    const SKU           = '6968173';
+    const PURCHASE_ORDER = 'PO-TEST-001';
+    const PROJECT_ID     = 'PROJ-TEST-001';
 
-test.describe(
-  `@P0 @E2E @OrderFlow E2E Order Flow — ${config.displayName ?? 'Sonepar'} on ${config.environment}`,
-  () => {
-    test(
-      'TC-001: Complete E2E order flow: Login → Search SKU 6968173 → Add to Cart → Checkout → Order Confirmation',
-      async ({
-        loginModule,
-        homePage,
-        searchModule,
-        searchResultsPage,
-        cartPage,
-        checkoutLogisticsPage,
-        checkoutVerificationPage,
-        orderConfirmationPage,
-        checkoutModule,
-      }) => {
+    // ── Step 1: Login ──────────────────────────────────────────────
+    await test.step('Login with valid OPCO credentials via Azure B2C', async () => {
+      await loginModule.doLogin(config.username, config.password);
+    });
 
-        // ── Step 1: Login ───────────────────────────────────────────────────
-        await test.step('Login with configured credentials via Azure B2C', async () => {
-          await loginModule.doLogin(config.username, config.password);
-        });
+    await test.step('Verify authenticated state — user-details-button is visible', async () => {
+      await loginModule.verifyLoginSuccess();
+    });
 
-        await test.step('Verify authenticated state — user-details-button is visible', async () => {
-          await loginModule.verifyLoginSuccess();
-        });
+    await test.step('Verify application URL is back on the app domain after login', async () => {
+      await expect(page).toHaveURL(/fra-vanilla-preprod\.dev\.spark\.sonepar\.com/);
+    });
 
-        // ── Step 2: Search ──────────────────────────────────────────────────
-        await test.step(`Submit header search for SKU ${SKU}`, async () => {
-          await searchModule.submitSearch(SKU);
-        });
+    // ── Step 2: Search for SKU 6968173 ─────────────────────────────
+    await test.step(`Submit header search for SKU ${SKU}`, async () => {
+      await searchModule.submitSearch(SKU);
+    });
 
-        await test.step(`Verify search results page loaded for SKU ${SKU}`, async () => {
-          await expect(
-            searchResultsPage.productCountSummary(),
-            '"1 product" count summary should be visible',
-          ).toBeVisible();
-          await expect(
-            searchResultsPage.productCardBySku(SKU),
-            `Product card for SKU ${SKU} should be visible`,
-          ).toBeVisible();
-          await expect(
-            searchResultsPage.productTitleLink(),
-            'Product title link should be visible on search results',
-          ).toBeVisible();
-        });
+    await test.step('Verify search results URL contains the SKU', async () => {
+      await expect(page).toHaveURL(/\/catalog\/en-gb\/search\/6968173/);
+    });
 
-        // ── Step 3: Add to Cart ─────────────────────────────────────────────
-        await test.step(`Add SKU ${SKU} to cart from search results`, async () => {
-          await checkoutModule.addProductToCart(SKU);
-        });
+    await test.step('Verify product card for SKU 6968173 is visible on results page', async () => {
+      await expect(
+        page.getByTestId('product-list-card-6968173'),
+        'Product card for SKU 6968173 should be visible in search results',
+      ).toBeVisible();
+    });
 
-        await test.step('Verify cart badge shows 1 item and navigate to cart page', async () => {
-          await checkoutModule.verifyCartBadgeAndNavigate(1);
-        });
+    await test.step('Verify product title is visible on the search results card', async () => {
+      await expect(
+        page.getByTestId('product-list-card-title'),
+        'Product title should be visible on the search results card',
+      ).toContainText('Schuifladekast');
+    });
 
-        // ── Step 4: Cart Page ───────────────────────────────────────────────
-        await test.step('Verify cart page URL and cart heading are correct', async () => {
-          await expect(homePage.page ?? cartPage['page'], 'Cart URL should match /checkout/en-gb/').toBeTruthy();
-          await expect(
-            cartPage.cartHeading(),
-            'Shopping Cart heading should be visible on cart page',
-          ).toBeVisible();
-        });
+    // ── Step 3: Add to Cart ────────────────────────────────────────
+    await test.step('Click "Add to cart" for SKU 6968173 on the search results page', async () => {
+      await orderFlowModule.addProductToCart();
+    });
 
-        await test.step(`Verify SKU ${SKU} is listed in cart with correct quantity and prices`, async () => {
-          await checkoutModule.verifyCartContents(SKU, '1');
-          await expect(
-            cartPage.productTitleLink(),
-            'Product title in cart should contain product name',
-          ).toContainText(/Schuifladekast/i);
-        });
+    await test.step('Verify cart header badge increments to 1 after adding the product', async () => {
+      await orderFlowModule.verifyCartBadgeCount(1);
+    });
 
-        // ── Step 5: Proceed to Checkout — Logistics (Step 1/2) ─────────────
-        await test.step('Click Proceed to checkout and wait for Logistics step to load', async () => {
-          await checkoutModule.proceedToCheckout();
-          await expect(
-            checkoutLogisticsPage.page as never,
-            'URL should match logistics tunnel pattern',
-          ).toBeTruthy(); // URL assertion handled inside waitForLogisticsPage()
-        });
+    // ── Step 4: Cart page ─────────────────────────────────────────
+    await test.step('Navigate to the cart page via the header cart button', async () => {
+      await orderFlowModule.navigateToCart();
+    });
 
-        await test.step('Verify Logistics step content and proceed to Verification', async () => {
-          await checkoutModule.verifyLogisticsAndContinue(TOTAL_VAT);
-        });
+    await test.step('Verify cart URL is /checkout/en-gb/', async () => {
+      await expect(page).toHaveURL(/\/checkout\/en-gb\//);
+    });
 
-        // ── Step 6: Checkout — Verification (Step 2/2) ─────────────────────
-        await test.step('Verify Verification step URL and step indicator', async () => {
-          await expect(
-            checkoutVerificationPage.stepIndicator(),
-            'Step indicator should show 2/2 on Verification page',
-          ).toBeVisible();
-        });
+    await test.step('Verify SKU 6968173 is listed in the cart with quantity 1', async () => {
+      await orderFlowModule.verifyCartContents();
+    });
 
-        await test.step('Fill required Purchase Order and Project ID fields', async () => {
-          await checkoutVerificationPage.fillPurchaseOrder(PURCHASE_ORDER);
-          await checkoutVerificationPage.fillProjectId(PROJECT_ID);
-        });
+    await test.step('Verify "Proceed to checkout" button is enabled', async () => {
+      await expect(
+        cartPage.checkoutButton(),
+        '"Proceed to checkout" button should be enabled when cart has items',
+      ).toBeEnabled();
+    });
 
-        await test.step('Verify Invoice payment is pre-selected and total is correct', async () => {
-          await expect(
-            checkoutVerificationPage.invoicePaymentRadio(),
-            'Invoice / Credit Line payment radio should be checked by default',
-          ).toBeChecked();
-          await expect(
-            checkoutVerificationPage.totalIncludingVat(),
-            `Order total should show ${TOTAL_VAT} in Verification step`,
-          ).toBeVisible();
-        });
+    // ── Step 5: Checkout Step 1 — Logistics ───────────────────────
+    await test.step('Click "Proceed to checkout" and wait for Logistics step URL', async () => {
+      await orderFlowModule.proceedToCheckout();
+    });
 
-        // ── Step 7: Confirm Order ───────────────────────────────────────────
-        await test.step('Click "confirm your order" and wait for Order Confirmation page', async () => {
-          await checkoutVerificationPage.clickConfirmOrder();
-          await orderConfirmationPage.waitForConfirmationPage();
-        });
+    await test.step('Verify URL matches the logistics tunnel pattern', async () => {
+      await expect(page).toHaveURL(/\/checkout\/en-gb\/tunnel\/.+\/logistics/);
+    });
 
-        await test.step('Verify Order Confirmation page shows success heading', async () => {
-          // ⚠️  TODO: Confirmation page locators are approximated — verify on first run.
-          // If this assertion fails, inspect the DOM and update OrderConfirmationPage.ts.
-          await expect(
-            orderConfirmationPage.successHeading(),
-            'Order confirmation success heading should be visible on confirmation page',
-          ).toBeVisible();
-        });
+    await test.step('Verify line item for SKU 6968173 is visible on the Logistics step', async () => {
+      await expect(
+        checkoutLogisticsPage.lineItemProductLink(),
+        'Line item product link should be visible in the Logistics step',
+      ).toBeVisible();
+    });
 
-        await test.step('Verify a unique order reference number is displayed', async () => {
-          // ⚠️  TODO: Confirmation page locators are approximated — verify on first run.
-          await expect(
-            orderConfirmationPage.orderReferenceNumber(),
-            'Order reference number element should be visible on confirmation page',
-          ).toBeVisible();
-        });
-      },
-    );
-  },
-);
+    await test.step('Click "continue to verification" to advance to Step 2', async () => {
+      await orderFlowModule.completeLogisticsStep();
+    });
+
+    // ── Step 6: Checkout Step 2 — Verification ────────────────────
+    await test.step('Verify URL matches the verification tunnel pattern', async () => {
+      await expect(page).toHaveURL(/\/checkout\/en-gb\/tunnel\/.+\/verification/);
+    });
+
+    await test.step('Verify Invoice / Credit Line payment method is pre-selected', async () => {
+      await expect(
+        checkoutVerificationPage.invoicePaymentRadio(),
+        'Invoice payment radio should be checked by default',
+      ).toBeChecked();
+    });
+
+    await test.step('Fill required Purchase Order and Project ID fields, then confirm the order', async () => {
+      await orderFlowModule.completeVerificationStep(PURCHASE_ORDER, PROJECT_ID);
+    });
+
+    // ── Step 7: Order Confirmation ────────────────────────────────
+    await test.step('Wait for order confirmation URL and verify success heading is visible', async () => {
+      await orderFlowModule.verifyOrderConfirmation();
+    });
+
+    await test.step('Verify a unique order reference number is displayed on the confirmation page', async () => {
+      const orderRef = await orderConfirmationPage.getOrderReference();
+      expect(
+        orderRef.length,
+        'Order reference number should be a non-empty string',
+      ).toBeGreaterThan(0);
+    });
+  });
+
+});

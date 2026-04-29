@@ -1,4 +1,4 @@
-import { test as base }              from '@playwright/test';
+import { test as base }     from '@playwright/test';
 import {
   SearchPage,
   HeaderSearchPage,
@@ -10,7 +10,7 @@ import {
   CheckoutVerificationPage,
   OrderConfirmationPage,
 } from '@pages/index';
-import { SearchModule, LoginModule, CheckoutModule } from '@modules/index';
+import { SearchModule, LoginModule, OrderFlowModule } from '@modules/index';
 
 type TestFixtures = {
   // Search fixtures
@@ -22,16 +22,16 @@ type TestFixtures = {
   loginPage:   LoginPage;
   homePage:    HomePage;
   loginModule: LoginModule;
-  // Checkout fixtures
+  // Cart & Checkout fixtures
   cartPage:                 CartPage;
   checkoutLogisticsPage:    CheckoutLogisticsPage;
   checkoutVerificationPage: CheckoutVerificationPage;
   orderConfirmationPage:    OrderConfirmationPage;
-  checkoutModule:           CheckoutModule;
+  orderFlowModule:          OrderFlowModule;
 };
 
 export const test = base.extend<TestFixtures>({
-  // ── Search ────────────────────────────────────────────────────────────
+  // --- Search ---
   searchPage: async ({ page }, use) => {
     await use(new SearchPage(page));
   },
@@ -48,7 +48,7 @@ export const test = base.extend<TestFixtures>({
     await use(new SearchModule(searchPage, headerSearchPage, searchResultsPage));
   },
 
-  // ── Login ─────────────────────────────────────────────────────────────
+  // --- Login ---
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page));
   },
@@ -61,7 +61,7 @@ export const test = base.extend<TestFixtures>({
     await use(new LoginModule(loginPage, homePage));
   },
 
-  // ── Checkout ──────────────────────────────────────────────────────────
+  // --- Cart & Checkout ---
   cartPage: async ({ page }, use) => {
     await use(new CartPage(page));
   },
@@ -78,19 +78,24 @@ export const test = base.extend<TestFixtures>({
     await use(new OrderConfirmationPage(page));
   },
 
-  checkoutModule: async (
-    { searchResultsPage, cartPage, checkoutLogisticsPage, checkoutVerificationPage, orderConfirmationPage },
-    use,
-  ) => {
-    await use(
-      new CheckoutModule(
-        searchResultsPage,
-        cartPage,
-        checkoutLogisticsPage,
-        checkoutVerificationPage,
-        orderConfirmationPage,
-      ),
-    );
+  orderFlowModule: async ({
+    page,
+    searchResultsPage,
+    headerSearchPage,
+    cartPage,
+    checkoutLogisticsPage,
+    checkoutVerificationPage,
+    orderConfirmationPage,
+  }, use) => {
+    await use(new OrderFlowModule(
+      page,
+      searchResultsPage,
+      headerSearchPage,
+      cartPage,
+      checkoutLogisticsPage,
+      checkoutVerificationPage,
+      orderConfirmationPage,
+    ));
   },
 });
 

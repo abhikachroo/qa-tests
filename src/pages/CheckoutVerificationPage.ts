@@ -3,47 +3,50 @@ import { BasePage } from './BasePage';
 
 /**
  * CheckoutVerificationPage — /checkout/en-gb/tunnel/{cartId}/verification
- * Step 2/2 of the checkout tunnel.
- * All locators verified via live DOM inspection on 2026-04-29.
+ *
+ * Checkout Step 2 of 2. All locators confirmed live via DOM inspection on 2026-04-29.
+ * Strategy: data-testid (priority 1) and aria-label (priority 2).
+ *
+ * Required fields: purchaseOrder and projectID must be filled before order submission.
  */
 export class CheckoutVerificationPage extends BasePage {
-  constructor(page: Page) {
-    super(page);
-  }
+  constructor(page: Page) { super(page); }
 
-  // ── Locators ────────────────────────────────────────────────────────────
+  // ── Payment method radios ─────────────────────────────────────────
+  /** Invoice / Credit Line radio (pre-selected by default) — data-testid confirmed live */
+  invoicePaymentRadio       = () => this.page.getByTestId('cart-payment-creditLine');
 
-  /** "confirm your order" CTA (strategy: data-testid — verified) */
-  confirmOrderButton = () => this.page.getByTestId('checkout-button');
+  /** Credit / debit card payment radio */
+  creditCardPaymentRadio    = () => this.page.getByTestId('cart-payment-creditCard');
 
-  /** Purchase Order required input (strategy: data-testid — verified) */
-  purchaseOrderInput = () => this.page.getByTestId('form-field-purchaseOrder-required');
+  // ── Required form fields ──────────────────────────────────────────
+  /** Purchase Order — required — data-testid confirmed live */
+  purchaseOrderInput        = () => this.page.getByTestId('form-field-purchaseOrder-required');
 
-  /** Project ID required input (strategy: data-testid — verified) */
-  projectIdInput = () => this.page.getByTestId('form-field-projectID-required');
+  /** Project ID — required — data-testid confirmed live */
+  projectIdInput            = () => this.page.getByTestId('form-field-projectID-required');
 
-  /** Invoice / Credit Line payment radio — pre-selected by default (strategy: data-testid — verified) */
-  invoicePaymentRadio = () => this.page.getByTestId('cart-payment-creditLine');
+  // ── Optional form fields ──────────────────────────────────────────
+  /** Warehouse name (optional) */
+  warehouseNameInput        = () => this.page.getByTestId('form-field-warehouseName');
 
-  /** Credit card payment radio (strategy: data-testid — verified) */
-  creditCardPaymentRadio = () => this.page.getByTestId('cart-payment-creditCard');
+  /** Contact first name (optional) */
+  contactFirstNameInput     = () => this.page.getByTestId('form-field-contactFirstName');
 
-  /** Notes textarea — optional (strategy: data-testid — verified) */
-  notesTextarea = () => this.page.getByTestId('form-field-noteText');
+  /** Notes textarea (optional) */
+  notesTextarea             = () => this.page.getByTestId('form-field-noteText');
 
-  /** "Back to cart" button (strategy: data-testid — verified) */
-  backToCartButton = () => this.page.getByTestId('back-button');
+  // ── CTAs ──────────────────────────────────────────────────────────
+  /** "confirm your order" button — same data-testid pattern as previous checkout steps */
+  confirmOrderButton        = () => this.page.getByTestId('checkout-button');
 
-  /** "Back to logistics" button (strategy: aria-label — verified) */
-  backToLogisticsButton = () => this.page.getByLabel('Back to logistics');
+  /** Back to logistics link */
+  backToLogisticsButton     = () => this.page.getByLabel('Back to logistics');
 
-  /** Step indicator text e.g. "2/2" (strategy: text match) */
-  stepIndicator = () => this.page.getByText(/2\s*\/\s*2/i);
+  /** Back button */
+  backButton                = () => this.page.getByTestId('back-button');
 
-  /** Order total including VAT in the summary panel (strategy: text match) */
-  totalIncludingVat = () => this.page.getByText('1.379,92 €').first();
-
-  // ── Actions ─────────────────────────────────────────────────────────────
+  // ── Simple UI actions ─────────────────────────────────────────────
 
   async fillPurchaseOrder(value: string): Promise<void> {
     await this.purchaseOrderInput().fill(value);
@@ -57,12 +60,7 @@ export class CheckoutVerificationPage extends BasePage {
     await this.confirmOrderButton().click();
   }
 
-  async clickBackToLogistics(): Promise<void> {
-    await this.backToLogisticsButton().click();
-  }
-
-  async waitForVerificationPage(): Promise<void> {
-    await this.page.waitForURL(/\/verification/, { timeout: 30_000 });
-    await this.waitForPageLoad();
+  async waitForVerificationUrl(): Promise<void> {
+    await this.page.waitForURL(/verification/, { timeout: 30_000 });
   }
 }
