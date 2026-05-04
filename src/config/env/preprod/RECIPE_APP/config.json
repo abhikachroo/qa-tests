@@ -1,0 +1,9 @@
+{
+  "displayName": "FitThali Recipe App",
+  "baseUrl": "https://recipe-beta-azure.vercel.app",
+  "searchPath": "/recipes",
+  "noResultsKeyword": "xyznotarecipe999",
+  "loginPath": "/",
+  "username": "",
+  "password": ""
+}
