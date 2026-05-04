@@ -1,6 +1,7 @@
 {
   "displayName": "AUTH POC",
   "baseUrl": "https://fra-vanilla-preprod.dev.spark.sonepar.com",
+  "apiUrl": "https://fra-vanilla-preprod.dev.spark.sonepar.com",
   "searchPath": "/search",
   "noResultsKeyword": "xyznotaproduct999",
   "loginPath": "/",
