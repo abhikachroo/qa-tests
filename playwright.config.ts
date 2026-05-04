@@ -23,8 +23,24 @@ export default defineConfig({
     navigationTimeout: 30_000,
   },
   projects: [
+    // ── Browser projects (E2E) ───────────────────────────────────────────────
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
     //{ name: 'firefox',  use: { ...devices['Desktop Firefox'] } },
     //{ name: 'webkit',   use: { ...devices['Desktop Safari'] } },
+
+    // ── API project ──────────────────────────────────────────────────────────
+    {
+      name: 'api',
+      testMatch: '**/*.api.spec.ts',
+      use: {
+        // No browser device — API tests do not launch a browser
+        baseURL: config.apiUrl,
+        extraHTTPHeaders: {
+          Accept: 'application/json',
+        },
+      },
+      timeout: 30_000,
+      retries: process.env.CI ? 1 : 0,
+    },
   ],
 });
