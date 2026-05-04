@@ -7,6 +7,8 @@ dotenv.config();
 export interface EnvConfig {
   displayName: string;
   baseUrl: string;
+  /** Base URL for API tests — points to the same host as baseUrl for this OPCO */
+  apiUrl: string;
   // Search config
   searchPath: string;
   noResultsKeyword: string;
