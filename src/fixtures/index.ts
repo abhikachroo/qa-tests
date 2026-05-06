@@ -1,12 +1,17 @@
-import { test as base }     from '@playwright/test';
+import { test as base } from '@playwright/test';
 import {
   SearchPage,
   HeaderSearchPage,
   SearchResultsPage,
   LoginPage,
   HomePage,
+  ProductDetailPage,
+  CartPage,
+  CheckoutLogisticsPage,
+  CheckoutVerificationPage,
+  OrderConfirmationPage,
 } from '@pages/index';
-import { SearchModule, LoginModule } from '@modules/index';
+import { SearchModule, LoginModule, CheckoutModule } from '@modules/index';
 
 type TestFixtures = {
   // Search fixtures
@@ -18,10 +23,17 @@ type TestFixtures = {
   loginPage:   LoginPage;
   homePage:    HomePage;
   loginModule: LoginModule;
+  // Checkout fixtures
+  productDetailPage:        ProductDetailPage;
+  cartPage:                 CartPage;
+  checkoutLogisticsPage:    CheckoutLogisticsPage;
+  checkoutVerificationPage: CheckoutVerificationPage;
+  orderConfirmationPage:    OrderConfirmationPage;
+  checkoutModule:           CheckoutModule;
 };
 
 export const test = base.extend<TestFixtures>({
-  // --- Search ---
+  // ── Search ───────────────────────────────────────────────────────────────────
   searchPage: async ({ page }, use) => {
     await use(new SearchPage(page));
   },
@@ -38,7 +50,7 @@ export const test = base.extend<TestFixtures>({
     await use(new SearchModule(searchPage, headerSearchPage, searchResultsPage));
   },
 
-  // --- Login ---
+  // ── Login ────────────────────────────────────────────────────────────────────
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page));
   },
@@ -49,6 +61,45 @@ export const test = base.extend<TestFixtures>({
 
   loginModule: async ({ loginPage, homePage }, use) => {
     await use(new LoginModule(loginPage, homePage));
+  },
+
+  // ── Checkout ─────────────────────────────────────────────────────────────────
+  productDetailPage: async ({ page }, use) => {
+    await use(new ProductDetailPage(page));
+  },
+
+  cartPage: async ({ page }, use) => {
+    await use(new CartPage(page));
+  },
+
+  checkoutLogisticsPage: async ({ page }, use) => {
+    await use(new CheckoutLogisticsPage(page));
+  },
+
+  checkoutVerificationPage: async ({ page }, use) => {
+    await use(new CheckoutVerificationPage(page));
+  },
+
+  orderConfirmationPage: async ({ page }, use) => {
+    await use(new OrderConfirmationPage(page));
+  },
+
+  checkoutModule: async ({
+    page,
+    productDetailPage,
+    cartPage,
+    checkoutLogisticsPage,
+    checkoutVerificationPage,
+    orderConfirmationPage,
+  }, use) => {
+    await use(new CheckoutModule(
+      page,
+      productDetailPage,
+      cartPage,
+      checkoutLogisticsPage,
+      checkoutVerificationPage,
+      orderConfirmationPage,
+    ));
   },
 });
 
