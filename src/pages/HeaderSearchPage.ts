@@ -10,8 +10,6 @@ export class HeaderSearchPage extends BasePage {
   searchInput  = () => this.page.getByTestId('search-bar-input');
   // Submit button identified by accessible role + name
   submitButton = () => this.page.getByRole('button', { name: 'Submit search' });
-  // OneTrust SDK overlay -- may still be intercepting pointer events after banner dismiss
-  private cookieSdkOverlay = () => this.page.locator('#onetrust-consent-sdk');
 
   async fillSearchInput(keyword: string): Promise<void> {
     await this.searchInput().click();
@@ -21,18 +19,21 @@ export class HeaderSearchPage extends BasePage {
   /**
    * Click the header search submit button.
    *
-   * Defensive guard: wait for the OneTrust SDK overlay to be hidden/detached before
-   * clicking. The overlay can still intercept pointer events for a short time after
-   * dismissCookieBannerIfPresent() resolves (the container animates out asynchronously).
-   * This guard resolves immediately if the overlay is already gone, adding zero latency
-   * in the common case.
+   * Defensive guard: call dismissCookieBannerIfPresent() (inherited from BasePage)
+   * before clicking. The OneTrust SDK overlay can still intercept pointer events
+   * for a short time after the banner is dismissed.
+   *
+   * dismissCookieBannerIfPresent() now uses page.evaluate() to forcibly remove the
+   * overlay from the DOM — deterministic and immune to CSS animation timing.
+   *
+   * Additionally, the click uses { force: true } as a belt-and-suspenders fallback:
+   * if any residual overlay element still intercepts pointer events after the evaluate()
+   * removal, force:true bypasses Playwright's actionability checks and fires the
+   * click directly, preventing a timeout at this step.
    */
   async clickSubmitButton(): Promise<void> {
-    await Promise.race([
-      this.cookieSdkOverlay().waitFor({ state: 'hidden',   timeout: 5_000 }).catch(() => undefined),
-      this.cookieSdkOverlay().waitFor({ state: 'detached', timeout: 5_000 }).catch(() => undefined),
-    ]);
-    await this.submitButton().click();
+    await this.dismissCookieBannerIfPresent();
+    await this.submitButton().click({ force: true });
   }
 
   async waitForSearchNavigation(keyword: string): Promise<void> {
