@@ -1,23 +1,42 @@
-aW1wb3J0IHsgUGFnZSB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwoKZXhwb3J0IGFic3RyYWN0
-IGNsYXNzIEJhc2VQYWdlIHsKICAvLyBDb29raWUgY29uc2VudCBiYW5uZXIg4oCUIHNpdGUtd2lk
-ZSwgYXBwZWFycyBvbiBmaXJzdCB2aXNpdAogIHByaXZhdGUgY29va2llQWNjZXB0QnRuID0gKCkg
-PT4gdGhpcy5wYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvYWNjZXB0ZXIgdG91dC9p
-IH0pOwoKICBjb25zdHJ1Y3Rvcihwcm90ZWN0ZWQgcGFnZTogUGFnZSkge30KCiAgYXN5bmMgbmF2
-aWdhdGUocGF0aDogc3RyaW5nKTogUHJvbWlzZTx2b2lkPiB7CiAgICBhd2FpdCB0aGlzLnBhZ2Uu
-Z290byhwYXRoKTsKICB9CgogIGFzeW5jIGRpc21pc3NDb29raWVCYW5uZXJJZlByZXNlbnQoKTog
-UHJvbWlzZTx2b2lkPiB7CiAgICBjb25zdCBidG4gPSB0aGlzLmNvb2tpZUFjY2VwdEJ0bigpOwog
-ICAgaWYgKGF3YWl0IGJ0bi5pc1Zpc2libGUoeyB0aW1lb3V0OiA1XzAwMCB9KS5jYXRjaCgoKSA9
-PiBmYWxzZSkpIHsKICAgICAgYXdhaXQgYnRuLmNsaWNrKCk7CiAgICAgIGF3YWl0IGJ0bi53YWl0
-Rm9yKHsgc3RhdGU6ICdoaWRkZW4nIH0pOwogICAgfQogIH0KCiAgYXN5bmMgZ2V0VGl0bGUoKTog
-UHJvbWlzZTxzdHJpbmc+IHsKICAgIHJldHVybiB0aGlzLnBhZ2UudGl0bGUoKTsKICB9CgogIC8q
-KgogICAqIFdhaXQgZm9yIHRoZSBwYWdlIERPTSB0byBiZSBmdWxseSBwYXJzZWQuCiAgICogVXNl
-cyAnZG9tY29udGVudGxvYWRlZCcgKG5vdCAnbmV0d29ya2lkbGUnKSB0byByZW1haW4gY29tcGF0
-aWJsZSB3aXRoIFNQQXMKICAgKiB0aGF0IG1haW50YWluIHBlcnNpc3RlbnQgYmFja2dyb3VuZCBY
-SFIgY29ubmVjdGlvbnMgKGFuYWx5dGljcywgbGF6eSB3aWRnZXRzKQogICAqIHdoaWNoIHdvdWxk
-IHByZXZlbnQgJ25ldHdvcmtpZGxlJyBmcm9tIGV2ZXIgcmVzb2x2aW5nLgogICAqLwogIGFzeW5j
-IHdhaXRGb3JQYWdlTG9hZCgpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMucGFnZS53
-YWl0Rm9yTG9hZFN0YXRlKCdkb21jb250ZW50bG9hZGVkJyk7CiAgfQoKICBhc3luYyB0YWtlU2Ny
-ZWVuc2hvdChuYW1lOiBzdHJpbmcpOiBQcm9taXNlPEJ1ZmZlcj4gewogICAgcmV0dXJuIHRoaXMu
-cGFnZS5zY3JlZW5zaG90KHsgZnVsbFBhZ2U6IHRydWUsIHBhdGg6IGB0ZXN0LXJlc3VsdHMvJHtu
-YW1lfS5wbmdgIH0pOwogIH0KCiAgYXN5bmMgZ2V0Q3VycmVudFVybCgpOiBQcm9taXNlPHN0cmlu
-Zz4gewogICAgcmV0dXJuIHRoaXMucGFnZS51cmwoKTsKICB9Cn0K
+import { Page } from '@playwright/test';
+
+export abstract class BasePage {
+  // Cookie consent banner -- site-wide, appears on first visit
+  private cookieAcceptBtn = () => this.page.getByRole('button', { name: /accepter tout/i });
+
+  constructor(protected page: Page) {}
+
+  async navigate(path: string): Promise<void> {
+    await this.page.goto(path);
+  }
+
+  async dismissCookieBannerIfPresent(): Promise<void> {
+    const btn = this.cookieAcceptBtn();
+    if (await btn.isVisible({ timeout: 5_000 }).catch(() => false)) {
+      await btn.click();
+      await btn.waitFor({ state: 'hidden' });
+    }
+  }
+
+  async getTitle(): Promise<string> {
+    return this.page.title();
+  }
+
+  /**
+   * Wait for the page DOM to be fully parsed.
+   * Uses 'domcontentloaded' (not 'networkidle') to remain compatible with SPAs
+   * that maintain persistent background XHR connections (analytics, lazy widgets)
+   * which would prevent 'networkidle' from ever resolving.
+   */
+  async waitForPageLoad(): Promise<void> {
+    await this.page.waitForLoadState('domcontentloaded');
+  }
+
+  async takeScreenshot(name: string): Promise<Buffer> {
+    return this.page.screenshot({ fullPage: true, path: `test-results/${name}.png` });
+  }
+
+  async getCurrentUrl(): Promise<string> {
+    return this.page.url();
+  }
+}
