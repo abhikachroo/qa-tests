@@ -1,79 +1,63 @@
-import { expect }           from '@playwright/test';
-import { SearchPage }        from '@pages/SearchPage';
-import { HeaderSearchPage }  from '@pages/HeaderSearchPage';
-import { SearchResultsPage } from '@pages/SearchResultsPage';
-import { Logger }            from '@utils/Logger';
-import { config }            from '@config/index';
-
-export class SearchModule {
-  private logger: Logger;
-
-  constructor(
-    private searchPage:        SearchPage,
-    private headerSearchPage:  HeaderSearchPage,
-    private searchResultsPage: SearchResultsPage,
-  ) {
-    this.logger = new Logger('SearchModule');
-  }
-
-  /**
-   * Navigate directly to the search results URL using the legacy query-string approach.
-   * Used by: TC-SEARCH-05 (no-results test)
-   */
-  async navigateToSearchResults(keyword: string): Promise<void> {
-    this.logger.info(`[${config.opco}][${config.environment}] Navigating to search results for: "${keyword}"`);
-    await this.searchPage.navigate(`${config.searchPath}?q=${encodeURIComponent(keyword)}`);
-    await this.searchPage.waitForPageLoad();
-    await this.searchPage.dismissCookieBannerIfPresent();
-    this.logger.info('Search results page loaded');
-  }
-
-  /**
-   * Submit a search via the header search bar UI.
-   * Flow: navigate to homepage → fill search input → click Submit → wait for URL redirect.
-   * Used by: TC-002
-   */
-  async submitSearch(keyword: string): Promise<void> {
-    this.logger.info(`[${config.opco}][${config.environment}] Submitting header search for: "${keyword}"`);
-    await this.headerSearchPage.navigate('/');
-    await this.headerSearchPage.waitForPageLoad();
-    await this.headerSearchPage.dismissCookieBannerIfPresent();
-    await this.headerSearchPage.fillSearchInput(keyword);
-    await this.headerSearchPage.clickSubmitButton();
-    await this.headerSearchPage.waitForSearchNavigation(keyword);
-    this.logger.info(`Header search submitted — URL now contains /search/${keyword}`);
-  }
-
-  /**
-   * Verify that the search results page shows the expected product count summary
-   * and that the searched product ID is visible on the page.
-   * Used by: TC-002
-   */
-  async verifySearchResultsPage(keyword: string): Promise<void> {
-    this.logger.info(`Verifying search results page contains results for: "${keyword}"`);
-    await expect(
-      this.searchResultsPage.productCountSummary(),
-      'Product count summary should be visible',
-    ).toBeVisible();
-    await expect(
-      this.searchResultsPage.productIdText(keyword),
-      `Product ID "${keyword}" should appear on the results page`,
-    ).toBeVisible();
-    this.logger.info('Search results page verified');
-  }
-
-  /**
-   * Verify the no-results state for an unknown keyword.
-   * Used by: TC-SEARCH-05
-   */
-  async verifyNoResultsDisplayed(): Promise<void> {
-    this.logger.info('Verifying no-results state is displayed');
-    await expect(
-      this.searchPage.noResultsMessage(),
-      'No-results message should be visible',
-    ).toBeVisible();
-    const count = await this.searchPage.getProductCount();
-    expect(count, 'Product cards should not be present when no results').toBe(0);
-    this.logger.info('No-results state verified');
-  }
-}
+aW1wb3J0IHsgZXhwZWN0IH0gICAgICAgICAgIGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwppbXBv
+cnQgeyBTZWFyY2hQYWdlIH0gICAgICAgIGZyb20gJ0BwYWdlcy9TZWFyY2hQYWdlJzsKaW1wb3J0
+IHsgSGVhZGVyU2VhcmNoUGFnZSB9ICBmcm9tICdAcGFnZXMvSGVhZGVyU2VhcmNoUGFnZSc7Cmlt
+cG9ydCB7IFNlYXJjaFJlc3VsdHNQYWdlIH0gZnJvbSAnQHBhZ2VzL1NlYXJjaFJlc3VsdHNQYWdl
+JzsKaW1wb3J0IHsgTG9nZ2VyIH0gICAgICAgICAgICBmcm9tICdAdXRpbHMvTG9nZ2VyJzsKaW1w
+b3J0IHsgY29uZmlnIH0gICAgICAgICAgICBmcm9tICdAY29uZmlnL2luZGV4JzsKCmV4cG9ydCBj
+bGFzcyBTZWFyY2hNb2R1bGUgewogIHByaXZhdGUgbG9nZ2VyOiBMb2dnZXI7CgogIGNvbnN0cnVj
+dG9yKAogICAgcHJpdmF0ZSBzZWFyY2hQYWdlOiAgICAgICAgU2VhcmNoUGFnZSwKICAgIHByaXZh
+dGUgaGVhZGVyU2VhcmNoUGFnZTogIEhlYWRlclNlYXJjaFBhZ2UsCiAgICBwcml2YXRlIHNlYXJj
+aFJlc3VsdHNQYWdlOiBTZWFyY2hSZXN1bHRzUGFnZSwKICApIHsKICAgIHRoaXMubG9nZ2VyID0g
+bmV3IExvZ2dlcignU2VhcmNoTW9kdWxlJyk7CiAgfQoKICAvKioKICAgKiBOYXZpZ2F0ZSBkaXJl
+Y3RseSB0byB0aGUgc2VhcmNoIHJlc3VsdHMgVVJMIHVzaW5nIHRoZSBsZWdhY3kgcXVlcnktc3Ry
+aW5nIGFwcHJvYWNoLgogICAqIFVzZWQgYnk6IFRDLVNFQVJDSC0wNSAobm8tcmVzdWx0cyB0ZXN0
+KQogICAqLwogIGFzeW5jIG5hdmlnYXRlVG9TZWFyY2hSZXN1bHRzKGtleXdvcmQ6IHN0cmluZyk6
+IFByb21pc2U8dm9pZD4gewogICAgdGhpcy5sb2dnZXIuaW5mbyhgWyR7Y29uZmlnLm9wY299XVsk
+e2NvbmZpZy5lbnZpcm9ubWVudH1dIE5hdmlnYXRpbmcgdG8gc2VhcmNoIHJlc3VsdHMgZm9yOiAi
+JHtrZXl3b3JkfSJgKTsKICAgIGF3YWl0IHRoaXMuc2VhcmNoUGFnZS5uYXZpZ2F0ZShgJHtjb25m
+aWcuc2VhcmNoUGF0aH0/cT0ke2VuY29kZVVSSUNvbXBvbmVudChrZXl3b3JkKX1gKTsKICAgIGF3
+YWl0IHRoaXMuc2VhcmNoUGFnZS53YWl0Rm9yUGFnZUxvYWQoKTsKICAgIGF3YWl0IHRoaXMuc2Vh
+cmNoUGFnZS5kaXNtaXNzQ29va2llQmFubmVySWZQcmVzZW50KCk7CiAgICB0aGlzLmxvZ2dlci5p
+bmZvKCdTZWFyY2ggcmVzdWx0cyBwYWdlIGxvYWRlZCcpOwogIH0KCiAgLyoqCiAgICogU3VibWl0
+IGEgc2VhcmNoIHZpYSB0aGUgaGVhZGVyIHNlYXJjaCBiYXIgVUkuCiAgICogRmxvdzogbmF2aWdh
+dGUgdG8gaG9tZXBhZ2Ug4oaSIGRpc21pc3MgY29va2llIGJhbm5lciDihpIgZmlsbCBzZWFyY2gg
+aW5wdXQg4oaSIGNsaWNrIFN1Ym1pdAogICAqICAgICAgIOKGkiB3YWl0IGZvciBVUkwgcmVkaXJl
+Y3QgdmlhIHdhaXRGb3JTZWFyY2hOYXZpZ2F0aW9uKCkuCiAgICoKICAgKiBOb3RlOiB3YWl0Rm9y
+UGFnZUxvYWQoKSBpcyBpbnRlbnRpb25hbGx5IG9taXR0ZWQgYWZ0ZXIgbmF2aWdhdGUoJy8nKS4K
+ICAgKiBUaGlzIFNQQSBtYWludGFpbnMgcGVyc2lzdGVudCBiYWNrZ3JvdW5kIFhIUiAoYW5hbHl0
+aWNzLCBsYXp5IHdpZGdldHMpIHRoYXQKICAgKiBwcmV2ZW50ICduZXR3b3JraWRsZScgZnJvbSBl
+dmVyIHJlc29sdmluZy4gVGhlIHdhaXRGb3JVUkwoKSBndWFyZCBpbnNpZGUKICAgKiB3YWl0Rm9y
+U2VhcmNoTmF2aWdhdGlvbigpIGlzIHN1ZmZpY2llbnQgdG8gY29uZmlybSB0aGUgc2VhcmNoIHRy
+YW5zaXRpb24uCiAgICoKICAgKiBVc2VkIGJ5OiBUQy1FMkUtMDAxIChUQy0wMDIgc3RlcCkKICAg
+Ki8KICBhc3luYyBzdWJtaXRTZWFyY2goa2V5d29yZDogc3RyaW5nKTogUHJvbWlzZTx2b2lkPiB7
+CiAgICB0aGlzLmxvZ2dlci5pbmZvKGBbJHtjb25maWcub3Bjb31dWyR7Y29uZmlnLmVudmlyb25t
+ZW50fV0gU3VibWl0dGluZyBoZWFkZXIgc2VhcmNoIGZvcjogIiR7a2V5d29yZH0iYCk7CiAgICBh
+d2FpdCB0aGlzLmhlYWRlclNlYXJjaFBhZ2UubmF2aWdhdGUoJy8nKTsKICAgIGF3YWl0IHRoaXMu
+aGVhZGVyU2VhcmNoUGFnZS5kaXNtaXNzQ29va2llQmFubmVySWZQcmVzZW50KCk7CiAgICBhd2Fp
+dCB0aGlzLmhlYWRlclNlYXJjaFBhZ2UuZmlsbFNlYXJjaElucHV0KGtleXdvcmQpOwogICAgYXdh
+aXQgdGhpcy5oZWFkZXJTZWFyY2hQYWdlLmNsaWNrU3VibWl0QnV0dG9uKCk7CiAgICBhd2FpdCB0
+aGlzLmhlYWRlclNlYXJjaFBhZ2Uud2FpdEZvclNlYXJjaE5hdmlnYXRpb24oa2V5d29yZCk7CiAg
+ICB0aGlzLmxvZ2dlci5pbmZvKGBIZWFkZXIgc2VhcmNoIHN1Ym1pdHRlZCDigJQgVVJMIG5vdyBj
+b250YWlucyAvc2VhcmNoLyR7a2V5d29yZH1gKTsKICB9CgogIC8qKgogICAqIFZlcmlmeSB0aGF0
+IHRoZSBzZWFyY2ggcmVzdWx0cyBwYWdlIHNob3dzIHRoZSBleHBlY3RlZCBwcm9kdWN0IGNvdW50
+IHN1bW1hcnkKICAgKiBhbmQgdGhhdCB0aGUgc2VhcmNoZWQgcHJvZHVjdCBJRCBpcyB2aXNpYmxl
+IG9uIHRoZSBwYWdlLgogICAqIFVzZWQgYnk6IFRDLUUyRS0wMDEgKFRDLTAwMiBzdGVwKQogICAq
+LwogIGFzeW5jIHZlcmlmeVNlYXJjaFJlc3VsdHNQYWdlKGtleXdvcmQ6IHN0cmluZyk6IFByb21p
+c2U8dm9pZD4gewogICAgdGhpcy5sb2dnZXIuaW5mbyhgVmVyaWZ5aW5nIHNlYXJjaCByZXN1bHRz
+IHBhZ2UgY29udGFpbnMgcmVzdWx0cyBmb3I6ICIke2tleXdvcmR9ImApOwogICAgYXdhaXQgZXhw
+ZWN0KAogICAgICB0aGlzLnNlYXJjaFJlc3VsdHNQYWdlLnByb2R1Y3RDb3VudFN1bW1hcnkoKSwK
+ICAgICAgJ1Byb2R1Y3QgY291bnQgc3VtbWFyeSBzaG91bGQgYmUgdmlzaWJsZScsCiAgICApLnRv
+QmVWaXNpYmxlKCk7CiAgICBhd2FpdCBleHBlY3QoCiAgICAgIHRoaXMuc2VhcmNoUmVzdWx0c1Bh
+Z2UucHJvZHVjdElkVGV4dChrZXl3b3JkKSwKICAgICAgYFByb2R1Y3QgSUQgIiR7a2V5d29yZH0i
+IHNob3VsZCBhcHBlYXIgb24gdGhlIHJlc3VsdHMgcGFnZWAsCiAgICApLnRvQmVWaXNpYmxlKCk7
+CiAgICB0aGlzLmxvZ2dlci5pbmZvKCdTZWFyY2ggcmVzdWx0cyBwYWdlIHZlcmlmaWVkJyk7CiAg
+fQoKICAvKioKICAgKiBWZXJpZnkgdGhlIG5vLXJlc3VsdHMgc3RhdGUgZm9yIGFuIHVua25vd24g
+a2V5d29yZC4KICAgKiBVc2VkIGJ5OiBUQy1TRUFSQ0gtMDUKICAgKi8KICBhc3luYyB2ZXJpZnlO
+b1Jlc3VsdHNEaXNwbGF5ZWQoKTogUHJvbWlzZTx2b2lkPiB7CiAgICB0aGlzLmxvZ2dlci5pbmZv
+KCdWZXJpZnlpbmcgbm8tcmVzdWx0cyBzdGF0ZSBpcyBkaXNwbGF5ZWQnKTsKICAgIGF3YWl0IGV4
+cGVjdCgKICAgICAgdGhpcy5zZWFyY2hQYWdlLm5vUmVzdWx0c01lc3NhZ2UoKSwKICAgICAgJ05v
+LXJlc3VsdHMgbWVzc2FnZSBzaG91bGQgYmUgdmlzaWJsZScsCiAgICApLnRvQmVWaXNpYmxlKCk7
+CiAgICBjb25zdCBjb3VudCA9IGF3YWl0IHRoaXMuc2VhcmNoUGFnZS5nZXRQcm9kdWN0Q291bnQo
+KTsKICAgIGV4cGVjdChjb3VudCwgJ1Byb2R1Y3QgY2FyZHMgc2hvdWxkIG5vdCBiZSBwcmVzZW50
+IHdoZW4gbm8gcmVzdWx0cycpLnRvQmUoMCk7CiAgICB0aGlzLmxvZ2dlci5pbmZvKCdOby1yZXN1
+bHRzIHN0YXRlIHZlcmlmaWVkJyk7CiAgfQp9Cg==
