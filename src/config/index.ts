@@ -14,6 +14,9 @@ export interface EnvConfig {
   loginPath: string;
   username: string;
   password: string;
+  // Order flow config
+  purchaseOrder: string;
+  projectId: string;
 }
 
 const environment = (process.env.ENVIRONMENT ?? 'preprod').toLowerCase();

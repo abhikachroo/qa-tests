@@ -16,4 +16,16 @@ export class SearchResultsPage extends BasePage {
   // Fallback: any visible element containing the product ID string
   productIdText = (productId: string) =>
     this.page.getByText(productId, { exact: false }).first();
+
+  // Product list card by SKU (strategy: data-testid)
+  productListCard = (sku: string) => this.page.getByTestId(`product-list-card-${sku}`);
+
+  // Add to cart button — visible on search results for a given product (strategy: data-testid)
+  addToCartButton = () => this.page.getByTestId('quantity-counter-cta-add');
+
+  // --- Simple UI actions ---
+
+  async clickAddToCart(): Promise<void> {
+    await this.addToCartButton().click();
+  }
 }

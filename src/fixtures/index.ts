@@ -1,12 +1,16 @@
-import { test as base }     from '@playwright/test';
+import { test as base } from '@playwright/test';
 import {
   SearchPage,
   HeaderSearchPage,
   SearchResultsPage,
   LoginPage,
   HomePage,
+  CartPage,
+  CheckoutLogisticsPage,
+  CheckoutVerificationPage,
+  OrderConfirmationPage,
 } from '@pages/index';
-import { SearchModule, LoginModule } from '@modules/index';
+import { SearchModule, LoginModule, OrderFlowModule } from '@modules/index';
 
 type TestFixtures = {
   // Search fixtures
@@ -18,6 +22,12 @@ type TestFixtures = {
   loginPage:   LoginPage;
   homePage:    HomePage;
   loginModule: LoginModule;
+  // Order flow fixtures
+  cartPage:                 CartPage;
+  checkoutLogisticsPage:    CheckoutLogisticsPage;
+  checkoutVerificationPage: CheckoutVerificationPage;
+  orderConfirmationPage:    OrderConfirmationPage;
+  orderFlowModule:          OrderFlowModule;
 };
 
 export const test = base.extend<TestFixtures>({
@@ -49,6 +59,48 @@ export const test = base.extend<TestFixtures>({
 
   loginModule: async ({ loginPage, homePage }, use) => {
     await use(new LoginModule(loginPage, homePage));
+  },
+
+  // --- Order Flow ---
+  cartPage: async ({ page }, use) => {
+    await use(new CartPage(page));
+  },
+
+  checkoutLogisticsPage: async ({ page }, use) => {
+    await use(new CheckoutLogisticsPage(page));
+  },
+
+  checkoutVerificationPage: async ({ page }, use) => {
+    await use(new CheckoutVerificationPage(page));
+  },
+
+  orderConfirmationPage: async ({ page }, use) => {
+    await use(new OrderConfirmationPage(page));
+  },
+
+  orderFlowModule: async (
+    {
+      page,
+      homePage,
+      searchResultsPage,
+      cartPage,
+      checkoutLogisticsPage,
+      checkoutVerificationPage,
+      orderConfirmationPage,
+    },
+    use,
+  ) => {
+    await use(
+      new OrderFlowModule(
+        page,
+        homePage,
+        searchResultsPage,
+        cartPage,
+        checkoutLogisticsPage,
+        checkoutVerificationPage,
+        orderConfirmationPage,
+      ),
+    );
   },
 });
 
