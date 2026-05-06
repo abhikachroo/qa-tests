@@ -15,30 +15,37 @@ export abstract class BasePage {
   /**
    * Dismiss the OneTrust cookie consent banner if present.
    *
-   * Two-stage wait:
-   *   1. Wait for the Accept button itself to become hidden (confirms click was registered).
-   *   2. Wait for the #onetrust-consent-sdk root container to detach or become hidden.
-   *      This container intercepts pointer events even after the button disappears,
-   *      causing downstream clicks (e.g. header search submit) to time out.
-   *
-   * Both waits use generous timeouts and are wrapped in .catch() so we never hard-fail
-   * on environments where the SDK has already been dismissed or is not present.
+   * Strategy:
+   *   1. Check whether the Accept button is visible (5 s probe).
+   *      If the banner is not present, return immediately — zero latency.
+   *   2. Click the Accept button.
+   *   3. Forcibly remove #onetrust-consent-sdk from the DOM via page.evaluate().
+   *      This is deterministic and immune to CSS animation / transition timing.
+   *      The previous Promise.race([...catch, ...catch]) pattern was broken:
+   *      waitFor() rejects immediately when the target state doesn't match the
+   *      current state (e.g. 'hidden' when the element IS visible), so .catch()
+   *      resolved both promises instantly — the race exited with no real wait
+   *      and the overlay kept intercepting pointer events.
+   *   4. As a belt-and-suspenders guard, also wait for the element to be absent
+   *      from the DOM using page.waitForSelector with state:'detached'.
    */
   async dismissCookieBannerIfPresent(): Promise<void> {
-    const btn     = this.cookieAcceptBtn();
-    const overlay = this.cookieSdkOverlay();
+    const btn = this.cookieAcceptBtn();
 
     if (await btn.isVisible({ timeout: 5_000 }).catch(() => false)) {
       await btn.click();
-      // Stage 1: wait for the button to disappear
-      await btn.waitFor({ state: 'hidden', timeout: 5_000 }).catch(() => undefined);
-      // Stage 2: wait for the entire SDK container to detach or become hidden.
-      // Resolves as soon as either state is confirmed; swallows the error if
-      // the element is already gone.
-      await Promise.race([
-        overlay.waitFor({ state: 'hidden',   timeout: 10_000 }).catch(() => undefined),
-        overlay.waitFor({ state: 'detached', timeout: 10_000 }).catch(() => undefined),
-      ]);
+
+      // Deterministically remove the overlay from the DOM so it can no longer
+      // intercept pointer events regardless of animation state.
+      await this.page.evaluate(() => {
+        document.getElementById('onetrust-consent-sdk')?.remove();
+      }).catch(() => undefined);
+
+      // Secondary guard: wait for the selector to be fully detached in case
+      // the evaluate() resolved before DOM mutation propagated.
+      await this.page
+        .waitForSelector('#onetrust-consent-sdk', { state: 'detached', timeout: 5_000 })
+        .catch(() => undefined);
     }
   }
 
