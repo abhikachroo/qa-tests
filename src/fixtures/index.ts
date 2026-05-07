@@ -5,8 +5,12 @@ import {
   SearchResultsPage,
   LoginPage,
   HomePage,
+  CartPage,
+  CheckoutLogisticsPage,
+  CheckoutVerificationPage,
+  OrderConfirmationPage,
 } from '@pages/index';
-import { SearchModule, LoginModule } from '@modules/index';
+import { SearchModule, LoginModule, CheckoutModule } from '@modules/index';
 
 type TestFixtures = {
   // Search fixtures
@@ -18,6 +22,12 @@ type TestFixtures = {
   loginPage:   LoginPage;
   homePage:    HomePage;
   loginModule: LoginModule;
+  // Checkout fixtures
+  cartPage:                 CartPage;
+  checkoutLogisticsPage:    CheckoutLogisticsPage;
+  checkoutVerificationPage: CheckoutVerificationPage;
+  orderConfirmationPage:    OrderConfirmationPage;
+  checkoutModule:           CheckoutModule;
 };
 
 export const test = base.extend<TestFixtures>({
@@ -49,6 +59,46 @@ export const test = base.extend<TestFixtures>({
 
   loginModule: async ({ loginPage, homePage }, use) => {
     await use(new LoginModule(loginPage, homePage));
+  },
+
+  // --- Checkout ---
+  cartPage: async ({ page }, use) => {
+    await use(new CartPage(page));
+  },
+
+  checkoutLogisticsPage: async ({ page }, use) => {
+    await use(new CheckoutLogisticsPage(page));
+  },
+
+  checkoutVerificationPage: async ({ page }, use) => {
+    await use(new CheckoutVerificationPage(page));
+  },
+
+  orderConfirmationPage: async ({ page }, use) => {
+    await use(new OrderConfirmationPage(page));
+  },
+
+  checkoutModule: async (
+    {
+      page,
+      searchResultsPage,
+      cartPage,
+      checkoutLogisticsPage,
+      checkoutVerificationPage,
+      orderConfirmationPage,
+    },
+    use,
+  ) => {
+    await use(
+      new CheckoutModule(
+        page,
+        searchResultsPage,
+        cartPage,
+        checkoutLogisticsPage,
+        checkoutVerificationPage,
+        orderConfirmationPage,
+      ),
+    );
   },
 });
 
