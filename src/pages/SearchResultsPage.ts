@@ -6,14 +6,23 @@ export class SearchResultsPage extends BasePage {
     super(page);
   }
 
-  // "1 product" / "N products" count summary visible on results page
-  productCountSummary = () => this.page.getByText(/\d+\s+product/i);
+  // "1 product" / "N products" count summary (strategy: data-testid)
+  productCountSummary = () => this.page.getByTestId('product-list-count');
 
-  // Product card identified by containing the searched product ID text
-  productCard = (productId: string) =>
-    this.page.locator('[data-testid="product-card"]').filter({ hasText: productId }).first();
+  // Product card by SKU-specific testid, e.g. product-list-card-6968173 (strategy: data-testid)
+  productCardByTestId = (sku: string) => this.page.getByTestId(`product-list-card-${sku}`);
+
+  // Add to cart button (strategy: data-testid — single product on results page)
+  addToCartButton = () => this.page.getByTestId('quantity-counter-cta-add');
+
+  // Quantity counter input for a specific SKU (strategy: id)
+  quantityInput = (sku: string) => this.page.locator(`#quantity-counter-${sku}`);
 
   // Fallback: any visible element containing the product ID string
   productIdText = (productId: string) =>
     this.page.getByText(productId, { exact: false }).first();
+
+  async clickAddToCart(): Promise<void> {
+    await this.addToCartButton().click();
+  }
 }
