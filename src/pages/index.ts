@@ -4,3 +4,5 @@ export { HeaderSearchPage }  from './HeaderSearchPage';
 export { SearchResultsPage } from './SearchResultsPage';
 export { LoginPage }         from './LoginPage';
 export { HomePage }          from './HomePage';
+export { ProductDetailPage } from './ProductDetailPage';
+export { CartPage }          from './CartPage';
