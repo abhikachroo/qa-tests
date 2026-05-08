@@ -1,19 +1,21 @@
-import { Page } from '@playwright/test';
-import { BasePage } from './BasePage';
+import { Locator, Page } from '@playwright/test';
+import { BasePage } from '@pages/BasePage';
 
 export class SearchResultsPage extends BasePage {
   constructor(page: Page) {
     super(page);
   }
 
-  // "1 product" / "N products" count summary visible on results page
-  productCountSummary = () => this.page.getByText(/\d+\s+product/i);
+  productCountSummary = (): Locator => this.page.getByText(/\d+\s+product/i);
+  productCard = (productId: string): Locator => this.page.getByTestId(`product-list-card-${productId}`);
+  productTitle = (): Locator => this.page.getByTestId('product-list-card-title');
+  productIdText = (productId: string): Locator => this.page.getByText(productId, { exact: false }).first();
+  quantityInput = (productId: string): Locator => this.page.locator(`#quantity-counter-${productId}`);
+  addToCartButton = (): Locator => this.page.getByTestId('quantity-counter-cta-add');
+  incrementButton = (): Locator => this.page.getByLabel('Increment');
+  decrementButton = (): Locator => this.page.getByLabel('Decrement');
 
-  // Product card identified by containing the searched product ID text
-  productCard = (productId: string) =>
-    this.page.locator('[data-testid="product-card"]').filter({ hasText: productId }).first();
-
-  // Fallback: any visible element containing the product ID string
-  productIdText = (productId: string) =>
-    this.page.getByText(productId, { exact: false }).first();
+  async navigateToProductSearch(productId: string): Promise<void> {
+    await this.navigate(`/catalog/en-gb/search/${productId}?version=1`);
+  }
 }
