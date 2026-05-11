@@ -1,22 +1,26 @@
-import { test as base }     from '@playwright/test';
+import { test as base } from '@playwright/test';
 import {
   SearchPage,
   HeaderSearchPage,
   SearchResultsPage,
+  ProductDetailPage,
   LoginPage,
   HomePage,
 } from '@pages/index';
-import { SearchModule, LoginModule } from '@modules/index';
+import { SearchModule, ProductPurchaseModule, LoginModule } from '@modules/index';
 
 type TestFixtures = {
   // Search fixtures
-  searchPage:        SearchPage;
-  headerSearchPage:  HeaderSearchPage;
+  searchPage: SearchPage;
+  headerSearchPage: HeaderSearchPage;
   searchResultsPage: SearchResultsPage;
-  searchModule:      SearchModule;
+  searchModule: SearchModule;
+  // Product purchase fixtures
+  productDetailPage: ProductDetailPage;
+  productPurchaseModule: ProductPurchaseModule;
   // Login fixtures
-  loginPage:   LoginPage;
-  homePage:    HomePage;
+  loginPage: LoginPage;
+  homePage: HomePage;
   loginModule: LoginModule;
 };
 
@@ -36,6 +40,18 @@ export const test = base.extend<TestFixtures>({
 
   searchModule: async ({ searchPage, headerSearchPage, searchResultsPage }, use) => {
     await use(new SearchModule(searchPage, headerSearchPage, searchResultsPage));
+  },
+
+  // --- Product purchase ---
+  productDetailPage: async ({ page }, use) => {
+    await use(new ProductDetailPage(page));
+  },
+
+  productPurchaseModule: async (
+    { homePage, headerSearchPage, searchResultsPage, productDetailPage },
+    use,
+  ) => {
+    await use(new ProductPurchaseModule(homePage, headerSearchPage, searchResultsPage, productDetailPage));
   },
 
   // --- Login ---
