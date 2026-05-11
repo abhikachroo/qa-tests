@@ -3,6 +3,7 @@ import {
   SearchPage,
   HeaderSearchPage,
   SearchResultsPage,
+  ProductDetailPage,
   LoginPage,
   HomePage,
 } from '@pages/index';
@@ -13,6 +14,7 @@ type TestFixtures = {
   searchPage:        SearchPage;
   headerSearchPage:  HeaderSearchPage;
   searchResultsPage: SearchResultsPage;
+  productDetailPage: ProductDetailPage;
   searchModule:      SearchModule;
   // Login fixtures
   loginPage:   LoginPage;
@@ -32,6 +34,10 @@ export const test = base.extend<TestFixtures>({
 
   searchResultsPage: async ({ page }, use) => {
     await use(new SearchResultsPage(page));
+  },
+
+  productDetailPage: async ({ page }, use) => {
+    await use(new ProductDetailPage(page));
   },
 
   searchModule: async ({ searchPage, headerSearchPage, searchResultsPage }, use) => {
