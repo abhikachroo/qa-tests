@@ -1,1 +1,24 @@
-aW1wb3J0IHsgTG9jYXRvciwgUGFnZSB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwppbXBvcnQgeyBCYXNlUGFnZSB9IGZyb20gJ0BwYWdlcy9CYXNlUGFnZSc7CgpleHBvcnQgY2xhc3MgU2VhcmNoUmVzdWx0c1BhZ2UgZXh0ZW5kcyBCYXNlUGFnZSB7CiAgY29uc3RydWN0b3IocGFnZTogUGFnZSkgewogICAgc3VwZXIocGFnZSk7CiAgfQoKICBwcm9kdWN0Q291bnRTdW1tYXJ5ID0gKCk6IExvY2F0b3IgPT4gdGhpcy5wYWdlLmdldEJ5VGV4dCgvXGRcK1xzK3Byb2R1Y3QvaSk7CiAgcHJvZHVjdENhcmQgPSAocHJvZHVjdElkOiBzdHJpbmcpOiBMb2NhdG9yID0+CiAgICB0aGlzLnBhZ2UuZ2V0QnlUZXN0SWQoJ3Byb2R1Y3QtbGlzdC1jYXJkLWNvbnRhaW5lcicpLmZpbHRlcih7IGhhc1RleHQ6IHByb2R1Y3RJZCB9KS5maXJzdCgpOwogIHByb2R1Y3RUaXRsZUxpbmsgPSAocHJvZHVjdElkOiBzdHJpbmcpOiBMb2NhdG9yID0+IHRoaXMucHJvZHVjdENhcmQocHJvZHVjdElkKS5nZXRCeVRlc3RJZCgncHJvZHVjdC1saXN0LWNhcmQtdGl0bGUnKTsKICBwcm9kdWN0SWRSZWZlcmVuY2UgPSAocHJvZHVjdElkOiBzdHJpbmcpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeUxhYmVsKGBDb3B5IHByb2R1Y3RJZCAke3Byb2R1Y3RJZH1gKTsKICBwcm9kdWN0QWRkVG9DYXJ0QnV0dG9uID0gKHByb2R1Y3RJZDogc3RyaW5nKTogTG9jYXRvciA9PgogICAgdGhpcy5wcm9kdWN0Q2FyZChwcm9kdWN0SWQpLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAnQWRkIHRvIGNhcnQnIH0pOwogIHByaWNlRXJyb3IgPSAocHJvZHVjdElkOiBzdHJpbmcpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZChgcHJpY2UtZXJyb3ItJHtwcm9kdWN0SWR9YCk7CiAgY2FydEJ1dHRvbiA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZCgnY2FydC1idXR0b24nKTsKCiAgcHJvZHVjdElkVGV4dCA9IChwcm9kdWN0SWQ6IHN0cmluZyk6IExvY2F0b3IgPT4gdGhpcy5wYWdlLmdldEJ5VGV4dChwcm9kdWN0SWQsIHsgZXhhY3Q6IGZhbHNlIH0pLmZpcnN0KCk7CgogIGFzeW5jIGNsaWNrUHJvZHVjdFRpdGxlKHByb2R1Y3RJZDogc3RyaW5nKTogUHJvbWlzZTx2b2lkPiB7CiAgICBhd2FpdCB0aGlzLnByb2R1Y3RUaXRsZUxpbmsocHJvZHVjdElkKS5jbGljaygpOwogIH0KfQo=
+import { Locator, Page } from '@playwright/test';
+import { BasePage } from '@pages/BasePage';
+
+export class SearchResultsPage extends BasePage {
+  constructor(page: Page) {
+    super(page);
+  }
+
+  productCountSummary = (): Locator => this.page.getByText(/\d+\s+product/i);
+  productCard = (productId: string): Locator =>
+    this.page.getByTestId('product-list-card-container').filter({ hasText: productId }).first();
+  productTitleLink = (productId: string): Locator => this.productCard(productId).getByTestId('product-list-card-title');
+  productIdReference = (productId: string): Locator => this.page.getByLabel(`Copy productId ${productId}`);
+  productAddToCartButton = (productId: string): Locator =>
+    this.productCard(productId).getByRole('button', { name: 'Add to cart' });
+  priceError = (productId: string): Locator => this.page.getByTestId(`price-error-${productId}`);
+  cartButton = (): Locator => this.page.getByTestId('cart-button');
+
+  productIdText = (productId: string): Locator => this.page.getByText(productId, { exact: false }).first();
+
+  async clickProductTitle(productId: string): Promise<void> {
+    await this.productTitleLink(productId).click();
+  }
+}
