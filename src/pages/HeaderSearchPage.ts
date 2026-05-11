@@ -1,23 +1,31 @@
-import { Page } from '@playwright/test';
-import { BasePage } from './BasePage';
+import { Locator, Page } from '@playwright/test';
+import { BasePage } from '@pages/BasePage';
 
 export class HeaderSearchPage extends BasePage {
   constructor(page: Page) {
     super(page);
   }
 
-  // Confirmed selector from live UI inspection: data-testid="search-bar-input"
-  searchInput  = () => this.page.getByTestId('search-bar-input');
-  // Submit button identified by accessible role + name
-  submitButton = () => this.page.getByRole('button', { name: 'Submit search' });
+  searchInput = (): Locator => this.page.getByTestId('search-bar-input');
+  submitButton = (): Locator => this.page.getByLabel('Submit search');
+  loginLink = (): Locator => this.page.getByTestId('login-button');
+  signUpLink = (): Locator => this.page.getByTestId('signup-button');
 
   async fillSearchInput(keyword: string): Promise<void> {
     await this.searchInput().click();
     await this.searchInput().fill(keyword);
   }
 
+  async clearSearchInput(): Promise<void> {
+    await this.searchInput().fill('');
+  }
+
   async clickSubmitButton(): Promise<void> {
     await this.submitButton().click();
+  }
+
+  async pressEnterInSearchInput(): Promise<void> {
+    await this.searchInput().press('Enter');
   }
 
   async waitForSearchNavigation(keyword: string): Promise<void> {
