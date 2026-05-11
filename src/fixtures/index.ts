@@ -3,17 +3,20 @@ import {
   SearchPage,
   HeaderSearchPage,
   SearchResultsPage,
+  ProductDetailPage,
   LoginPage,
   HomePage,
 } from '@pages/index';
-import { SearchModule, LoginModule } from '@modules/index';
+import { SearchModule, ProductSearchAddToCartModule, LoginModule } from '@modules/index';
 
 type TestFixtures = {
   // Search fixtures
   searchPage:        SearchPage;
   headerSearchPage:  HeaderSearchPage;
   searchResultsPage: SearchResultsPage;
+  productDetailPage: ProductDetailPage;
   searchModule:      SearchModule;
+  productSearchAddToCartModule: ProductSearchAddToCartModule;
   // Login fixtures
   loginPage:   LoginPage;
   homePage:    HomePage;
@@ -34,8 +37,16 @@ export const test = base.extend<TestFixtures>({
     await use(new SearchResultsPage(page));
   },
 
+  productDetailPage: async ({ page }, use) => {
+    await use(new ProductDetailPage(page));
+  },
+
   searchModule: async ({ searchPage, headerSearchPage, searchResultsPage }, use) => {
     await use(new SearchModule(searchPage, headerSearchPage, searchResultsPage));
+  },
+
+  productSearchAddToCartModule: async ({ headerSearchPage, searchResultsPage, productDetailPage }, use) => {
+    await use(new ProductSearchAddToCartModule(headerSearchPage, searchResultsPage, productDetailPage));
   },
 
   // --- Login ---
