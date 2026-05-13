@@ -88,7 +88,7 @@ export class ProductSearchAddToCartModule {
   async verifyProductDetails(productId: string, expectedTitleContains: string): Promise<void> {
     this.logger.info(`Verifying product details for ${productId}`);
     await expect(this.productDetailsPage.productTitle()).toContainText(expectedTitleContains);
-    await expect(this.productDetailsPage.productIdReference()).toContainText(productId);
+    await expect(this.productDetailsPage.productIdReference(productId)).toContainText(productId);
     await expect(this.productDetailsPage.priceUnavailableMessage(productId)).toContainText('Unable to display price');
   }
 

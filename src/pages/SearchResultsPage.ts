@@ -13,7 +13,7 @@ export class SearchResultsPage extends BasePage {
   productIdReference = (productId: string) => this.page.getByLabel(`Copy productId ${productId}`);
   addToCartButton = () => this.page.getByTestId('quantity-counter-cta-add');
   quantityInput = (productId: string) => this.page.locator(`#quantity-counter-${productId}`);
-  cartButton = () => this.page.getByTestId('cart-button');
+  cartButton = () => this.page.getByTestId('header-cart').getByTestId('cart-button');
 
   productIdText = (productId: string) => this.page.getByText(productId, { exact: false }).first();
 
