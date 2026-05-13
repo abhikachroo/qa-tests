@@ -127,7 +127,7 @@ export class SearchModule {
     }
     this.logger.info(`Verifying product detail disabled state for product: "${productId}"`);
     await expect(this.productDetailPage.productHeading()).toContainText(expectedTitleFragment);
-    await expect(this.productDetailPage.productIdReference()).toContainText(productId);
+    await expect(this.productDetailPage.productIdReference(productId)).toContainText(productId);
     await expect(this.productDetailPage.addToCartButton()).toBeDisabled();
     await expect(this.productDetailPage.buyboxQuantityInput()).toBeDisabled();
     await expect(this.productDetailPage.buyboxQuantityInput()).toHaveValue(expectedQuantity);

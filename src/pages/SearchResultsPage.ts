@@ -10,14 +10,14 @@ export class SearchResultsPage extends BasePage {
   productCountSummary = () => this.page.getByText(/\d+\s+product/i);
   resultsHeading      = (keyword: string) => this.page.getByText(new RegExp(`Results\\s*for\\s*${keyword}`, 'i')).first();
 
-  // Product card verified by live UI data-testid
-  productCard = (productId: string): Locator => this.page.getByTestId(`product-list-card-${productId}`);
+  // Current result cards render product media and details as sibling elements inside a shared container.
+  productCard = (productId: string): Locator =>
+    this.page.getByTestId('product-list-card-container').filter({ hasText: productId }).first();
 
-  productTitle = (productId: string): Locator =>
-    this.productCard(productId).getByTestId('product-list-card-title').first();
+  productTitle = (productId: string): Locator => this.productCard(productId).getByTestId('product-list-card-title').first();
 
   productIdReference = (productId: string): Locator =>
-    this.productCard(productId).getByLabel(`Copy productId ${productId}`);
+    this.productCard(productId).getByText(new RegExp(`ProductID\\s*${productId}`));
 
   quantityInput = (productId: string): Locator => this.productCard(productId).locator(`#quantity-counter-${productId}`);
   addToCartButton = (productId: string): Locator => this.productCard(productId).getByTestId('quantity-counter-cta-add');

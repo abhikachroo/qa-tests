@@ -7,7 +7,8 @@ export class ProductDetailPage extends BasePage {
   }
 
   productHeading = () => this.page.getByRole('heading', { level: 1 });
-  productIdReference = () => this.page.getByTestId('ref-product-productId');
+  productIdReference = (productId: string): Locator =>
+    this.page.getByRole('button', { name: new RegExp(`ProductID\\s*${productId}`) });
   buyboxQuantityInput = () => this.page.locator('#buybox-counter'); // strategy: id
   addToCartButton = () => this.page.getByTestId('quantity-counter-cta-add');
   decrementButton = () => this.page.getByLabel('Decrement');

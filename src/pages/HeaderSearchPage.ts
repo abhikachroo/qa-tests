@@ -12,7 +12,7 @@ export class HeaderSearchPage extends BasePage {
   submitButton = () => this.page.getByLabel('Submit search');
   loginLink    = () => this.page.getByTestId('login-button');
   signUpLink   = () => this.page.getByTestId('signup-button');
-  cartButton   = () => this.page.getByTestId('cart-button');
+  cartButton   = () => this.page.getByTestId('header-cart').getByTestId('cart-button');
 
   async fillSearchInput(keyword: string): Promise<void> {
     await this.searchInput().click();
