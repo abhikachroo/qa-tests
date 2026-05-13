@@ -8,12 +8,23 @@ export class HeaderSearchPage extends BasePage {
 
   // Confirmed selector from live UI inspection: data-testid="search-bar-input"
   searchInput  = () => this.page.getByTestId('search-bar-input');
-  // Submit button identified by accessible role + name
-  submitButton = () => this.page.getByRole('button', { name: 'Submit search' });
+  // Submit button identified by accessible label
+  submitButton = () => this.page.getByLabel('Submit search');
+  loginLink    = () => this.page.getByTestId('login-button');
+  signUpLink   = () => this.page.getByTestId('signup-button');
+  cartButton   = () => this.page.getByTestId('cart-button');
 
   async fillSearchInput(keyword: string): Promise<void> {
     await this.searchInput().click();
     await this.searchInput().fill(keyword);
+  }
+
+  async clearSearchInput(): Promise<void> {
+    await this.searchInput().clear();
+  }
+
+  async pressEnterInSearchInput(): Promise<void> {
+    await this.searchInput().press('Enter');
   }
 
   async clickSubmitButton(): Promise<void> {
