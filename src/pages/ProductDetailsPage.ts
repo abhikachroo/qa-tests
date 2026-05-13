@@ -1,1 +1,18 @@
-aW1wb3J0IHsgUGFnZSB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwppbXBvcnQgeyBCYXNlUGFnZSB9IGZyb20gJy4vQmFzZVBhZ2UnOwoKZXhwb3J0IGNsYXNzIFByb2R1Y3REZXRhaWxzUGFnZSBleHRlbmRzIEJhc2VQYWdlIHsKICBjb25zdHJ1Y3RvcihwYWdlOiBQYWdlKSB7CiAgICBzdXBlcihwYWdlKTsKICB9CgogIHByb2R1Y3RUaXRsZSA9ICgpID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZCgndGl0bGUtbWFudWZhY3R1cmVyJyk7CiAgcHJvZHVjdElkUmVmZXJlbmNlID0gKHByb2R1Y3RJZDogc3RyaW5nKSA9PiB0aGlzLnBhZ2UuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6IGBQcm9kdWN0SUQgJHtwcm9kdWN0SWR9YCB9KTsKICBtYW51ZmFjdHVyZXJSZWZlcmVuY2UgPSAoKSA9PiB0aGlzLnBhZ2UuZ2V0QnlUZXN0SWQoJ3JlZi1wcm9kdWN0LW1hbnVmYWN0dXJlclJlZklkJyk7CiAgcHJpY2VVbmF2YWlsYWJsZU1lc3NhZ2UgPSAocHJvZHVjdElkOiBzdHJpbmcpID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZChgcHJpY2UtZXJyb3ItJHtwcm9kdWN0SWR9YCk7CiAgcXVhbnRpdHlJbnB1dCA9ICgpID0+IHRoaXMucGFnZS5sb2NhdG9yKCcjYnV5Ym94LWNvdW50ZXInKTsKICBhZGRUb0NhcnRCdXR0b24gPSAoKSA9PiB0aGlzLnBhZ2UuZ2V0QnlUZXN0SWQoJ3F1YW50aXR5LWNvdW50ZXItY3RhLWFkZCcpOwogIGRlY3JlbWVudEJ1dHRvbiA9ICgpID0+IHRoaXMucGFnZS5nZXRCeUxhYmVsKCdEZWNyZW1lbnQnKTsKICBpbmNyZW1lbnRCdXR0b24gPSAoKSA9PiB0aGlzLnBhZ2UuZ2V0QnlMYWJlbCgnSW5jcmVtZW50Jyk7CiAgY2FydEJ1dHRvbiA9ICgpID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZCgnaGVhZGVyLWNhcnQnKS5nZXRCeVRlc3RJZCgnY2FydC1idXR0b24nKTsKfQo=
+import { Page } from '@playwright/test';
+import { BasePage } from './BasePage';
+
+export class ProductDetailsPage extends BasePage {
+  constructor(page: Page) {
+    super(page);
+  }
+
+  productTitle = () => this.page.getByTestId('title-manufacturer');
+  productIdReference = (productId: string) => this.page.getByRole('button', { name: `ProductID ${productId}` });
+  manufacturerReference = () => this.page.getByTestId('ref-product-manufacturerRefId');
+  priceUnavailableMessage = (productId: string) => this.page.getByTestId(`price-error-${productId}`);
+  quantityInput = () => this.page.locator('#buybox-counter');
+  addToCartButton = () => this.page.getByTestId('quantity-counter-cta-add');
+  decrementButton = () => this.page.getByLabel('Decrement');
+  incrementButton = () => this.page.getByLabel('Increment');
+  cartButton = () => this.page.getByTestId('header-cart').getByTestId('cart-button');
+}
