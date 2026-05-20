@@ -28,6 +28,8 @@ export class OrdersQuotesPage extends BasePage {
     await this.dismissCookieBannerIfPresent();
     const quotesLink = this.quotesSubmenuLink();
     await quotesLink.waitFor({ state: 'visible' });
+    await quotesLink.scrollIntoViewIfNeeded();
+    await this.dismissCookieBannerIfPresent();
     await quotesLink.click();
   }
 
