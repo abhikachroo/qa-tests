@@ -28,7 +28,11 @@ export class CartModule {
     this.logger.info(`[${config.opco}][${config.environment}] Opening authenticated PDP state before cart validation`);
     await this.cartPage.goToAuthenticatedProductPage();
     await this.cartPage.dismissCookieBannerIfPresent();
-    await expect(this.cartPage.productAddToCartButton(), 'Authenticated PDP Add to Cart should be enabled').toBeEnabled();
+    await expect(this.cartPage.productQuantityInput(), 'Authenticated PDP quantity input should be visible').toBeVisible();
+    await this.cartPage.fillProductQuantity('1');
+    await expect(this.cartPage.productAddToCartButton(), 'Authenticated PDP Add to Cart should be enabled after quantity entry').toBeEnabled();
+    await this.cartPage.clickProductAddToCart();
+    await expect(this.cartPage.headerCartButton(), 'Header cart button should be available after adding product').toBeVisible();
     await this.cartPage.clickHeaderCartButton();
     await expect(this.cartPage.shoppingCartHeading(), 'Cart heading should be visible after header cart navigation').toBeVisible();
     await expect(this.cartPage.cartProductTitles().first(), 'Cart should show at least one product after PDP cart navigation').toBeVisible();
