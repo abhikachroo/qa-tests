@@ -1,1 +1,31 @@
-aW1wb3J0IHsgTG9jYXRvciwgUGFnZSB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwppbXBvcnQgeyBCYXNlUGFnZSB9IGZyb20gJ0BwYWdlcy9CYXNlUGFnZSc7CgpleHBvcnQgY2xhc3MgT3JkZXJzUXVvdGVzUGFnZSBleHRlbmRzIEJhc2VQYWdlIHsKICBjb25zdHJ1Y3RvcihwYWdlOiBQYWdlKSB7IHN1cGVyKHBhZ2UpOyB9CgogIGFjY291bnRTZXR0aW5nc0J1dHRvbiA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZCgndXNlci1kZXRhaWxzLWJ1dHRvbicpOwogIG9yZGVyc0J1dHRvbiA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogJ09yZGVycycgfSk7IC8vIHN0cmF0ZWd5OiByb2xlK25hbWUKICBxdW90ZXNTdWJtZW51TGluayA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVJvbGUoJ2xpbmsnLCB7IG5hbWU6ICdRdW90ZXMnIH0pOyAvLyBzdHJhdGVneTogcm9sZStuYW1lCiAgcXVvdGVzSGVhZGluZyA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVJvbGUoJ2hlYWRpbmcnLCB7IG5hbWU6ICdRdW90ZXMnIH0pOyAvLyBzdHJhdGVneTogcm9sZStuYW1lCiAgcXVvdGVTZWFyY2hGaWVsZCA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZCgnc2VhcmNoLWZpZWxkJyk7CiAgcXVvdGVTZWFyY2hCdXR0b24gPSAoKTogTG9jYXRvciA9PiB0aGlzLnBhZ2UuZ2V0QnlUZXN0SWQoJ3NlYXJjaC1maWVsZC1zZWFyY2gtYnV0dG9uJyk7CiAgcXVvdGVzVGFibGUgPSAoKTogTG9jYXRvciA9PiB0aGlzLnBhZ2UuZ2V0QnlSb2xlKCd0YWJsZScsIHsgbmFtZTogJ1F1b3RlcycgfSk7IC8vIHN0cmF0ZWd5OiByb2xlK25hbWUKICBxdW90ZUxpbmsgPSAocXVvdGVJZDogc3RyaW5nKTogTG9jYXRvciA9PiB0aGlzLnBhZ2UuZ2V0QnlSb2xlKCdsaW5rJywgeyBuYW1lOiBxdW90ZUlkIH0pOyAvLyBzdHJhdGVneTogcm9sZStuYW1lCgogIGFzeW5jIGNsaWNrT3JkZXJzQnV0dG9uKCk6IFByb21pc2U8dm9pZD4gewogICAgYXdhaXQgdGhpcy5vcmRlcnNCdXR0b24oKS5jbGljaygpOwogIH0KCiAgYXN5bmMgY2xpY2tRdW90ZXNTdWJtZW51TGluaygpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMucXVvdGVzU3VibWVudUxpbmsoKS5jbGljaygpOwogIH0KCiAgYXN5bmMgZmlsbFF1b3RlU2VhcmNoKHF1b3RlSWQ6IHN0cmluZyk6IFByb21pc2U8dm9pZD4gewogICAgYXdhaXQgdGhpcy5xdW90ZVNlYXJjaEZpZWxkKCkuZmlsbChxdW90ZUlkKTsKICB9CgogIGFzeW5jIGNsaWNrUXVvdGVTZWFyY2hCdXR0b24oKTogUHJvbWlzZTx2b2lkPiB7CiAgICBhd2FpdCB0aGlzLnF1b3RlU2VhcmNoQnV0dG9uKCkuY2xpY2soKTsKICB9Cn0K
+import { Locator, Page } from '@playwright/test';
+import { BasePage } from '@pages/BasePage';
+
+export class OrdersQuotesPage extends BasePage {
+  constructor(page: Page) { super(page); }
+
+  accountSettingsButton = (): Locator => this.page.getByTestId('user-details-button');
+  ordersButton = (): Locator => this.page.getByRole('button', { name: 'Orders' }); // strategy: role+name
+  quotesSubmenuLink = (): Locator => this.page.getByRole('link', { name: 'Quotes' }); // strategy: role+name
+  quotesHeading = (): Locator => this.page.getByRole('heading', { name: 'Quotes' }); // strategy: role+name
+  quoteSearchField = (): Locator => this.page.getByTestId('search-field');
+  quoteSearchButton = (): Locator => this.page.getByTestId('search-field-search-button');
+  quotesTable = (): Locator => this.page.getByRole('table', { name: 'Quotes' }); // strategy: role+name
+  quoteLink = (quoteId: string): Locator => this.page.getByRole('link', { name: quoteId }); // strategy: role+name
+
+  async clickOrdersButton(): Promise<void> {
+    await this.ordersButton().click();
+  }
+
+  async clickQuotesSubmenuLink(): Promise<void> {
+    await this.quotesSubmenuLink().click();
+  }
+
+  async fillQuoteSearch(quoteId: string): Promise<void> {
+    await this.quoteSearchField().fill(quoteId);
+  }
+
+  async clickQuoteSearchButton(): Promise<void> {
+    await this.quoteSearchButton().click();
+  }
+}
