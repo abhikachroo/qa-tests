@@ -1,1 +1,143 @@
-aW1wb3J0IHsgZXhwZWN0IH0gZnJvbSAnQHBsYXl3cmlnaHQvdGVzdCc7CmltcG9ydCB7IENhcnRQYWdlIH0gZnJvbSAnQHBhZ2VzL0NhcnRQYWdlJzsKaW1wb3J0IHsgTG9nZ2VyIH0gZnJvbSAnQHV0aWxzL0xvZ2dlcic7CmltcG9ydCB7IGNvbmZpZyB9IGZyb20gJ0Bjb25maWcvaW5kZXgnOwoKZXhwb3J0IGNsYXNzIENhcnRNb2R1bGUgewogIHByaXZhdGUgbG9nZ2VyOiBMb2dnZXI7CgogIGNvbnN0cnVjdG9yKHByaXZhdGUgY2FydFBhZ2U6IENhcnRQYWdlKSB7CiAgICB0aGlzLmxvZ2dlciA9IG5ldyBMb2dnZXIoJ0NhcnRNb2R1bGUnKTsKICB9CgogIGFzeW5jIG9wZW5DYXJ0KCk6IFByb21pc2U8dm9pZD4gewogICAgdGhpcy5sb2dnZXIuaW5mbyhgWyR7Y29uZmlnLm9wY299XVske2NvbmZpZy5lbnZpcm9ubWVudH1dIE9wZW5pbmcgY2FydCBwYWdlYCk7CiAgICBhd2FpdCB0aGlzLmNhcnRQYWdlLmdvVG9DYXJ0KCk7CiAgICBhd2FpdCB0aGlzLmNhcnRQYWdlLndhaXRGb3JQYWdlTG9hZCgpOwogICAgYXdhaXQgdGhpcy5jYXJ0UGFnZS5kaXNtaXNzQ29va2llQmFubmVySWZQcmVzZW50KCk7CiAgfQoKICBhc3luYyBvcGVuTG9jYWxpemVkRW1wdHlDYXJ0KCk6IFByb21pc2U8dm9pZD4gewogICAgdGhpcy5sb2dnZXIuaW5mbyhgWyR7Y29uZmlnLm9wY299XVske2NvbmZpZy5lbnZpcm9ubWVudH1dIE9wZW5pbmcgbG9jYWxpemVkIGVtcHR5IGNhcnQgcGFnZWApOwogICAgYXdhaXQgdGhpcy5jYXJ0UGFnZS5nb1RvTG9jYWxpemVkRW1wdHlDYXJ0KCk7CiAgICBhd2FpdCB0aGlzLmNhcnRQYWdlLndhaXRGb3JQYWdlTG9hZCgpOwogICAgYXdhaXQgdGhpcy5jYXJ0UGFnZS5kaXNtaXNzQ29va2llQmFubmVySWZQcmVzZW50KCk7CiAgfQoKICBhc3luYyBvcGVuQXV0aGVudGljYXRlZFByb2R1Y3RBbmRDYXJ0KCk6IFByb21pc2U8dm9pZD4gewogICAgdGhpcy5sb2dnZXIuaW5mbyhgWyR7Y29uZmlnLm9wY299XVske2NvbmZpZy5lbnZpcm9ubWVudH1dIE9wZW5pbmcgYXV0aGVudGljYXRlZCBQRFAgc3RhdGUgYmVmb3JlIGNhcnQgdmFsaWRhdGlvbmApOwogICAgYXdhaXQgdGhpcy5jYXJ0UGFnZS5nb1RvQXV0aGVudGljYXRlZFByb2R1Y3RQYWdlKCk7CiAgICBhd2FpdCB0aGlzLmNhcnRQYWdlLmRpc21pc3NDb29raWVCYW5uZXJJZlByZXNlbnQoKTsKICAgIGF3YWl0IGV4cGVjdCh0aGlzLmNhcnRQYWdlLnByb2R1Y3RBZGRUb0NhcnRCdXR0b24oKSwgJ0F1dGhlbnRpY2F0ZWQgUERQIEFkZCB0byBDYXJ0IHNob3VsZCBiZSBlbmFibGVkJykudG9CZUVuYWJsZWQoKTsKICAgIGF3YWl0IHRoaXMuY2FydFBhZ2UuY2xpY2tIZWFkZXJDYXJ0QnV0dG9uKCk7CiAgICBhd2FpdCBleHBlY3QodGhpcy5jYXJ0UGFnZS5zaG9wcGluZ0NhcnRIZWFkaW5nKCksICdDYXJ0IGhlYWRpbmcgc2hvdWxkIGJlIHZpc2libGUgYWZ0ZXIgaGVhZGVyIGNhcnQgbmF2aWdhdGlvbicpLnRvQmVWaXNpYmxlKCk7CiAgICBhd2FpdCBleHBlY3QodGhpcy5jYXJ0UGFnZS5jYXJ0UHJvZHVjdFRpdGxlcygpLmZpcnN0KCksICdDYXJ0IHNob3VsZCBzaG93IGF0IGxlYXN0IG9uZSBwcm9kdWN0IGFmdGVyIFBEUCBjYXJ0IG5hdmlnYXRpb24nKS50b0JlVmlzaWJsZSgpOwogIH0KCiAgYXN5bmMgdmVyaWZ5Q2FydFBhZ2VWaXNpYmxlKCk6IFByb21pc2U8dm9pZD4gewogICAgdGhpcy5sb2dnZXIuaW5mbygnVmVyaWZ5aW5nIGNhcnQgcGFnZSBzaGVsbCBpcyB2aXNpYmxlJyk7CiAgICBhd2FpdCBleHBlY3QodGhpcy5jYXJ0UGFnZS5zaG9wcGluZ0NhcnRIZWFkaW5nKCksICdTaG9wcGluZyBDYXJ0IGhlYWRpbmcgc2hvdWxkIGJlIHZpc2libGUnKS50b0JlVmlzaWJsZSgpOwogIH0KCiAgYXN5bmMgdmVyaWZ5RW1wdHlDYXJ0V2l0aG91dFJlY29tbWVuZGF0aW9ucygpOiBQcm9taXNlPHZvaWQ+IHsKICAgIHRoaXMubG9nZ2VyLmluZm8oJ1ZlcmlmeWluZyBlbXB0eSBjYXJ0IGhpZGVzIHJlY29tbWVuZGF0aW9ucycpOwogICAgYXdhaXQgZXhwZWN0KHRoaXMuY2FydFBhZ2UuZW1wdHlDYXJ0SGVhZGluZygpLCAnRW1wdHktY2FydCBoZWFkaW5nIHNob3VsZCBiZSB2aXNpYmxlJykudG9CZVZpc2libGUoKTsKICAgIGF3YWl0IGV4cGVjdCh0aGlzLmNhcnRQYWdlLmVtcHR5Q2FydE1lc3NhZ2VCb2FyZCgpLCAnRW1wdHktY2FydCBtZXNzYWdlIGJvYXJkIHNob3VsZCBiZSB2aXNpYmxlJykudG9CZVZpc2libGUoKTsKICAgIGF3YWl0IGV4cGVjdCh0aGlzLmNhcnRQYWdlLmV4cGxvcmVDYXRlZ29yaWVzQnV0dG9uKCksICdFeHBsb3JlIGNhdGVnb3JpZXMgQ1RBIHNob3VsZCBiZSB2aXNpYmxlJykudG9CZVZpc2libGUoKTsKICAgIGF3YWl0IGV4cGVjdCh0aGlzLmNhcnRQYWdlLnJlY29tbWVuZGF0aW9uVGl0bGUoKSwgJ1JlY29tbWVuZGF0aW9uIHRpdGxlIHNob3VsZCBub3QgYmUgdmlzaWJsZSBmb3IgZW1wdHkgY2FydCcpLm5vdC50b0JlVmlzaWJsZSgpOwogICAgYXdhaXQgZXhwZWN0KHRoaXMuY2FydFBhZ2UucmVjb21tZW5kYXRpb25RdWlja0xpbmsoKSwgJ1JlY29tbWVuZGF0aW9uIHF1aWNrIGxpbmsgc2hvdWxkIG5vdCBiZSB2aXNpYmxlIGZvciBlbXB0eSBjYXJ0Jykubm90LnRvQmVWaXNpYmxlKCk7CiAgICBhd2FpdCBleHBlY3QodGhpcy5jYXJ0UGFnZS5yZWNvbW1lbmRhdGlvbkNhcmRzKCksICdSZWNvbW1lbmRhdGlvbiBjYXJkcyBzaG91bGQgbm90IHJlbmRlciBmb3IgZW1wdHkgY2FydCcpLnRvSGF2ZUNvdW50KDApOwogIH0KCiAgYXN5bmMgdmVyaWZ5QW5vbnltb3VzQ2FydFdpdGhvdXRSZWNvbW1lbmRhdGlvbnMoKTogUHJvbWlzZTx2b2lkPiB7CiAgICB0aGlzLmxvZ2dlci5pbmZvKCdWZXJpZnlpbmcgYW5vbnltb3VzIGNhcnQgaGlkZXMgcmVjb21tZW5kYXRpb25zJyk7CiAgICBhd2FpdCBleHBlY3QodGhpcy5jYXJ0UGFnZS5sb2dpbkJ1dHRvbigpLCAnQW5vbnltb3VzIGhlYWRlciBzaG91bGQgc2hvdyBsb2dpbiBjb250cm9sJykudG9CZVZpc2libGUoKTsKICAgIGF3YWl0IGV4cGVjdCh0aGlzLmNhcnRQYWdlLnJlY29tbWVuZGF0aW9uVGl0bGUoKSwgJ1JlY29tbWVuZGF0aW9uIHRpdGxlIHNob3VsZCBub3QgYmUgdmlzaWJsZSBhbm9ueW1vdXNseScpLm5vdC50b0JlVmlzaWJsZSgpOwogICAgYXdhaXQgZXhwZWN0KHRoaXMuY2FydFBhZ2UucmVjb21tZW5kYXRpb25RdWlja0xpbmsoKSwgJ1JlY29tbWVuZGF0aW9uIHF1aWNrIGxpbmsgc2hvdWxkIG5vdCBiZSB2aXNpYmxlIGFub255bW91c2x5Jykubm90LnRvQmVWaXNpYmxlKCk7CiAgICBhd2FpdCBleHBlY3QodGhpcy5jYXJ0UGFnZS5yZWNvbW1lbmRhdGlvbkNhcmRzKCksICdSZWNvbW1lbmRhdGlvbiBjYXJkcyBzaG91bGQgbm90IHJlbmRlciBhbm9ueW1vdXNseScpLnRvSGF2ZUNvdW50KDApOwogIH0KCiAgYXN5bmMgdmVyaWZ5Tm9uRW1wdHlDYXJ0V2l0aG91dFJlY29tbWVuZGF0aW9ucygpOiBQcm9taXNlPHZvaWQ+IHsKICAgIHRoaXMubG9nZ2VyLmluZm8oJ1ZlcmlmeWluZyBub24tZW1wdHkgbm8tcmVzdWx0IGNhcnQgcmVtYWlucyB1c2FibGUgd2l0aG91dCByZWNvbW1lbmRhdGlvbnMnKTsKICAgIGF3YWl0IHRoaXMudmVyaWZ5Q2FydFBhZ2VWaXNpYmxlKCk7CiAgICBhd2FpdCBleHBlY3QodGhpcy5jYXJ0UGFnZS5jYXJ0UHJvZHVjdFRpdGxlcygpLmZpcnN0KCksICdBdCBsZWFzdCBvbmUgY2FydCBwcm9kdWN0IHRpdGxlIHNob3VsZCBiZSB2aXNpYmxlJykudG9CZVZpc2libGUoKTsKICAgIGF3YWl0IGV4cGVjdCh0aGlzLmNhcnRQYWdlLmNoZWNrb3V0QnV0dG9uKCksICdDaGVja291dCBidXR0b24gc2hvdWxkIHJlbWFpbiBhdmFpbGFibGUgZm9yIG5vbi1lbXB0eSBjYXJ0JykudG9CZVZpc2libGUoKTsKICAgIGF3YWl0IGV4cGVjdCh0aGlzLmNhcnRQYWdlLnJlY29tbWVuZGF0aW9uVGl0bGUoKSwgJ1JlY29tbWVuZGF0aW9uIHRpdGxlIHNob3VsZCBub3QgYmUgdmlzaWJsZSB3aGVuIG5vIHJlY29tbWVuZGF0aW9uIHByb2R1Y3RzIGV4aXN0Jykubm90LnRvQmVWaXNpYmxlKCk7CiAgICBhd2FpdCBleHBlY3QodGhpcy5jYXJ0UGFnZS5yZWNvbW1lbmRhdGlvblF1aWNrTGluaygpLCAnUmVjb21tZW5kYXRpb24gcXVpY2sgbGluayBzaG91bGQgbm90IHJlbmRlciB3aGVuIG5vIHJlY29tbWVuZGF0aW9ucyBleGlzdCcpLm5vdC50b0JlVmlzaWJsZSgpOwogICAgYXdhaXQgZXhwZWN0KHRoaXMuY2FydFBhZ2UucmVjb21tZW5kYXRpb25DYXJkcygpLCAnTm8gcmVjb21tZW5kYXRpb24gY2FyZHMgc2hvdWxkIGJlIHJlbmRlcmVkIGZvciBuby1yZXN1bHQgc3RhdGUnKS50b0hhdmVDb3VudCgwKTsKICB9CgogIGFzeW5jIHZlcmlmeVJlY29tbWVuZGF0aW9uc1ByZXNlbnQoKTogUHJvbWlzZTx2b2lkPiB7CiAgICB0aGlzLmxvZ2dlci5pbmZvKCdWZXJpZnlpbmcgdmlzaWJsZSByZWNvbW1lbmRhdGlvbiBzZWN0aW9uIGFuZCBjYXJkIGNvdW50Jyk7CiAgICBhd2FpdCB0aGlzLnZlcmlmeUNhcnRQYWdlVmlzaWJsZSgpOwogICAgYXdhaXQgZXhwZWN0KHRoaXMuY2FydFBhZ2UucmVjb21tZW5kYXRpb25UaXRsZSgpLCAnUmVjb21tZW5kYXRpb24gdGl0bGUgc2hvdWxkIGJlIHZpc2libGUnKS50b0JlVmlzaWJsZSgpOwogICAgYXdhaXQgZXhwZWN0KHRoaXMuY2FydFBhZ2UucmVjb21tZW5kYXRpb25DYXJkcygpLmZpcnN0KCksICdBdCBsZWFzdCBvbmUgcmVjb21tZW5kYXRpb24gY2FyZCBzaG91bGQgYmUgdmlzaWJsZScpLnRvQmVWaXNpYmxlKCk7CiAgICBhd2FpdCBleHBlY3QucG9sbChhc3luYyAoKSA9PiB0aGlzLmNhcnRQYWdlLnJlY29tbWVuZGF0aW9uQ2FyZHMoKS5jb3VudCgpLCB7CiAgICAgIG1lc3NhZ2U6ICdSZWNvbW1lbmRhdGlvbiBjYXJkcyBzaG91bGQgYmUgYmV0d2VlbiAxIGFuZCAxMCcsCiAgICB9KS50b0JlR3JlYXRlclRoYW5PckVxdWFsKDEpOwogICAgYXdhaXQgZXhwZWN0LnBvbGwoYXN5bmMgKCkgPT4gdGhpcy5jYXJ0UGFnZS5yZWNvbW1lbmRhdGlvbkNhcmRzKCkuY291bnQoKSwgewogICAgICBtZXNzYWdlOiAnUmVjb21tZW5kYXRpb24gY2FyZHMgc2hvdWxkIGJlIGNhcHBlZCBhdCAxMCcsCiAgICB9KS50b0JlTGVzc1RoYW5PckVxdWFsKDEwKTsKICAgIGF3YWl0IGV4cGVjdCh0aGlzLmNhcnRQYWdlLnJlY29tbWVuZGF0aW9uUXVpY2tMaW5rKCksICdSZWNvbW1lbmRhdGlvbiBxdWljayBsaW5rIHNob3VsZCBiZSB2aXNpYmxlJykudG9CZVZpc2libGUoKTsKICB9CgogIGFzeW5jIHZlcmlmeVJlY29tbWVuZGF0aW9uQ29udGVudCgpOiBQcm9taXNlPHZvaWQ+IHsKICAgIHRoaXMubG9nZ2VyLmluZm8oJ1ZlcmlmeWluZyByZWNvbW1lbmRhdGlvbiBjb250ZW50LCBwcm9kdWN0IGRldGFpbHMsIGFuZCBkaXZpZGVyJyk7CiAgICBhd2FpdCBleHBlY3QodGhpcy5jYXJ0UGFnZS5yZWNvbW1lbmRhdGlvblRpdGxlKCksICdDTVMgdGl0bGUgc2hvdWxkIGJlIHZpc2libGUnKS50b0JlVmlzaWJsZSgpOwogICAgYXdhaXQgZXhwZWN0KHRoaXMuY2FydFBhZ2UucmVjb21tZW5kYXRpb25EaXZpZGVyKCkuZmlyc3QoKSwgJ0RpdmlkZXIgc2hvdWxkIHNlcGFyYXRlIGNhcnQgY29udGVudCBmcm9tIHJlY29tbWVuZGF0aW9ucycpLnRvQmVWaXNpYmxlKCk7CiAgICBhd2FpdCBleHBlY3QodGhpcy5jYXJ0UGFnZS5yZWNvbW1lbmRhdGlvbkNhcmRUaXRsZXMoKS5maXJzdCgpLCAnUmVjb21tZW5kYXRpb24gcHJvZHVjdCB0aXRsZSBzaG91bGQgYmUgdmlzaWJsZScpLnRvQmVWaXNpYmxlKCk7CiAgICBhd2FpdCBleHBlY3QodGhpcy5jYXJ0UGFnZS5yZWNvbW1lbmRhdGlvbkltYWdlcygpLmZpcnN0KCksICdSZWNvbW1lbmRhdGlvbiBwcm9kdWN0IGltYWdlIHNob3VsZCBiZSB2aXNpYmxlJykudG9CZVZpc2libGUoKTsKICAgIGF3YWl0IGV4cGVjdCh0aGlzLmNhcnRQYWdlLnJlY29tbWVuZGF0aW9uUHJpY2VzKCkuZmlyc3QoKSwgJ1JlY29tbWVuZGF0aW9uIHByb2R1Y3QgcHJpY2Ugc2hvdWxkIGJlIHZpc2libGUnKS50b0JlVmlzaWJsZSgpOwogICAgYXdhaXQgZXhwZWN0KHRoaXMuY2FydFBhZ2UucmVjb21tZW5kYXRpb25BZGRCdXR0b25zKCkuZmlyc3QoKSwgJ1JlY29tbWVuZGF0aW9uIEFkZCB0byBDYXJ0IGJ1dHRvbiBzaG91bGQgYmUgdmlzaWJsZScpLnRvQmVWaXNpYmxlKCk7CiAgfQoKICBhc3luYyB2ZXJpZnlSZWNvbW1lbmRhdGlvbkFuY2hvck5hdmlnYXRpb24oKTogUHJvbWlzZTx2b2lkPiB7CiAgICB0aGlzLmxvZ2dlci5pbmZvKCdWZXJpZnlpbmcgcmVjb21tZW5kYXRpb24gcXVpY2sgbGluayBhbmNob3JzIHRvIHNlY3Rpb24nKTsKICAgIGF3YWl0IGV4cGVjdCh0aGlzLmNhcnRQYWdlLnJlY29tbWVuZGF0aW9uUXVpY2tMaW5rKCksICdSZWNvbW1lbmRhdGlvbiBxdWljayBsaW5rIHNob3VsZCBiZSBlbmFibGVkJykudG9CZUVuYWJsZWQoKTsKICAgIGF3YWl0IHRoaXMuY2FydFBhZ2UuY2xpY2tSZWNvbW1lbmRhdGlvblF1aWNrTGluaygpOwogICAgYXdhaXQgZXhwZWN0KHRoaXMuY2FydFBhZ2UucmVjb21tZW5kYXRpb25UaXRsZSgpLCAnUmVjb21tZW5kYXRpb24gc2VjdGlvbiBzaG91bGQgcmVtYWluIHZpc2libGUgYWZ0ZXIgYW5jaG9yIGNsaWNrJykudG9CZVZpc2libGUoKTsKICB9CgogIGFzeW5jIGFkZEZpcnN0UmVjb21tZW5kYXRpb25BbmRWZXJpZnlTdGF0ZSgpOiBQcm9taXNlPHZvaWQ+IHsKICAgIHRoaXMubG9nZ2VyLmluZm8oJ0FkZGluZyBmaXJzdCByZWNvbW1lbmRhdGlvbiB0byBjYXJ0IGFuZCB2ZXJpZnlpbmcgc3RhdGljIGxpc3Qgc3RhdGUnKTsKICAgIGNvbnN0IGJlZm9yZU5hbWVzID0gYXdhaXQgdGhpcy5jYXJ0UGFnZS5nZXRSZWNvbW1lbmRhdGlvblByb2R1Y3ROYW1lcygpOwogICAgY29uc3QgYmVmb3JlQ2FydENvdW50ID0gYXdhaXQgdGhpcy5jYXJ0UGFnZS5nZXRDYXJ0UHJvZHVjdENvdW50KCk7CiAgICBhd2FpdCB0aGlzLmNhcnRQYWdlLmNsaWNrRmlyc3RSZWNvbW1lbmRhdGlvbkFkZEJ1dHRvbigpOwogICAgYXdhaXQgZXhwZWN0KHRoaXMuY2FydFBhZ2UucmVjb21tZW5kYXRpb25BZGRlZEJ1dHRvbnMoKS5maXJzdCgpLCAnQ2xpY2tlZCByZWNvbW1lbmRhdGlvbiBidXR0b24gc2hvdWxkIHNob3cgYWRkZWQgc3RhdGUnKS50b0JlVmlzaWJsZSgpOwogICAgYXdhaXQgZXhwZWN0KHRoaXMuY2FydFBhZ2UuY2FydFByb2R1Y3RDYXJkcygpLCAnQ2FydCBwcm9kdWN0IGNvdW50IHNob3VsZCBpbmNyZWFzZSBhZnRlciBhZGRpbmcgcmVjb21tZW5kYXRpb24nKS50b0hhdmVDb3VudChiZWZvcmVDYXJ0Q291bnQgKyAxKTsKICAgIGF3YWl0IGV4cGVjdC5wb2xsKGFzeW5jICgpID0+IHRoaXMuY2FydFBhZ2UuZ2V0UmVjb21tZW5kYXRpb25Qcm9kdWN0TmFtZXMoKSwgewogICAgICBtZXNzYWdlOiAnUmVjb21tZW5kYXRpb24gbGlzdCBzaG91bGQgcmVtYWluIHN0YXRpYyBhZnRlciBhZGQtdG8tY2FydCcsCiAgICB9KS50b0VxdWFsKGJlZm9yZU5hbWVzKTsKICB9CgogIGFzeW5jIHJlbW92ZUZpcnN0Q2FydEl0ZW1BbmRWZXJpZnlSZWNvbW1lbmRhdGlvbkNhbkJlQWRkZWRBZ2FpbigpOiBQcm9taXNlPHZvaWQ+IHsKICAgIHRoaXMubG9nZ2VyLmluZm8oJ1JlbW92aW5nIGFkZGVkIHJlY29tbWVuZGF0aW9uIGFuZCB2ZXJpZnlpbmcgYWRkIGJ1dHRvbiByZXNldCcpOwogICAgYXdhaXQgdGhpcy5jYXJ0UGFnZS5jbGlja0ZpcnN0UmVtb3ZlQ2FydEl0ZW1CdXR0b24oKTsKICAgIGF3YWl0IGV4cGVjdCh0aGlzLmNhcnRQYWdlLnJlY29tbWVuZGF0aW9uQWRkQnV0dG9ucygpLmZpcnN0KCksICdSZWNvbW1lbmRhdGlvbiBidXR0b24gc2hvdWxkIHJlc2V0IHRvIGFkZCBzdGF0ZSBhZnRlciByZW1vdmFsJykudG9CZVZpc2libGUoKTsKICB9CgogIGFzeW5jIHJlbW92ZUFsbENhcnRJdGVtc0FuZFZlcmlmeUVtcHR5U3RhdGUoKTogUHJvbWlzZTx2b2lkPiB7CiAgICB0aGlzLmxvZ2dlci5pbmZvKCdSZW1vdmluZyBhbGwgdmlzaWJsZSBjYXJ0IGl0ZW1zIGFuZCB2ZXJpZnlpbmcgZW1wdHkgY2FydCBzdGF0ZScpOwogICAgY29uc3QgaW5pdGlhbENvdW50ID0gYXdhaXQgdGhpcy5jYXJ0UGFnZS5nZXRDYXJ0UHJvZHVjdENvdW50KCk7CiAgICBmb3IgKGxldCBpbmRleCA9IDA7IGluZGV4IDwgaW5pdGlhbENvdW50OyBpbmRleCArPSAxKSB7CiAgICAgIGF3YWl0IHRoaXMuY2FydFBhZ2UuY2xpY2tGaXJzdFJlbW92ZUNhcnRJdGVtQnV0dG9uKCk7CiAgICB9CiAgICBhd2FpdCBleHBlY3QodGhpcy5jYXJ0UGFnZS5lbXB0eUNhcnRIZWFkaW5nKCksICdDYXJ0IHNob3VsZCBzaG93IGVtcHR5IHN0YXRlIGFmdGVyIGFsbCBpdGVtcyBhcmUgcmVtb3ZlZCcpLnRvQmVWaXNpYmxlKCk7CiAgICBhd2FpdCBleHBlY3QodGhpcy5jYXJ0UGFnZS5yZWNvbW1lbmRhdGlvblRpdGxlKCksICdSZWNvbW1lbmRhdGlvbiB0aXRsZSBzaG91bGQgZGlzYXBwZWFyIHdoZW4gY2FydCBiZWNvbWVzIGVtcHR5Jykubm90LnRvQmVWaXNpYmxlKCk7CiAgICBhd2FpdCBleHBlY3QodGhpcy5jYXJ0UGFnZS5yZWNvbW1lbmRhdGlvblF1aWNrTGluaygpLCAnUmVjb21tZW5kYXRpb24gcXVpY2sgbGluayBzaG91bGQgZGlzYXBwZWFyIHdoZW4gY2FydCBiZWNvbWVzIGVtcHR5Jykubm90LnRvQmVWaXNpYmxlKCk7CiAgfQoKICBhc3luYyB2ZXJpZnlSZWNvbW1lbmRhdGlvbkxpc3RTdGF0aWNBZnRlckNhcnRDaGFuZ2VzKCk6IFByb21pc2U8dm9pZD4gewogICAgdGhpcy5sb2dnZXIuaW5mbygnVmVyaWZ5aW5nIHJlY29tbWVuZGF0aW9uIGxpc3QgcmVtYWlucyBzdGF0aWMgYWZ0ZXIgY2FydCBjaGFuZ2VzJyk7CiAgICBjb25zdCBiZWZvcmVOYW1lcyA9IGF3YWl0IHRoaXMuY2FydFBhZ2UuZ2V0UmVjb21tZW5kYXRpb25Qcm9kdWN0TmFtZXMoKTsKICAgIGF3YWl0IHRoaXMuY2FydFBhZ2UuY2xpY2tGaXJzdFJlY29tbWVuZGF0aW9uQWRkQnV0dG9uKCk7CiAgICBhd2FpdCBleHBlY3QodGhpcy5jYXJ0UGFnZS5yZWNvbW1lbmRhdGlvbkFkZGVkQnV0dG9ucygpLmZpcnN0KCksICdBZGRlZCBzdGF0ZSBzaG91bGQgYmUgdmlzaWJsZSBhZnRlciBhZGQtdG8tY2FydCcpLnRvQmVWaXNpYmxlKCk7CiAgICBhd2FpdCBleHBlY3QucG9sbChhc3luYyAoKSA9PiB0aGlzLmNhcnRQYWdlLmdldFJlY29tbWVuZGF0aW9uUHJvZHVjdE5hbWVzKCksIHsKICAgICAgbWVzc2FnZTogJ1JlY29tbWVuZGF0aW9uIGxpc3Qgc2hvdWxkIHJlbWFpbiB1bmNoYW5nZWQgYWZ0ZXIgYWRkaW5nIGEgcmVjb21tZW5kYXRpb24nLAogICAgfSkudG9FcXVhbChiZWZvcmVOYW1lcyk7CiAgICBhd2FpdCB0aGlzLmNhcnRQYWdlLmNsaWNrSW5jcmVtZW50UXVhbnRpdHkoKTsKICAgIGF3YWl0IGV4cGVjdC5wb2xsKGFzeW5jICgpID0+IHRoaXMuY2FydFBhZ2UuZ2V0UmVjb21tZW5kYXRpb25Qcm9kdWN0TmFtZXMoKSwgewogICAgICBtZXNzYWdlOiAnUmVjb21tZW5kYXRpb24gbGlzdCBzaG91bGQgcmVtYWluIHVuY2hhbmdlZCBhZnRlciBxdWFudGl0eSB1cGRhdGUnLAogICAgfSkudG9FcXVhbChiZWZvcmVOYW1lcyk7CiAgfQp9Cg==
+import { expect } from '@playwright/test';
+import { CartPage } from '@pages/CartPage';
+import { Logger } from '@utils/Logger';
+import { config } from '@config/index';
+
+export class CartModule {
+  private logger: Logger;
+
+  constructor(private cartPage: CartPage) {
+    this.logger = new Logger('CartModule');
+  }
+
+  async openCart(): Promise<void> {
+    this.logger.info(`[${config.opco}][${config.environment}] Opening cart page`);
+    await this.cartPage.goToCart();
+    await this.cartPage.waitForPageLoad();
+    await this.cartPage.dismissCookieBannerIfPresent();
+  }
+
+  async openLocalizedEmptyCart(): Promise<void> {
+    this.logger.info(`[${config.opco}][${config.environment}] Opening localized empty cart page`);
+    await this.cartPage.goToLocalizedEmptyCart();
+    await this.cartPage.waitForPageLoad();
+    await this.cartPage.dismissCookieBannerIfPresent();
+  }
+
+  async openAuthenticatedProductAndCart(): Promise<void> {
+    this.logger.info(`[${config.opco}][${config.environment}] Opening authenticated PDP state before cart validation`);
+    await this.cartPage.goToAuthenticatedProductPage();
+    await this.cartPage.dismissCookieBannerIfPresent();
+    await expect(this.cartPage.productAddToCartButton(), 'Authenticated PDP Add to Cart should be enabled').toBeEnabled();
+    await this.cartPage.clickHeaderCartButton();
+    await expect(this.cartPage.shoppingCartHeading(), 'Cart heading should be visible after header cart navigation').toBeVisible();
+    await expect(this.cartPage.cartProductTitles().first(), 'Cart should show at least one product after PDP cart navigation').toBeVisible();
+  }
+
+  async verifyCartPageVisible(): Promise<void> {
+    this.logger.info('Verifying cart page shell is visible');
+    await expect(this.cartPage.shoppingCartHeading(), 'Shopping Cart heading should be visible').toBeVisible();
+  }
+
+  async verifyEmptyCartWithoutRecommendations(): Promise<void> {
+    this.logger.info('Verifying empty cart hides recommendations');
+    await expect(this.cartPage.emptyCartHeading(), 'Empty-cart heading should be visible').toBeVisible();
+    await expect(this.cartPage.emptyCartMessageBoard(), 'Empty-cart message board should be visible').toBeVisible();
+    await expect(this.cartPage.exploreCategoriesButton(), 'Explore categories CTA should be visible').toBeVisible();
+    await expect(this.cartPage.recommendationTitle(), 'Recommendation title should not be visible for empty cart').not.toBeVisible();
+    await expect(this.cartPage.recommendationQuickLink(), 'Recommendation quick link should not be visible for empty cart').not.toBeVisible();
+    await expect(this.cartPage.recommendationCards(), 'Recommendation cards should not render for empty cart').toHaveCount(0);
+  }
+
+  async verifyAnonymousCartWithoutRecommendations(): Promise<void> {
+    this.logger.info('Verifying anonymous cart hides recommendations');
+    await expect(this.cartPage.loginButton(), 'Anonymous header should show login control').toBeVisible();
+    await expect(this.cartPage.recommendationTitle(), 'Recommendation title should not be visible anonymously').not.toBeVisible();
+    await expect(this.cartPage.recommendationQuickLink(), 'Recommendation quick link should not be visible anonymously').not.toBeVisible();
+    await expect(this.cartPage.recommendationCards(), 'Recommendation cards should not render anonymously').toHaveCount(0);
+  }
+
+  async verifyNonEmptyCartWithoutRecommendations(): Promise<void> {
+    this.logger.info('Verifying non-empty no-result cart remains usable without recommendations');
+    await this.verifyCartPageVisible();
+    await expect(this.cartPage.cartProductTitles().first(), 'At least one cart product title should be visible').toBeVisible();
+    await expect(this.cartPage.checkoutButton(), 'Checkout button should remain available for non-empty cart').toBeVisible();
+    await expect(this.cartPage.recommendationTitle(), 'Recommendation title should not be visible when no recommendation products exist').not.toBeVisible();
+    await expect(this.cartPage.recommendationQuickLink(), 'Recommendation quick link should not render when no recommendations exist').not.toBeVisible();
+    await expect(this.cartPage.recommendationCards(), 'No recommendation cards should be rendered for no-result state').toHaveCount(0);
+  }
+
+  async verifyRecommendationsPresent(): Promise<void> {
+    this.logger.info('Verifying visible recommendation section and card count');
+    await this.verifyCartPageVisible();
+    await expect(this.cartPage.recommendationTitle(), 'Recommendation title should be visible').toBeVisible();
+    await expect(this.cartPage.recommendationCards().first(), 'At least one recommendation card should be visible').toBeVisible();
+    await expect.poll(async () => this.cartPage.recommendationCards().count(), {
+      message: 'Recommendation cards should be between 1 and 10',
+    }).toBeGreaterThanOrEqual(1);
+    await expect.poll(async () => this.cartPage.recommendationCards().count(), {
+      message: 'Recommendation cards should be capped at 10',
+    }).toBeLessThanOrEqual(10);
+    await expect(this.cartPage.recommendationQuickLink(), 'Recommendation quick link should be visible').toBeVisible();
+  }
+
+  async verifyRecommendationContent(): Promise<void> {
+    this.logger.info('Verifying recommendation content, product details, and divider');
+    await expect(this.cartPage.recommendationTitle(), 'CMS title should be visible').toBeVisible();
+    await expect(this.cartPage.recommendationDivider().first(), 'Divider should separate cart content from recommendations').toBeVisible();
+    await expect(this.cartPage.recommendationCardTitles().first(), 'Recommendation product title should be visible').toBeVisible();
+    await expect(this.cartPage.recommendationImages().first(), 'Recommendation product image should be visible').toBeVisible();
+    await expect(this.cartPage.recommendationPrices().first(), 'Recommendation product price should be visible').toBeVisible();
+    await expect(this.cartPage.recommendationAddButtons().first(), 'Recommendation Add to Cart button should be visible').toBeVisible();
+  }
+
+  async verifyRecommendationAnchorNavigation(): Promise<void> {
+    this.logger.info('Verifying recommendation quick link anchors to section');
+    await expect(this.cartPage.recommendationQuickLink(), 'Recommendation quick link should be enabled').toBeEnabled();
+    await this.cartPage.clickRecommendationQuickLink();
+    await expect(this.cartPage.recommendationTitle(), 'Recommendation section should remain visible after anchor click').toBeVisible();
+  }
+
+  async addFirstRecommendationAndVerifyState(): Promise<void> {
+    this.logger.info('Adding first recommendation to cart and verifying static list state');
+    const beforeNames = await this.cartPage.getRecommendationProductNames();
+    const beforeCartCount = await this.cartPage.getCartProductCount();
+    await this.cartPage.clickFirstRecommendationAddButton();
+    await expect(this.cartPage.recommendationAddedButtons().first(), 'Clicked recommendation button should show added state').toBeVisible();
+    await expect(this.cartPage.cartProductCards(), 'Cart product count should increase after adding recommendation').toHaveCount(beforeCartCount + 1);
+    await expect.poll(async () => this.cartPage.getRecommendationProductNames(), {
+      message: 'Recommendation list should remain static after add-to-cart',
+    }).toEqual(beforeNames);
+  }
+
+  async removeFirstCartItemAndVerifyRecommendationCanBeAddedAgain(): Promise<void> {
+    this.logger.info('Removing added recommendation and verifying add button reset');
+    await this.cartPage.clickFirstRemoveCartItemButton();
+    await expect(this.cartPage.recommendationAddButtons().first(), 'Recommendation button should reset to add state after removal').toBeVisible();
+  }
+
+  async removeAllCartItemsAndVerifyEmptyState(): Promise<void> {
+    this.logger.info('Removing all visible cart items and verifying empty cart state');
+    const initialCount = await this.cartPage.getCartProductCount();
+    for (let index = 0; index < initialCount; index += 1) {
+      await this.cartPage.clickFirstRemoveCartItemButton();
+    }
+    await expect(this.cartPage.emptyCartHeading(), 'Cart should show empty state after all items are removed').toBeVisible();
+    await expect(this.cartPage.recommendationTitle(), 'Recommendation title should disappear when cart becomes empty').not.toBeVisible();
+    await expect(this.cartPage.recommendationQuickLink(), 'Recommendation quick link should disappear when cart becomes empty').not.toBeVisible();
+  }
+
+  async verifyRecommendationListStaticAfterCartChanges(): Promise<void> {
+    this.logger.info('Verifying recommendation list remains static after cart changes');
+    const beforeNames = await this.cartPage.getRecommendationProductNames();
+    await this.cartPage.clickFirstRecommendationAddButton();
+    await expect(this.cartPage.recommendationAddedButtons().first(), 'Added state should be visible after add-to-cart').toBeVisible();
+    await expect.poll(async () => this.cartPage.getRecommendationProductNames(), {
+      message: 'Recommendation list should remain unchanged after adding a recommendation',
+    }).toEqual(beforeNames);
+    await this.cartPage.clickIncrementQuantity();
+    await expect.poll(async () => this.cartPage.getRecommendationProductNames(), {
+      message: 'Recommendation list should remain unchanged after quantity update',
+    }).toEqual(beforeNames);
+  }
+}
