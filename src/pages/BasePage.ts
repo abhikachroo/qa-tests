@@ -2,11 +2,11 @@ import { Locator, Page } from '@playwright/test';
 
 export abstract class BasePage {
   // Cookie consent banner — site-wide, appears on first visit
-  private cookieAcceptBtn = (): Locator =>
-    this.page
-      .getByRole('button', { name: /(accept all|allow all|accept cookies|accepter tout|tout accepter|j'accepte|i accept)/i })
-      .or(this.page.locator('#onetrust-accept-btn-handler'));
-
+  private oneTrustAcceptButton = (): Locator => this.page.locator('#onetrust-accept-btn-handler');
+  private cookieAcceptButton = (): Locator =>
+    this.page.getByRole('button', {
+      name: /(accept all|allow all|accept cookies|accepter tout|tout accepter|continuer sans accepter|j'accepte|i accept)/i,
+    });
   private cookieBanner = (): Locator => this.page.locator('#onetrust-banner-sdk');
 
   constructor(protected page: Page) {}
@@ -16,12 +16,16 @@ export abstract class BasePage {
   }
 
   async dismissCookieBannerIfPresent(): Promise<void> {
-    const btn = this.cookieAcceptBtn().first();
-    if (await btn.isVisible({ timeout: 5_000 }).catch(() => false)) {
-      await btn.click();
-      await this.cookieBanner().waitFor({ state: 'hidden', timeout: 10_000 }).catch(() => undefined);
-      await btn.waitFor({ state: 'hidden', timeout: 10_000 }).catch(() => undefined);
+    const oneTrustButton = this.oneTrustAcceptButton();
+    const roleButton = this.cookieAcceptButton().first();
+
+    if (await oneTrustButton.isVisible({ timeout: 3_000 }).catch(() => false)) {
+      await oneTrustButton.click();
+    } else if (await roleButton.isVisible({ timeout: 3_000 }).catch(() => false)) {
+      await roleButton.click();
     }
+
+    await this.cookieBanner().waitFor({ state: 'hidden', timeout: 10_000 }).catch(() => undefined);
   }
 
   async getTitle(): Promise<string> {
