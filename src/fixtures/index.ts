@@ -5,8 +5,9 @@ import {
   SearchResultsPage,
   LoginPage,
   HomePage,
+  QuotesPage,
 } from '@pages/index';
-import { SearchModule, LoginModule } from '@modules/index';
+import { SearchModule, LoginModule, QuotesModule } from '@modules/index';
 
 type TestFixtures = {
   // Search fixtures
@@ -18,6 +19,9 @@ type TestFixtures = {
   loginPage:   LoginPage;
   homePage:    HomePage;
   loginModule: LoginModule;
+  // Quotes fixtures
+  quotesPage:   QuotesPage;
+  quotesModule: QuotesModule;
 };
 
 export const test = base.extend<TestFixtures>({
@@ -49,6 +53,15 @@ export const test = base.extend<TestFixtures>({
 
   loginModule: async ({ loginPage, homePage }, use) => {
     await use(new LoginModule(loginPage, homePage));
+  },
+
+  // --- Quotes ---
+  quotesPage: async ({ page }, use) => {
+    await use(new QuotesPage(page));
+  },
+
+  quotesModule: async ({ quotesPage }, use) => {
+    await use(new QuotesModule(quotesPage));
   },
 });
 
