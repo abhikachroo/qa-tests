@@ -1,1 +1,40 @@
-aW1wb3J0IHsgTG9jYXRvciwgUGFnZSB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwppbXBvcnQgeyBCYXNlUGFnZSB9IGZyb20gJ0BwYWdlcy9CYXNlUGFnZSc7CgpleHBvcnQgY2xhc3MgT3JkZXJzUXVvdGVzUGFnZSBleHRlbmRzIEJhc2VQYWdlIHsKICBjb25zdHJ1Y3RvcihwYWdlOiBQYWdlKSB7IHN1cGVyKHBhZ2UpOyB9CgogIGFjY291bnRTZXR0aW5nc0J1dHRvbiA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZCgndXNlci1kZXRhaWxzLWJ1dHRvbicpOwogIG9yZGVyc0J1dHRvbiA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogJ09yZGVycycgfSk7IC8vIHN0cmF0ZWd5OiByb2xlK25hbWUKICBxdW90ZXNTdWJtZW51TGluayA9ICgpOiBMb2NhdG9yID0+CiAgICB0aGlzLnBhZ2UKICAgICAgLmdldEJ5Um9sZSgnbGluaycsIHsgbmFtZTogL15RdW90ZXMkLyB9KQogICAgICAub3IodGhpcy5wYWdlLmdldEJ5Um9sZSgnbWVudWl0ZW0nLCB7IG5hbWU6IC9eUXVvdGVzJC8gfSkpCiAgICAgIC5vcih0aGlzLnBhZ2UuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6IC9eUXVvdGVzJC8gfSkpCiAgICAgIC5maXJzdCgpOyAvLyBzdHJhdGVneTogYWN0aW9uYWJsZSByb2xlK25hbWUsIGV4Y2x1ZGVzIGRhc2hib2FyZCBjYXJkIHRpdGxlIHRleHQKICBxdW90ZXNIZWFkaW5nID0gKCk6IExvY2F0b3IgPT4gdGhpcy5wYWdlLmdldEJ5Um9sZSgnaGVhZGluZycsIHsgbmFtZTogJ1F1b3RlcycgfSk7IC8vIHN0cmF0ZWd5OiByb2xlK25hbWUKICBxdW90ZVNlYXJjaEZpZWxkID0gKCk6IExvY2F0b3IgPT4gdGhpcy5wYWdlLmdldEJ5VGVzdElkKCdzZWFyY2gtZmllbGQnKTsKICBxdW90ZVNlYXJjaEJ1dHRvbiA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZCgnc2VhcmNoLWZpZWxkLXNlYXJjaC1idXR0b24nKTsKICBxdW90ZXNUYWJsZSA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVJvbGUoJ3RhYmxlJywgeyBuYW1lOiAnUXVvdGVzJyB9KTsgLy8gc3RyYXRlZ3k6IHJvbGUrbmFtZQogIHF1b3RlTGluayA9IChxdW90ZUlkOiBzdHJpbmcpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVJvbGUoJ2xpbmsnLCB7IG5hbWU6IHF1b3RlSWQgfSk7IC8vIHN0cmF0ZWd5OiByb2xlK25hbWUKCiAgYXN5bmMgY2xpY2tPcmRlcnNCdXR0b24oKTogUHJvbWlzZTx2b2lkPiB7CiAgICBhd2FpdCB0aGlzLmRpc21pc3NDb29raWVCYW5uZXJJZlByZXNlbnQoKTsKICAgIGF3YWl0IHRoaXMub3JkZXJzQnV0dG9uKCkuY2xpY2soKTsKICB9CgogIGFzeW5jIGNsaWNrUXVvdGVzU3VibWVudUxpbmsoKTogUHJvbWlzZTx2b2lkPiB7CiAgICBhd2FpdCB0aGlzLmRpc21pc3NDb29raWVCYW5uZXJJZlByZXNlbnQoKTsKICAgIGNvbnN0IHF1b3Rlc0xpbmsgPSB0aGlzLnF1b3Rlc1N1Ym1lbnVMaW5rKCk7CiAgICBhd2FpdCBxdW90ZXNMaW5rLndhaXRGb3IoeyBzdGF0ZTogJ3Zpc2libGUnIH0pOwogICAgYXdhaXQgcXVvdGVzTGluay5jbGljaygpOwogIH0KCiAgYXN5bmMgZmlsbFF1b3RlU2VhcmNoKHF1b3RlSWQ6IHN0cmluZyk6IFByb21pc2U8dm9pZD4gewogICAgYXdhaXQgdGhpcy5xdW90ZVNlYXJjaEZpZWxkKCkuZmlsbChxdW90ZUlkKTsKICB9CgogIGFzeW5jIGNsaWNrUXVvdGVTZWFyY2hCdXR0b24oKTogUHJvbWlzZTx2b2lkPiB7CiAgICBhd2FpdCB0aGlzLnF1b3RlU2VhcmNoQnV0dG9uKCkuY2xpY2soKTsKICB9Cn0K
+import { Locator, Page } from '@playwright/test';
+import { BasePage } from '@pages/BasePage';
+
+export class OrdersQuotesPage extends BasePage {
+  constructor(page: Page) { super(page); }
+
+  accountSettingsButton = (): Locator => this.page.getByTestId('user-details-button');
+  ordersButton = (): Locator => this.page.getByRole('button', { name: 'Orders' }); // strategy: role+name
+  quotesSubmenuLink = (): Locator =>
+    this.page
+      .getByRole('link', { name: /^Quotes$/ })
+      .or(this.page.getByRole('menuitem', { name: /^Quotes$/ }))
+      .or(this.page.getByRole('button', { name: /^Quotes$/ }))
+      .first(); // strategy: actionable role+name, excludes dashboard card title text
+  quotesHeading = (): Locator => this.page.getByRole('heading', { name: 'Quotes' }); // strategy: role+name
+  quoteSearchField = (): Locator => this.page.getByTestId('search-field');
+  quoteSearchButton = (): Locator => this.page.getByTestId('search-field-search-button');
+  quotesTable = (): Locator => this.page.getByRole('table', { name: 'Quotes' }); // strategy: role+name
+  quoteLink = (quoteId: string): Locator => this.page.getByRole('link', { name: quoteId }); // strategy: role+name
+
+  async clickOrdersButton(): Promise<void> {
+    await this.dismissCookieBannerIfPresent();
+    await this.ordersButton().click();
+  }
+
+  async clickQuotesSubmenuLink(): Promise<void> {
+    await this.dismissCookieBannerIfPresent();
+    const quotesLink = this.quotesSubmenuLink();
+    await quotesLink.waitFor({ state: 'visible' });
+    await quotesLink.click();
+  }
+
+  async fillQuoteSearch(quoteId: string): Promise<void> {
+    await this.quoteSearchField().fill(quoteId);
+  }
+
+  async clickQuoteSearchButton(): Promise<void> {
+    await this.quoteSearchButton().click();
+  }
+}
