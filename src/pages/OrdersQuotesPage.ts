@@ -14,10 +14,12 @@ export class OrdersQuotesPage extends BasePage {
   quoteLink = (quoteId: string): Locator => this.page.getByRole('link', { name: quoteId }); // strategy: role+name
 
   async clickOrdersButton(): Promise<void> {
+    await this.dismissCookieBannerIfPresent();
     await this.ordersButton().click();
   }
 
   async clickQuotesSubmenuLink(): Promise<void> {
+    await this.dismissCookieBannerIfPresent();
     await this.quotesSubmenuLink().click();
   }
 
