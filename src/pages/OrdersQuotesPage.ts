@@ -11,7 +11,8 @@ export class OrdersQuotesPage extends BasePage {
       .getByRole('link', { name: /^Quotes$/ })
       .or(this.page.getByRole('menuitem', { name: /^Quotes$/ }))
       .or(this.page.getByRole('button', { name: /^Quotes$/ }))
-      .first(); // strategy: actionable role+name, excludes dashboard card title text
+      .or(this.page.locator('a[href$="/account/en-gb/quotes"]').filter({ has: this.page.getByText('Quotes', { exact: true }) }))
+      .first(); // strategy: prefer actionable role+name, fallback scopes dashboard Quotes card by route and visible card title
   quotesHeading = (): Locator => this.page.getByRole('heading', { name: 'Quotes' }); // strategy: role+name
   quoteSearchField = (): Locator => this.page.getByTestId('search-field');
   quoteSearchButton = (): Locator => this.page.getByTestId('search-field-search-button');
