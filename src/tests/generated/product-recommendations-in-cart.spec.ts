@@ -10,6 +10,7 @@ test.describe(`@DFS-67436 @CartRecommendations Product recommendations in cart â
     });
   });
 
+  // Skipped until controlled recommendation-present preprod data or service mocking is available.
   test.skip('@P0 @Smoke TC-001: Display recommendations section for authenticated non-empty cart with valid recommendations', async ({
     cartModule,
   }) => {
@@ -22,6 +23,7 @@ test.describe(`@DFS-67436 @CartRecommendations Product recommendations in cart â
     });
   });
 
+  // Skipped until controlled recommendation-present preprod data or service mocking is available.
   test.skip('@P0 @Smoke TC-006: Add recommended product to cart without full page reload and show added state', async ({
     cartModule,
   }) => {
@@ -34,6 +36,7 @@ test.describe(`@DFS-67436 @CartRecommendations Product recommendations in cart â
     });
   });
 
+  // Skipped until CMS-backed visible recommendation cards are available in preprod.
   test.skip('@P1 @Functional TC-002: Verify recommendation section content, product card details, CMS text, and divider', async ({
     cartModule,
   }) => {
@@ -46,6 +49,7 @@ test.describe(`@DFS-67436 @CartRecommendations Product recommendations in cart â
     });
   });
 
+  // Skipped until the recommendation quick-link anchor can be verified with recommendation-present data.
   test.skip('@P1 @Functional TC-003: Navigate from cart quick link anchor to recommendations section', async ({
     cartModule,
   }) => {
@@ -82,6 +86,7 @@ test.describe(`@DFS-67436 @CartRecommendations Product recommendations in cart â
     });
   });
 
+  // Skipped until controlled recommendation-present preprod data with an added recommendation line item is available.
   test.skip('@P1 @Functional TC-007: Reset recommendation button to add state after removing added recommendation from cart', async ({
     cartModule,
   }) => {
@@ -106,6 +111,7 @@ test.describe(`@DFS-67436 @CartRecommendations Product recommendations in cart â
     });
   });
 
+  // Skipped until an isolated disposable authenticated cart can be safely mutated to empty.
   test.skip('@P2 @Negative TC-008: Remove recommendations section when cart becomes empty after all products are removed', async ({
     cartModule,
   }) => {
@@ -118,6 +124,7 @@ test.describe(`@DFS-67436 @CartRecommendations Product recommendations in cart â
     });
   });
 
+  // Skipped until controlled recommendation-present preprod data with at least two stable recommendation cards is available.
   test.skip('@P2 @Functional TC-009: Keep recommendation list static while adding a recommended product and changing cart state', async ({
     cartModule,
   }) => {

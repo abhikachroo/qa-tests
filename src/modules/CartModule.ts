@@ -72,7 +72,12 @@ export class CartModule {
     await this.verifyCartPageVisible();
     await expect(this.cartPage.recommendationTitle(), 'Recommendation title should be visible').toBeVisible();
     await expect(this.cartPage.recommendationCards().first(), 'At least one recommendation card should be visible').toBeVisible();
-    await expect(this.cartPage.recommendationCards(), 'Recommendation cards should be capped at 10').toHaveCount(/[1-9]|10/ as unknown as number);
+    await expect.poll(async () => this.cartPage.recommendationCards().count(), {
+      message: 'Recommendation cards should be between 1 and 10',
+    }).toBeGreaterThanOrEqual(1);
+    await expect.poll(async () => this.cartPage.recommendationCards().count(), {
+      message: 'Recommendation cards should be capped at 10',
+    }).toBeLessThanOrEqual(10);
     await expect(this.cartPage.recommendationQuickLink(), 'Recommendation quick link should be visible').toBeVisible();
   }
 
