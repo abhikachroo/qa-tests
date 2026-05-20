@@ -13,7 +13,6 @@ export class OrdersQuotesModule {
     this.logger.info('Navigating from Orders menu to Quotes submenu');
     await this.ordersQuotesPage.clickOrdersButton();
     await this.ordersQuotesPage.clickQuotesSubmenuLink();
-    await this.ordersQuotesPage.waitForPageLoad();
   }
 
   async searchQuote(quoteId: string): Promise<void> {
