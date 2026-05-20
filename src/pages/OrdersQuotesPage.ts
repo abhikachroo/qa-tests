@@ -6,7 +6,7 @@ export class OrdersQuotesPage extends BasePage {
 
   accountSettingsButton = (): Locator => this.page.getByTestId('user-details-button');
   ordersButton = (): Locator => this.page.getByRole('button', { name: 'Orders' }); // strategy: role+name
-  quotesSubmenuLink = (): Locator => this.page.getByRole('link', { name: 'Quotes' }); // strategy: role+name
+  quotesSubmenuLink = (): Locator => this.page.getByText('Quotes', { exact: true }); // strategy: exact visible text
   quotesHeading = (): Locator => this.page.getByRole('heading', { name: 'Quotes' }); // strategy: role+name
   quoteSearchField = (): Locator => this.page.getByTestId('search-field');
   quoteSearchButton = (): Locator => this.page.getByTestId('search-field-search-button');
