@@ -93,6 +93,10 @@ export class CartPage extends BasePage {
     await this.incrementQuantityButton().first().click();
   }
 
+  async fillProductQuantity(quantity: string): Promise<void> {
+    await this.productQuantityInput().fill(quantity);
+  }
+
   async clickProductAddToCart(): Promise<void> {
     await this.productAddToCartButton().click();
   }
