@@ -9,9 +9,9 @@ export abstract class BasePage {
     });
   private cookieBanner = (): Locator => this.page.locator('#onetrust-banner-sdk');
   private oneTrustSdk = (): Locator => this.page.locator('#onetrust-consent-sdk');
-  private oneTrustDarkFilter = (): Locator => this.page.locator('.onetrust-pc-dark-filter.ot-fade-in');
+  private oneTrustDarkFilter = (): Locator => this.page.locator('.onetrust-pc-dark-filter');
   private oneTrustOverlays = (): Locator =>
-    this.page.locator('#onetrust-consent-sdk, .onetrust-pc-dark-filter.ot-fade-in');
+    this.page.locator('#onetrust-consent-sdk, #onetrust-banner-sdk, .onetrust-pc-dark-filter');
 
   constructor(protected page: Page) {}
 
@@ -35,12 +35,16 @@ export abstract class BasePage {
       this.oneTrustDarkFilter().waitFor({ state: 'hidden', timeout: 5_000 }).catch(() => undefined),
     ]);
 
-    if (await this.oneTrustOverlays().first().isVisible({ timeout: 1_000 }).catch(() => false)) {
+    const overlayCount = await this.oneTrustOverlays().count().catch(() => 0);
+    if (overlayCount > 0) {
       await this.page.evaluate(() => {
         document
-          .querySelectorAll('#onetrust-consent-sdk, .onetrust-pc-dark-filter.ot-fade-in')
+          .querySelectorAll('#onetrust-consent-sdk, #onetrust-banner-sdk, .onetrust-pc-dark-filter')
           .forEach((element) => element.remove());
+        document.body.classList.remove('ot-sdk-show-settings', 'ot-bnr-blocked');
+        document.documentElement.classList.remove('ot-sdk-show-settings', 'ot-bnr-blocked');
       });
+      await this.oneTrustOverlays().first().waitFor({ state: 'detached', timeout: 2_000 }).catch(() => undefined);
     }
   }
 
