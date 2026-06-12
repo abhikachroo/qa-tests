@@ -5,8 +5,9 @@ import {
   SearchResultsPage,
   LoginPage,
   HomePage,
+  ChatPdpPage,
 } from '@pages/index';
-import { SearchModule, LoginModule } from '@modules/index';
+import { SearchModule, LoginModule, ChatPdpModule } from '@modules/index';
 
 type TestFixtures = {
   // Search fixtures
@@ -18,6 +19,9 @@ type TestFixtures = {
   loginPage:   LoginPage;
   homePage:    HomePage;
   loginModule: LoginModule;
+  // Chat PDP fixtures
+  chatPdpPage: ChatPdpPage;
+  chatPdpModule: ChatPdpModule;
 };
 
 export const test = base.extend<TestFixtures>({
@@ -49,6 +53,15 @@ export const test = base.extend<TestFixtures>({
 
   loginModule: async ({ loginPage, homePage }, use) => {
     await use(new LoginModule(loginPage, homePage));
+  },
+
+  // --- Chat PDP ---
+  chatPdpPage: async ({ page }, use) => {
+    await use(new ChatPdpPage(page));
+  },
+
+  chatPdpModule: async ({ chatPdpPage, loginModule }, use) => {
+    await use(new ChatPdpModule(chatPdpPage, loginModule));
   },
 });
 
