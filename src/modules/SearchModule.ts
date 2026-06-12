@@ -16,10 +16,6 @@ export class SearchModule {
     this.logger = new Logger('SearchModule');
   }
 
-  /**
-   * Navigate directly to the search results URL using the legacy query-string approach.
-   * Used by: TC-SEARCH-05 (no-results test)
-   */
   async navigateToSearchResults(keyword: string): Promise<void> {
     this.logger.info(`[${config.opco}][${config.environment}] Navigating to search results for: "${keyword}"`);
     await this.searchPage.navigate(`${config.searchPath}?q=${encodeURIComponent(keyword)}`);
@@ -28,11 +24,6 @@ export class SearchModule {
     this.logger.info('Search results page loaded');
   }
 
-  /**
-   * Submit a search via the header search bar UI.
-   * Flow: navigate to homepage → fill search input → click Submit → wait for URL redirect.
-   * Used by: TC-002
-   */
   async submitSearch(keyword: string): Promise<void> {
     this.logger.info(`[${config.opco}][${config.environment}] Submitting header search for: "${keyword}"`);
     await this.headerSearchPage.navigate('/');
@@ -44,11 +35,6 @@ export class SearchModule {
     this.logger.info(`Header search submitted — URL now contains /search/${keyword}`);
   }
 
-  /**
-   * Verify that the search results page shows the expected product count summary
-   * and that the searched product ID is visible on the page.
-   * Used by: TC-002
-   */
   async verifySearchResultsPage(keyword: string): Promise<void> {
     this.logger.info(`Verifying search results page contains results for: "${keyword}"`);
     await expect(
@@ -62,10 +48,6 @@ export class SearchModule {
     this.logger.info('Search results page verified');
   }
 
-  /**
-   * Verify the no-results state for an unknown keyword.
-   * Used by: TC-SEARCH-05
-   */
   async verifyNoResultsDisplayed(): Promise<void> {
     this.logger.info('Verifying no-results state is displayed');
     await expect(
@@ -75,5 +57,15 @@ export class SearchModule {
     const count = await this.searchPage.getProductCount();
     expect(count, 'Product cards should not be present when no results').toBe(0);
     this.logger.info('No-results state verified');
+  }
+
+  async openSearchResultByProductId(productId: string): Promise<void> {
+    this.logger.info(`Opening search result for product ID: "${productId}"`);
+    await expect(
+      this.searchResultsPage.productIdText(productId),
+      `Product ID "${productId}" should be visible before opening the PDP`,
+    ).toBeVisible();
+    await this.searchResultsPage.productCard(productId).click();
+    this.logger.info('PDP opened from search results');
   }
 }
