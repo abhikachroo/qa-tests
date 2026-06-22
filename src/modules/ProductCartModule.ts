@@ -59,6 +59,6 @@ export class ProductCartModule {
     this.logger.info('Verifying empty search does not navigate away from the current page');
     await this.headerSearchPage.fillSearchInput('');
     await this.headerSearchPage.clickSubmitButton();
-    await expect(this.headerSearchPage.currentUrl()).toHaveText(previousUrl);
+    expect(await this.headerSearchPage.getCurrentUrl()).toBe(previousUrl);
   }
 }
