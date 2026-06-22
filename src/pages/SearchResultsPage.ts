@@ -16,4 +16,8 @@ export class SearchResultsPage extends BasePage {
   // Fallback: any visible element containing the product ID string
   productIdText = (productId: string) =>
     this.page.getByText(productId, { exact: false }).first();
+
+  // Page-level accessible add-to-cart action for the matching product
+  addToCartButton = () =>
+    this.page.getByRole('button', { name: /^Add to cart$/i }).first();
 }
