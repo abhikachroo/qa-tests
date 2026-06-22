@@ -20,7 +20,7 @@ test.describe(`@P1 @P2 @Regression @ProductSearchAndAddToCart Add product to car
     await test.step('Verify the cart reflects the added product', async () => {
       await productCartModule.verifyAddToCartSucceeded(PRODUCT_ID);
       await expect(productCartPage.cartButton(), 'Cart button should remain available after add-to-cart').toBeVisible();
-      await expect(productCartPage.cartButton(), 'Cart count should increment to at least one item').toContainText(/[1-9]\d*/);
+      await expect(productCartPage.cartCount(), 'Cart count should increment to at least one item').toContainText(/[1-9]\d*/);
     });
 
     await test.step('Verify the add-to-cart success confirmation state is shown', async () => {
