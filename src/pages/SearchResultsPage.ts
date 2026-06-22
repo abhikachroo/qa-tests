@@ -16,4 +16,11 @@ export class SearchResultsPage extends BasePage {
   // Fallback: any visible element containing the product ID string
   productIdText = (productId: string) =>
     this.page.getByText(productId, { exact: false }).first();
+
+  error404Container = () => this.page.getByTestId('Error404');
+  error404Heading = () => this.page.getByRole('heading', { name: "We couldn't find that page" });
+
+  async selectProduct(productId: string): Promise<void> {
+    await this.productCard(productId).click();
+  }
 }
