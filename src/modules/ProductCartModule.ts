@@ -35,7 +35,7 @@ export class ProductCartModule {
 
   async addProductToCart(productId: string): Promise<void> {
     this.logger.info(`Adding product to cart: ${productId}`);
-    await this.searchResultsPage.productCard(productId).getByRole('button', { name: /add.*cart|add.*basket|buy/i }).click();
+    await this.searchResultsPage.addToCartButton().click();
   }
 
   async openCartFromHeader(): Promise<void> {
