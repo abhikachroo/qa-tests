@@ -11,9 +11,13 @@ export class SearchResultsPage extends BasePage {
 
   // Product card identified by containing the searched product ID text
   productCard = (productId: string) =>
-    this.page.locator('[data-testid="product-card"]').filter({ hasText: productId }).first();
+    this.page.getByText(productId, { exact: false }).first();
 
   // Fallback: any visible element containing the product ID string
   productIdText = (productId: string) =>
     this.page.getByText(productId, { exact: false }).first();
+
+  // Page-level accessible add-to-cart action for the matching product
+  addToCartButton = () =>
+    this.page.getByRole('button', { name: /^Add to cart$/i }).first();
 }
