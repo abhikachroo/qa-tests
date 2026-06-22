@@ -6,8 +6,8 @@ export class CartPage extends BasePage {
     super(page);
   }
 
-  // Header cart control (strategy: data-testid reused from HomePage)
-  headerCartButton = (): Locator => this.page.getByTestId('cart-button');
+  // Header cart control (strategy: accessible link locator)
+  headerCartButton = (): Locator => this.page.getByRole('link', { name: /cart/i }).last();
 
   // Cart heading (strategy: role+text, approximated from cart semantics)
   cartHeading = (): Locator => this.page.getByRole('heading', { name: /cart|basket/i });
