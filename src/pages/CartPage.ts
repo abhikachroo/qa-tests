@@ -10,7 +10,7 @@ export class CartPage extends BasePage {
   cartDrawer = () => this.page.getByRole('dialog').filter({ hasText: /cart|basket|panier/i });
   cartItemByProductId = (productId: string) => this.page.getByText(productId, { exact: false }).first();
   cartQuantity = () => this.page.locator('[data-testid="cart-item-quantity"], input[name*="quantity"], [aria-label*="quantity" i]').first();
-  cartCount = () => this.page.locator('[data-testid="cart-count"], [aria-label*="cart" i]').first();
+  cartCount = () => this.page.getByRole('link', { name: /cart\s*,\s*\d+\s*items/i });
   successMessage = () => this.page.getByRole('status').or(this.page.getByText(/added.*cart|added.*basket|success/i));
   errorMessage = () => this.page.getByRole('alert').or(this.page.getByText(/unable|failed|error/i));
   emptyOrSessionMessage = () => this.page.getByRole('heading', { name: /empty/i });
