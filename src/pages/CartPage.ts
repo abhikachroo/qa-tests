@@ -1,1 +1,26 @@
-aW1wb3J0IHsgUGFnZSB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwppbXBvcnQgeyBCYXNlUGFnZSB9IGZyb20gJy4vQmFzZVBhZ2UnOwoKZXhwb3J0IGNsYXNzIENhcnRQYWdlIGV4dGVuZHMgQmFzZVBhZ2UgewogIGNvbnN0cnVjdG9yKHBhZ2U6IFBhZ2UpIHsKICAgIHN1cGVyKHBhZ2UpOwogIH0KCiAgY2FydEljb24gPSAoKSA9PiB0aGlzLnBhZ2UuZ2V0QnlSb2xlKCdsaW5rJywgeyBuYW1lOiAvY2FydHxiYXNrZXR8cGFuaWVyL2kgfSk7CiAgY2FydERyYXdlciA9ICgpID0+IHRoaXMucGFnZS5nZXRCeVJvbGUoJ2RpYWxvZycpLmZpbHRlcih7IGhhc1RleHQ6IC9jYXJ0fGJhc2tldHxwYW5pZXIvaSB9KTsKICBjYXJ0SXRlbUJ5UHJvZHVjdElkID0gKHByb2R1Y3RJZDogc3RyaW5nKSA9PiB0aGlzLnBhZ2UuZ2V0QnlUZXh0KHByb2R1Y3RJZCwgeyBleGFjdDogZmFsc2UgfSkuZmlyc3QoKTsKICBjYXJ0UXVhbnRpdHkgPSAoKSA9PiB0aGlzLnBhZ2UubG9jYXRvcignW2RhdGEtdGVzdGlkPSJjYXJ0LWl0ZW0tcXVhbnRpdHkiXSwgaW5wdXRbbmFtZSo9InF1YW50aXR5Il0sIFthcmlhLWxhYmVsKj0icXVhbnRpdHkiIGldJykuZmlyc3QoKTsKICBjYXJ0Q291bnQgPSAoKSA9PiB0aGlzLnBhZ2UubG9jYXRvcignW2RhdGEtdGVzdGlkPSJjYXJ0LWNvdW50Il0sIFthcmlhLWxhYmVsKj0iY2FydCIgaV0nKS5maXJzdCgpOwogIHN1Y2Nlc3NNZXNzYWdlID0gKCkgPT4gdGhpcy5wYWdlLmdldEJ5Um9sZSgnc3RhdHVzJykub3IodGhpcy5wYWdlLmdldEJ5VGV4dCgvYWRkZWQuKmNhcnR8YWRkZWQuKmJhc2tldHxzdWNjZXNzL2kpKTsKICBlcnJvck1lc3NhZ2UgPSAoKSA9PiB0aGlzLnBhZ2UuZ2V0QnlSb2xlKCdhbGVydCcpLm9yKHRoaXMucGFnZS5nZXRCeVRleHQoL3VuYWJsZXxmYWlsZWR8ZXJyb3IvaSkpOwogIGVtcHR5T3JTZXNzaW9uTWVzc2FnZSA9ICgpID0+IHRoaXMucGFnZS5nZXRCeVJvbGUoJ2hlYWRpbmcnLCB7IG5hbWU6IC9lbXB0eS9pIH0pLm9yKHRoaXMucGFnZS5nZXRCeVJvbGUoJ2xpbmsnLCB7IG5hbWU6IC9zaWduIGlufGxvZ2luL2kgfSkpLm9yKHRoaXMucGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL3NpZ24gaW58bG9naW4vaSB9KSk7CiAgZXJyb3JQYWdlQ29udGFpbmVyID0gKCkgPT4gdGhpcy5wYWdlLmdldEJ5VGVzdElkKCdFcnJvcjQwNCcpOwoKICBhc3luYyBvcGVuQ2FydCgpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMuY2FydEljb24oKS5jbGljaygpOwogIH0KCiAgYXN5bmMgZ2V0Q2FydENvdW50VGV4dCgpOiBQcm9taXNlPHN0cmluZz4gewogICAgcmV0dXJuIChhd2FpdCB0aGlzLmNhcnRDb3VudCgpLnRleHRDb250ZW50KCkpID8/ICcnOwogIH0KfQo=
+import { Page } from '@playwright/test';
+import { BasePage } from './BasePage';
+
+export class CartPage extends BasePage {
+  constructor(page: Page) {
+    super(page);
+  }
+
+  cartIcon = () => this.page.getByRole('link', { name: /cart|basket|panier/i });
+  cartDrawer = () => this.page.getByRole('dialog').filter({ hasText: /cart|basket|panier/i });
+  cartItemByProductId = (productId: string) => this.page.getByText(productId, { exact: false }).first();
+  cartQuantity = () => this.page.locator('[data-testid="cart-item-quantity"], input[name*="quantity"], [aria-label*="quantity" i]').first();
+  cartCount = () => this.page.locator('[data-testid="cart-count"], [aria-label*="cart" i]').first();
+  successMessage = () => this.page.getByRole('status').or(this.page.getByText(/added.*cart|added.*basket|success/i));
+  errorMessage = () => this.page.getByRole('alert').or(this.page.getByText(/unable|failed|error/i));
+  emptyOrSessionMessage = () => this.page.getByRole('heading', { name: /empty/i }).or(this.page.getByRole('link', { name: /sign in|login/i })).or(this.page.getByRole('button', { name: /sign in|login/i }));
+  errorPageContainer = () => this.page.getByTestId('Error404');
+
+  async openCart(): Promise<void> {
+    await this.cartIcon().click();
+  }
+
+  async getCartCountText(): Promise<string> {
+    return (await this.cartCount().textContent()) ?? '';
+  }
+}
