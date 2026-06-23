@@ -20,7 +20,7 @@ export class HeaderSearchPage extends BasePage {
   }
 
   async waitForSearchNavigation(keyword: string): Promise<void> {
-    await this.page.waitForURL(`**/search/${keyword}**`, { timeout: 30_000 });
+    await this.page.waitForURL(`**/search/${encodeURIComponent(keyword)}**`, { timeout: 30_000 });
   }
 
   async getSearchInputValue(): Promise<string> {
