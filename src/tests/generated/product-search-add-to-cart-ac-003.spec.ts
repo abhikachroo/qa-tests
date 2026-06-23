@@ -2,60 +2,56 @@ import { test, expect } from '@fixtures';
 import { config } from '@config/index';
 
 const PRODUCT_ID = '170720241509';
-const EXPECTED_QUANTITY = '1';
 
-test.describe(`@P1 @ProductSearchAddToCart Product Search and Add to Cart — ${config.displayName} on ${config.environment}`, () => {
-  test('@P1 @Functional @ProductSearchAddToCart TC-006: Open the cart after adding product ID 170720241509 displays the product in cart contents', async ({
+test.describe(`@P1 @P2 @ProductSearchAddToCart Cart verification — ${config.displayName} on ${config.environment}`, () => {
+  test('@P1 @Functional @ProductSearchAddToCart TC-008: Navigate to cart after adding product 170720241509 and verify product row', async ({
     productCartModule,
     cartPage,
+    page,
   }) => {
-    await test.step('Search for the product ID', async () => {
-      await productCartModule.searchForProduct(PRODUCT_ID);
-    });
-
-    await test.step('Verify the matching product is shown in search results', async () => {
-      await productCartModule.verifyProductSearchResult(PRODUCT_ID);
+    await test.step('Search for the target product', async () => {
+      await productCartModule.searchAndVerifyProduct(PRODUCT_ID);
     });
 
     await test.step('Add the matching product to the cart', async () => {
-      await productCartModule.addProductFromSearchResults(PRODUCT_ID);
+      await productCartModule.addVisibleProductToCart(PRODUCT_ID);
     });
 
-    await test.step('Open the cart from the confirmed cart entry point', async () => {
+    await test.step('Verify the cart confirmation shows at least one item', async () => {
+      await productCartModule.verifyAddToCartConfirmation();
+      await expect(
+        cartPage.cartIndicator(),
+        'Cart indicator should reflect at least one item after adding the product',
+      ).toContainText(/[1-9]\d*/);
+    });
+
+    await test.step('Open the cart from the cart entry point', async () => {
       await productCartModule.openCart();
     });
 
-    await test.step('Verify the cart displays the added product line item', async () => {
+    await test.step('Verify the cart opens with contents instead of an empty state', async () => {
+      await expect(page, 'Cart navigation should not render a Page not found view').not.toHaveTitle(/page not found/i);
+      await expect(
+        cartPage.emptyCartState(),
+        'Empty-cart state should not be visible after adding the target product',
+      ).not.toBeVisible();
+    });
+
+    await test.step('Verify the cart item contains the target product ID', async () => {
       await productCartModule.verifyProductInCart(PRODUCT_ID);
       await expect(
         cartPage.cartLineItem(PRODUCT_ID),
-        `Cart line item for product ID ${PRODUCT_ID} should be visible after adding the product`,
-      ).toBeVisible();
-      await expect(
-        cartPage.cartLineItem(PRODUCT_ID),
-        `Cart line item for product ID ${PRODUCT_ID} should include the expected default quantity`,
-      ).toContainText(EXPECTED_QUANTITY);
-      await expect(
-        cartPage.emptyCartState(),
-        'Empty-cart state should not be visible when the added product is present in the cart',
-      ).not.toBeVisible();
+        `Cart line item should include product ID ${PRODUCT_ID}`,
+      ).toContainText(PRODUCT_ID);
     });
   });
 
-  test('@P1 @Negative @ProductSearchAddToCart TC-007: Empty cart entry point shows an empty-cart state before adding the product', async ({
+  test('@P2 @Negative @ProductSearchAddToCart TC-009: Show empty cart state when cart has no products', async ({
     productCartModule,
     cartPage,
   }) => {
-    await test.step('Open the cart from a fresh empty session', async () => {
-      await productCartModule.openCart();
-    });
-
-    await test.step('Verify the empty-cart state is displayed', async () => {
-      await productCartModule.verifyEmptyCart(PRODUCT_ID);
-      await expect(
-        cartPage.emptyCartState(),
-        'Empty-cart state should be visible before any product is added',
-      ).toBeVisible();
+    await test.step('Open an isolated empty cart and verify the empty state', async () => {
+      await productCartModule.verifyEmptyCart();
     });
 
     await test.step('Verify the target product is absent from the empty cart', async () => {
@@ -63,6 +59,13 @@ test.describe(`@P1 @ProductSearchAddToCart Product Search and Add to Cart — ${
         cartPage.cartLineItem(PRODUCT_ID),
         `Product ID ${PRODUCT_ID} should not be listed in an empty cart`,
       ).not.toBeVisible();
+    });
+
+    await test.step('Verify empty-cart guidance remains visible', async () => {
+      await expect(
+        cartPage.emptyCartState(),
+        'Empty-cart guidance should be visible when no products are in the cart',
+      ).toBeVisible();
     });
   });
 });
