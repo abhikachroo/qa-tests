@@ -43,6 +43,14 @@ export class CartPage extends BasePage {
   }
 
   async openCart(): Promise<void> {
+    if (this.page.url() === 'about:blank') {
+      await this.page.goto('/');
+      await this.waitForPageLoad();
+      if (typeof (this as unknown as { dismissCookieBannerIfPresent?: () => Promise<void> }).dismissCookieBannerIfPresent === 'function') {
+        await (this as unknown as { dismissCookieBannerIfPresent: () => Promise<void> }).dismissCookieBannerIfPresent();
+      }
+    }
+
     await this.cartEntryPoint().click();
   }
 }
