@@ -10,10 +10,15 @@ export class SearchResultsPage extends BasePage {
   productCountSummary = () => this.page.getByText(/\d+\s+product/i);
 
   // Product can be identified by the copy button or the visible ProductID text in the live snapshot
-  productCard = (productId: string) =>
-    this.page.getByRole('button', { name: new RegExp(`copy\s+productId\s+${productId}`, 'i') }).or(
-      this.page.getByText(new RegExp(`ProductID\s+${productId}`, 'i'), { exact: false })
+  productCard = (productId: string) => {
+    const escapedProductId = productId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const productIdPattern = new RegExp(`ProductID\\s+${escapedProductId}`, 'i');
+    const copyProductIdPattern = new RegExp(`Copy\\s+productId\\s+${escapedProductId}`, 'i');
+
+    return this.page.getByRole('button', { name: copyProductIdPattern }).or(
+      this.page.getByText(productIdPattern, { exact: false })
     ).first();
+  };
 
   // Fallback: any visible element containing the product ID string
   productIdText = (productId: string) =>
