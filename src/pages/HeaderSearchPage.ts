@@ -1,29 +1,3 @@
-import { Page } from '@playwright/test';
-import { BasePage } from './BasePage';
-
-export class HeaderSearchPage extends BasePage {
-  constructor(page: Page) {
-    super(page);
-  }
-
-  // Header/root input opens the search dialog when focused.
-  searchInput       = () => this.page.getByTestId('volt-search-box-root').getByTestId('search-bar-input');
-  dialogSearchInput = () => this.page.getByTestId('volt-search-dialog').getByTestId('search-bar-input');
-
-  async fillSearchInput(keyword: string): Promise<void> {
-    await this.searchInput().click();
-    await this.dialogSearchInput().fill(keyword);
-  }
-
-  async clickSubmitButton(): Promise<void> {
-    await this.dialogSearchInput().press('Enter');
-  }
-
-  async waitForSearchNavigation(keyword: string): Promise<void> {
-    await this.page.waitForURL(`**/search/${keyword}**`, { timeout: 30_000 });
-  }
-
-  async getSearchInputValue(): Promise<string> {
-    return (await this.dialogSearchInput().inputValue()) ?? '';
+aW1wb3J0IHsgUGFnZSB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwppbXBvcnQgeyBCYXNlUGFnZSB9IGZyb20gJy4vQmFzZVBhZ2UnOwoKZXhwb3J0IGNsYXNzIEhlYWRlclNlYXJjaFBhZ2UgZXh0ZW5kcyBCYXNlUGFnZSB7CiAgY29uc3RydWN0b3IocGFnZTogUGFnZSkgewogICAgc3VwZXIocGFnZSk7CiAgfQoKICAvLyBIZWFkZXIvcm9vdCBpbnB1dCBvcGVucyB0aGUgc2VhcmNoIGRpYWxvZyB3aGVuIGZvY3VzZWQuCiAgc2VhcmNoSW5wdXQgPSAoKSA9PiB0aGlzLnBhZ2UuZ2V0QnlMYWJlbCgnU2VhcmNoJyk7CiAgZGlhbG9nU2VhcmNoSW5wdXQgPSAoKSA9PiB0aGlzLnBhZ2UuZ2V0QnlMYWJlbCgnU2VhcmNoJyk7CgogIGFzeW5jIGZpbGxTZWFyY2hJbnB1dChrZXl3b3JkOiBzdHJpbmcpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMuc2VhcmNoSW5wdXQoKS5jbGljaygpOwogICAgYXdhaXQgdGhpcy5kaWFsb2dTZWFyY2hJbnB1dCgpLmZpbGwoa2V5d29yZCk7CiAgfQoKICBhc3luYyBjbGlja1N1Ym1pdEJ1dHRvbigpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMuZGlhbG9nU2VhcmNoSW5wdXQoKS5wcmVzcygnRW50ZXInKTsKICB9CgogIGFzeW5jIHdhaXRGb3JTZWFyY2hOYXZpZ2F0aW9uKGtleXdvcmQ6IHN0cmluZyk6IFByb21pc2U8dm9pZD4gewogICAgYXdhaXQgdGhpcy5wYWdlLndhaXRGb3JVUkwoYCoqL3NlYXJjaC8ke2tleXdvcmR9KipgLCB7IHRpbWVvdXQ6IDMwXzAwMCB9KTsKICB9CgogIGFzeW5jIGdldFNlYXJjaElucHV0VmFsdWUoKTogUHJvbWlzZTxzdHJpbmc+IHsKICAgIHJldHVybiAoYXdhaXQgthis.dialogSearchInput().inputValue()) ?? '';
   }
 }
