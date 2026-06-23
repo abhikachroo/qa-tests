@@ -16,4 +16,15 @@ export class SearchResultsPage extends BasePage {
   // Fallback: any visible element containing the product ID string
   productIdText = (productId: string) =>
     this.page.getByText(productId, { exact: false }).first();
+
+  // Add-to-cart control exposed as a visible role button on the results list.
+  addToCartButton = (productId: string) =>
+    this.page.getByRole('button', { name: /^Add to cart$/i }).first();
+
+  // Generic error page locator observed during route extraction.
+  errorPageContainer = () => this.page.getByTestId('Error404');
+
+  async clickAddToCart(productId: string): Promise<void> {
+    await this.addToCartButton(productId).click();
+  }
 }
