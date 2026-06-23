@@ -6,9 +6,9 @@ export class HeaderSearchPage extends BasePage {
     super(page);
   }
 
-  // Header/root input opens the search dialog when focused.
-  searchInput = () => this.page.getByRole('textbox', { name: /search/i }).first();
-  dialogSearchInput = () => this.page.getByRole('textbox', { name: /search/i }).last();
+  // Header/root search control and dialog submit button.
+  searchInput = () => this.page.getByRole('searchbox', { name: /search input/i }).first();
+  dialogSearchInput = () => this.page.getByRole('searchbox', { name: /search input/i }).first();
 
   async fillSearchInput(keyword: string): Promise<void> {
     await this.searchInput().click();
@@ -16,7 +16,7 @@ export class HeaderSearchPage extends BasePage {
   }
 
   async clickSubmitButton(): Promise<void> {
-    await this.dialogSearchInput().press('Enter');
+    await this.page.getByRole('button', { name: /submit search/i }).click();
   }
 
   async waitForSearchNavigation(keyword: string): Promise<void> {
