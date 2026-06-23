@@ -7,8 +7,8 @@ export class HeaderSearchPage extends BasePage {
   }
 
   // Header/root input opens the search dialog when focused.
-  searchInput = () => this.page.getByLabel('Search');
-  dialogSearchInput = () => this.page.getByLabel('Search');
+  searchInput = () => this.page.getByTestId('search-bar-input');
+  dialogSearchInput = () => this.page.getByTestId('search-bar-input');
 
   async fillSearchInput(keyword: string): Promise<void> {
     await this.searchInput().click();
