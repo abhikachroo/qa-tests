@@ -1,1 +1,29 @@
-aW1wb3J0IHsgUGFnZSB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwppbXBvcnQgeyBCYXNlUGFnZSB9IGZyb20gJy4vQmFzZVBhZ2UnOwoKZXhwb3J0IGNsYXNzIEhlYWRlclNlYXJjaFBhZ2UgZXh0ZW5kcyBCYXNlUGFnZSB7CiAgY29uc3RydWN0b3IocGFnZTogUGFnZSkgewogICAgc3VwZXIocGFnZSk7CiAgfQoKICAvLyBIZWFkZXIvcm9vdCBpbnB1dCBvcGVucyB0aGUgc2VhcmNoIGRpYWxvZyB3aGVuIGZvY3VzZWQuCiAgc2VhcmNoSW5wdXQgPSAoKSA9PiB0aGlzLnBhZ2UuZ2V0QnlSb2xlKCd0ZXh0Ym94JywgeyBuYW1lOiAvc2VhcmNoL2kgfSkuZmlyc3QoKTsKICBkaWFsb2dTZWFyY2hJbnB1dCA9ICgpID0+IHRoaXMucGFnZS5nZXRCeVJvbGUoJ3RleHRib3gnLCB7IG5hbWU6IC9zZWFyY2gvaSB9KS5sYXN0KCk7CgogIGFzeW5jIGZpbGxTZWFyY2hJbnB1dChrZXl3b3JkOiBzdHJpbmcpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMuc2VhcmNoSW5wdXQoKS5jbGljaygpOwogICAgYXdhaXQgdGhpcy5kaWFsb2dTZWFyY2hJbnB1dCgpLmZpbGwoa2V5d29yZCk7CiAgfQoKICBhc3luYyBjbGlja1N1Ym1pdEJ1dHRvbigpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMuZGlhbG9nU2VhcmNoSW5wdXQoKS5wcmVzcygnRW50ZXInKTsKICB9CgogIGFzeW5jIHdhaXRGb3JTZWFyY2hOYXZpZ2F0aW9uKGtleXdvcmQ6IHN0cmluZyk6IFByb21pc2U8dm9pZD4gewogICAgYXdhaXQgdGhpcy5wYWdlLndhaXRGb3JVUkwoYCoqL3NlYXJjaC8ke2tleXdvcmR9KipgLCB7IHRpbWVvdXQ6IDMwXzAwMCB9KTsKICB9CgogIGFzeW5jIGdldFNlYXJjaElucHV0VmFsdWUoKTogUHJvbWlzZTxzdHJpbmc+IHsKICAgIHJldHVybiAoYXdhaXQgdGhpcy5kaWFsb2dTZWFyY2hJbnB1dCgpLmlucHV0VmFsdWUoKSkgPz8gJyc7CiAgfQp9Cg==
+import { Page } from '@playwright/test';
+import { BasePage } from './BasePage';
+
+export class HeaderSearchPage extends BasePage {
+  constructor(page: Page) {
+    super(page);
+  }
+
+  // Header/root input opens the search dialog when focused.
+  searchInput = () => this.page.getByRole('textbox', { name: /search/i }).first();
+  dialogSearchInput = () => this.page.getByRole('textbox', { name: /search/i }).last();
+
+  async fillSearchInput(keyword: string): Promise<void> {
+    await this.searchInput().click();
+    await this.dialogSearchInput().fill(keyword);
+  }
+
+  async clickSubmitButton(): Promise<void> {
+    await this.dialogSearchInput().press('Enter');
+  }
+
+  async waitForSearchNavigation(keyword: string): Promise<void> {
+    await this.page.waitForURL(`**/search/${keyword}**`, { timeout: 30_000 });
+  }
+
+  async getSearchInputValue(): Promise<string> {
+    return (await this.dialogSearchInput().inputValue()) ?? '';
+  }
+}
