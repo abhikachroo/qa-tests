@@ -12,13 +12,13 @@ export class CartPage extends BasePage {
   // Error container from extracted /cart 404 manifest.
   error404Container = (): Locator => this.page.getByTestId('Error404');
 
-  // Product card identified by containing the searched product ID text.
+  // Product card identified by the accessible copy-product-id button in the search result.
   productCard = (productId: string): Locator =>
-    this.page.locator('[data-testid="product-card"]').filter({ hasText: productId }).first();
+    this.page.getByRole('button', { name: new RegExp(`Copy productId ${productId}`, 'i') }).first();
 
-  // Add-to-cart button/control inside a product card. TODO: verify selector once stable add-to-cart test id is exposed.
-  addToCartButton = (productId: string): Locator =>
-    this.productCard(productId).getByRole('button', { name: /add|cart|panier|ajouter/i }).first();
+  // Add-to-cart button/control in the search result.
+  addToCartButton = (_productId: string): Locator =>
+    this.page.getByRole('button', { name: /^Add to cart$/i }).first();
 
   // Header or confirmation cart entry point. TODO: verify selector against authenticated/orderable product state.
   cartEntryPoint = (): Locator =>
