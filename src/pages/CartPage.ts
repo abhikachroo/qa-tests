@@ -6,8 +6,8 @@ export class CartPage extends BasePage {
     super(page);
   }
 
-  cartEntryPoint = () => this.page.getByRole('link', { name: /cart|basket|panier/i }).first(); // TODO: verify selector
-  cartIndicator  = () => this.page.getByTestId('cart-indicator').or(this.page.getByRole('link', { name: /cart|basket|panier/i })).first(); // TODO: verify selector
+  cartEntryPoint = () => this.page.getByRole('button', { name: /cart|basket|panier/i }).first(); // TODO: verify selector
+  cartIndicator  = () => this.page.getByTestId('cart-indicator').or(this.page.getByRole('button', { name: /cart|basket|panier/i })).first(); // TODO: verify selector
   cartDrawer     = () => this.page.getByRole('dialog').filter({ hasText: /cart|basket|panier/i }).first(); // TODO: verify selector
   emptyCartState = () => this.page.getByText(/empty cart|basket is empty|panier vide|votre panier est vide/i).first(); // TODO: verify selector
 
