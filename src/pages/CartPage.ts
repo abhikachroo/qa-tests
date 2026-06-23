@@ -13,7 +13,7 @@ export class CartPage extends BasePage {
   cartCount = () => this.page.locator('[data-testid="cart-count"], [aria-label*="cart" i]').first();
   successMessage = () => this.page.getByRole('status').or(this.page.getByText(/added.*cart|added.*basket|success/i));
   errorMessage = () => this.page.getByRole('alert').or(this.page.getByText(/unable|failed|error/i));
-  emptyOrSessionMessage = () => this.page.getByRole('heading', { name: /empty/i }).or(this.page.getByRole('link', { name: /sign in|login/i })).or(this.page.getByRole('button', { name: /sign in|login/i }));
+  emptyOrSessionMessage = () => this.page.getByRole('heading', { name: /empty/i });
   errorPageContainer = () => this.page.getByTestId('Error404');
 
   async openCart(): Promise<void> {
