@@ -5,23 +5,23 @@ import {
   SearchResultsPage,
   LoginPage,
   HomePage,
+  ProductChatPdpPage,
 } from '@pages/index';
-import { SearchModule, LoginModule } from '@modules/index';
+import { SearchModule, LoginModule, ProductChatPdpModule } from '@modules/index';
 
 type TestFixtures = {
-  // Search fixtures
-  searchPage:        SearchPage;
-  headerSearchPage:  HeaderSearchPage;
+  searchPage: SearchPage;
+  headerSearchPage: HeaderSearchPage;
   searchResultsPage: SearchResultsPage;
-  searchModule:      SearchModule;
-  // Login fixtures
-  loginPage:   LoginPage;
-  homePage:    HomePage;
+  searchModule: SearchModule;
+  loginPage: LoginPage;
+  homePage: HomePage;
   loginModule: LoginModule;
+  productChatPdpPage: ProductChatPdpPage;
+  productChatPdpModule: ProductChatPdpModule;
 };
 
 export const test = base.extend<TestFixtures>({
-  // --- Search ---
   searchPage: async ({ page }, use) => {
     await use(new SearchPage(page));
   },
@@ -38,7 +38,6 @@ export const test = base.extend<TestFixtures>({
     await use(new SearchModule(searchPage, headerSearchPage, searchResultsPage));
   },
 
-  // --- Login ---
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page));
   },
@@ -49,6 +48,14 @@ export const test = base.extend<TestFixtures>({
 
   loginModule: async ({ loginPage, homePage }, use) => {
     await use(new LoginModule(loginPage, homePage));
+  },
+
+  productChatPdpPage: async ({ page }, use) => {
+    await use(new ProductChatPdpPage(page));
+  },
+
+  productChatPdpModule: async ({ productChatPdpPage, searchModule, loginModule }, use) => {
+    await use(new ProductChatPdpModule(productChatPdpPage, searchModule, loginModule));
   },
 });
 
