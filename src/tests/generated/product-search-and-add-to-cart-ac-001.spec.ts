@@ -4,7 +4,7 @@ import { config } from '@config/index';
 const PRODUCT_ID = '170720241509';
 
 test.describe(
-  `@P0 @P1 @Smoke @Functional @Regression @ProductSearchAndAddToCart Product Search And Add To Cart — ${config.displayName} on ${config.environment}`,
+  `@ProductSearchAndAddToCart Product Search And Add To Cart — ${config.displayName} on ${config.environment}`,
   () => {
     test('@P0 @Smoke @ProductSearchAndAddToCart TC-001: Search product 170720241509, add it to cart, and verify it appears in cart', async ({
       page,
