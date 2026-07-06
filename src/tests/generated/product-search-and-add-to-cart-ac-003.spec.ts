@@ -2,7 +2,6 @@ import { test, expect } from '@fixtures';
 import { config } from '@config/index';
 
 const matchingProductId = '170720241509';
-const directCartRoute = '/cart';
 
 test.describe(`@ProductSearchAndAddToCart Navigate to cart after add — ${config.displayName} on ${config.environment}`, () => {
   test('@P1 @Functional @ProductSearchAndAddToCart TC-004: Navigate to cart after add loads the cart view', async ({
