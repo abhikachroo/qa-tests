@@ -1,5 +1,5 @@
-import { Page } from '@playwright/test';
-import { BasePage } from './BasePage';
+import { Locator, Page } from '@playwright/test';
+import { BasePage } from '@pages/BasePage';
 
 export class HeaderSearchPage extends BasePage {
   constructor(page: Page) {
@@ -7,16 +7,35 @@ export class HeaderSearchPage extends BasePage {
   }
 
   // Header/root input opens the search dialog when focused.
-  searchInput       = () => this.page.getByTestId('volt-search-box-root').getByTestId('search-bar-input');
-  dialogSearchInput = () => this.page.getByTestId('volt-search-dialog').getByTestId('search-bar-input');
+  searchInput = (): Locator => this.page.getByRole('textbox', { name: 'Search' });
+  dialogSearchInput = (): Locator => this.page.getByTestId('volt-search-dialog').getByRole('textbox', { name: 'Search' });
+  submitSearchButton = (): Locator => this.page.getByRole('button', { name: 'Submit search' });
+  cartButton = (): Locator => this.page.getByRole('button', { name: /cart|panier/i }).first();
+  searchLoadingIndicator = (): Locator => this.page.getByRole('status').or(this.page.getByRole('progressbar'));
 
-  async fillSearchInput(keyword: string): Promise<void> {
+  async openSearchDialog(): Promise<void> {
     await this.searchInput().click();
+  }
+
+  async fillDialogSearchInput(keyword: string): Promise<void> {
     await this.dialogSearchInput().fill(keyword);
   }
 
+  async fillSearchInput(keyword: string): Promise<void> {
+    await this.openSearchDialog();
+    await this.fillDialogSearchInput(keyword);
+  }
+
   async clickSubmitButton(): Promise<void> {
+    await this.submitSearchButton().click();
+  }
+
+  async pressEnterToSubmit(): Promise<void> {
     await this.dialogSearchInput().press('Enter');
+  }
+
+  async clickCartButton(): Promise<void> {
+    await this.cartButton().click();
   }
 
   async waitForSearchNavigation(keyword: string): Promise<void> {
@@ -24,6 +43,6 @@ export class HeaderSearchPage extends BasePage {
   }
 
   async getSearchInputValue(): Promise<string> {
-    return (await this.dialogSearchInput().inputValue()) ?? '';
+    return await this.dialogSearchInput().inputValue();
   }
 }

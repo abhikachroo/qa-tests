@@ -31,23 +31,41 @@ export class SearchModule {
   /**
    * Submit a search via the header search bar UI.
    * Flow: navigate to homepage → fill search input → click Submit → wait for URL redirect.
-   * Used by: TC-002
    */
   async submitSearch(keyword: string): Promise<void> {
     this.logger.info(`[${config.opco}][${config.environment}] Submitting header search for: "${keyword}"`);
     await this.headerSearchPage.navigate('/');
     await this.headerSearchPage.waitForPageLoad();
     await this.headerSearchPage.dismissCookieBannerIfPresent();
-    await this.headerSearchPage.fillSearchInput(keyword);
+    await this.headerSearchPage.openSearchDialog();
+    await this.headerSearchPage.fillDialogSearchInput(keyword);
     await this.headerSearchPage.clickSubmitButton();
     await this.headerSearchPage.waitForSearchNavigation(keyword);
     this.logger.info(`Header search submitted — URL now contains /search/${keyword}`);
   }
 
+  async submitEmptySearch(): Promise<void> {
+    this.logger.info(`[${config.opco}][${config.environment}] Submitting an empty header search`);
+    await this.headerSearchPage.navigate('/');
+    await this.headerSearchPage.waitForPageLoad();
+    await this.headerSearchPage.dismissCookieBannerIfPresent();
+    await this.headerSearchPage.openSearchDialog();
+    await this.headerSearchPage.fillDialogSearchInput('');
+    await this.headerSearchPage.clickSubmitButton();
+    this.logger.info('Empty header search submitted');
+  }
+
+  async openSearchDialog(): Promise<void> {
+    this.logger.info('Opening header search dialog');
+    await this.headerSearchPage.navigate('/');
+    await this.headerSearchPage.waitForPageLoad();
+    await this.headerSearchPage.dismissCookieBannerIfPresent();
+    await this.headerSearchPage.openSearchDialog();
+  }
+
   /**
    * Verify that the search results page shows the expected product count summary
    * and that the searched product ID is visible on the page.
-   * Used by: TC-002
    */
   async verifySearchResultsPage(keyword: string): Promise<void> {
     this.logger.info(`Verifying search results page contains results for: "${keyword}"`);
@@ -64,7 +82,6 @@ export class SearchModule {
 
   /**
    * Verify the no-results state for an unknown keyword.
-   * Used by: TC-SEARCH-05
    */
   async verifyNoResultsDisplayed(): Promise<void> {
     this.logger.info('Verifying no-results state is displayed');
@@ -72,8 +89,23 @@ export class SearchModule {
       this.searchPage.noResultsMessage(),
       'No-results message should be visible',
     ).toBeVisible();
-    const count = await this.searchPage.getProductCount();
-    expect(count, 'Product cards should not be present when no results').toBe(0);
+    await expect(
+      this.searchPage.productCards(),
+      'Product cards should not be present when no results are returned',
+    ).toHaveCount(0);
     this.logger.info('No-results state verified');
+  }
+
+  async verifyEmptySearchIsRecoverable(): Promise<void> {
+    this.logger.info('Verifying empty search leaves the user in a recoverable state');
+    await expect(
+      this.headerSearchPage.dialogSearchInput(),
+      'Search dialog input should remain available after empty submission',
+    ).toBeVisible();
+    await expect(
+      this.headerSearchPage.dialogSearchInput(),
+      'Search dialog input should remain empty after empty submission',
+    ).toHaveValue('');
+    this.logger.info('Empty search recoverable state verified');
   }
 }
