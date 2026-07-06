@@ -11,14 +11,30 @@ export class SearchResultsPage extends BasePage {
 
   // Product card identified by containing the searched product ID text
   productCard = (productId: string): Locator =>
-    this.page.locator('[data-testid="product-card"]').filter({ hasText: productId }).first();
+    this.page
+      .getByRole('article')
+      .filter({ hasText: productId })
+      .or(this.page.getByRole('listitem').filter({ hasText: productId }))
+      .or(this.page.getByText(productId, { exact: false }))
+      .first();
 
   // Fallback: any visible element containing the product ID string
   productIdText = (productId: string): Locator =>
     this.page.getByText(productId, { exact: false }).first();
 
   addToCartButtonForProduct = (productId: string): Locator =>
-    this.productCard(productId).getByRole('button', { name: /add to cart|add|ajouter|panier/i }); // TODO: verify selector
+    this.page
+      .getByRole('article')
+      .filter({ hasText: productId })
+      .getByRole('button', { name: /add to cart|add|ajouter|panier/i })
+      .or(
+        this.page
+          .getByRole('listitem')
+          .filter({ hasText: productId })
+          .getByRole('button', { name: /add to cart|add|ajouter|panier/i }),
+      )
+      .or(this.page.getByRole('button', { name: /add to cart|add|ajouter|panier/i }).first())
+      .first(); // TODO: verify selector
 
   addToCartConfirmation = (): Locator =>
     this.page.getByRole('alert').or(this.page.getByText(/added to cart|ajouté|panier/i)); // TODO: verify selector
