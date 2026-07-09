@@ -6,29 +6,39 @@ export class CartPage extends BasePage {
     super(page);
   }
 
-  // Route shell search input from extracted 404 shell manifest.
+  // Search shell input remains available on recoverable cart-route error states.
   routeShellSearchInput = (): Locator => this.page.getByTestId('search-bar-input');
 
-  // Error container from extracted /cart 404 manifest.
+  // Controlled application error container seen when direct cart route is unavailable.
   error404Container = (): Locator => this.page.getByTestId('Error404');
 
-  // Product card identified by the accessible copy-product-id button in the search result.
+  // Product card containing product ID (strategy: data-testid + text filter from test plan locator map).
   productCard = (productId: string): Locator =>
-    this.page.getByRole('button', { name: new RegExp(`Copy productId ${productId}`, 'i') }).first();
+    this.page.locator('[data-testid="product-card"]').filter({ hasText: productId }).first();
 
-  // Add-to-cart button/control in the search result.
-  addToCartButton = (_productId: string): Locator =>
-    this.page.getByRole('button', { name: /^Add to cart$/i }).first();
+  // Add-to-cart button within the matching product card. TODO: verify localized accessible name in orderable product state.
+  addToCartButton = (productId: string): Locator =>
+    this.productCard(productId).getByRole('button', { name: /add to cart|ajouter au panier/i }).first();
 
-  // Header or confirmation cart entry point. TODO: verify selector against authenticated/orderable product state.
+  // Add-to-cart success or cart update indication. TODO: replace with stable data-testid when provided by application.
+  addToCartSuccessIndicator = (): Locator =>
+    this.page.getByRole('status').or(this.page.getByText(/added|ajouté|panier|cart/i)).first();
+
+  // Recoverable add-to-cart failure indication. TODO: replace with stable data-testid when backend error contract is known.
+  addToCartErrorMessage = (): Locator =>
+    this.page.getByRole('alert').or(this.page.getByText(/error|failed|erreur|impossible/i)).first();
+
+  // Header cart entry point. TODO: verify selector against authenticated/orderable product state.
   cartEntryPoint = (): Locator =>
-    this.page.getByRole('link', { name: /cart|basket|panier/i }).or(
+    this.page.getByTestId('cart-button').or(
+      this.page.getByRole('link', { name: /cart|basket|panier/i }),
+    ).or(
       this.page.getByRole('button', { name: /cart|basket|panier/i }),
     ).first();
 
-  // Generic cart content container. TODO: replace with stable data-testid when provided by application.
+  // Generic cart content container. TODO: replace with stable cart container data-testid when available.
   cartContents = (): Locator =>
-    this.page.locator('[data-testid="cart"], [data-testid*="cart"], [class*="cart"]').first();
+    this.page.locator('[data-testid="cart"], [data-testid*="cart"], [class*="cart"], main').first();
 
   // Cart line containing the searched product ID. TODO: replace with stable cart-line data-testid when available.
   cartLineByProductId = (productId: string): Locator =>
@@ -42,15 +52,11 @@ export class CartPage extends BasePage {
     await this.addToCartButton(productId).click();
   }
 
-  async openCart(): Promise<void> {
-    if (this.page.url() === 'about:blank') {
-      await this.page.goto('/');
-      await this.waitForPageLoad();
-      if (typeof (this as unknown as { dismissCookieBannerIfPresent?: () => Promise<void> }).dismissCookieBannerIfPresent === 'function') {
-        await (this as unknown as { dismissCookieBannerIfPresent: () => Promise<void> }).dismissCookieBannerIfPresent();
-      }
-    }
-
+  async clickCartEntryPoint(): Promise<void> {
     await this.cartEntryPoint().click();
+  }
+
+  async navigateToCartRoute(): Promise<void> {
+    await this.navigate('/cart');
   }
 }
