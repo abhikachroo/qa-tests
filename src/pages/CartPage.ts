@@ -12,13 +12,17 @@ export class CartPage extends BasePage {
   // Controlled application error container seen when direct cart route is unavailable.
   error404Container = (): Locator => this.page.getByTestId('Error404');
 
-  // Product card containing product ID (strategy: data-testid + text filter from test plan locator map).
+  // Product result containing product ID (strategy: semantic result containers + text filter from test plan locator map).
   productCard = (productId: string): Locator =>
-    this.page.locator('[data-testid="product-card"]').filter({ hasText: productId }).first();
+    this.page.getByRole('listitem').filter({ hasText: productId }).or(
+      this.page.getByRole('article').filter({ hasText: productId }),
+    ).or(
+      this.page.getByRole('main').filter({ hasText: productId }),
+    ).first();
 
   // Add-to-cart control associated with the matching product result.
   addToCartButton = (productId: string): Locator =>
-    this.productCard(productId).getByRole('button').last();
+    this.productCard(productId).getByRole('button', { name: 'Add to cart' }).first();
 
   // Add-to-cart success or cart update indication. TODO: replace with stable data-testid when provided by application.
   addToCartSuccessIndicator = (): Locator =>
