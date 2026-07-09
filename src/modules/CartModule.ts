@@ -25,8 +25,8 @@ export class CartModule {
   async verifyAddToCartCompleted(productId: string): Promise<void> {
     this.logger.info(`Verifying add-to-cart completion for product: ${productId}`);
     await expect(
-      this.cartPage.addToCartSuccessIndicator().or(this.cartPage.cartEntryPoint()),
-      'Success indication or cart entry point should reflect the added product',
+      this.cartPage.cartEntryPoint(),
+      'Cart entry point should be visible after the product is added',
     ).toBeVisible();
   }
 
