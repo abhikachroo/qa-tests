@@ -32,13 +32,9 @@ export class CartPage extends BasePage {
   addToCartErrorMessage = (): Locator =>
     this.page.getByRole('alert').or(this.page.getByText(/error|failed|erreur|impossible/i)).first();
 
-  // Header cart entry point. TODO: verify selector against authenticated/orderable product state.
+  // Header cart entry point.
   cartEntryPoint = (): Locator =>
-    this.page.getByTestId('cart-button').or(
-      this.page.getByRole('link', { name: /cart|basket|panier/i }),
-    ).or(
-      this.page.getByRole('button', { name: /cart|basket|panier/i }),
-    ).first();
+    this.page.getByRole('link', { name: /cart/i }).filter({ hasText: /Shopping Cart/i }).first();
 
   // Generic cart content container. TODO: replace with stable cart container data-testid when available.
   cartContents = (): Locator =>
