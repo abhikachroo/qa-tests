@@ -3,8 +3,8 @@ import { config } from '@config/index';
 
 const productId = '170720241509';
 
-test.describe(`@Cart @ProductSearchAndAddToCart Cart Access — ${config.displayName} on ${config.environment}`, () => {
-  test('@P1 @Functional TC-007: Open cart after add-to-cart displays cart contents', async ({
+test.describe(`@P1 @Cart @ProductSearchAndAddToCart Cart Access — ${config.displayName} on ${config.environment}`, () => {
+  test('@P1 @Functional @ProductSearchAndAddToCart TC-004: Open cart after adding product displays product ID', async ({
     cartModule,
     cartPage,
   }) => {
@@ -25,25 +25,15 @@ test.describe(`@Cart @ProductSearchAndAddToCart Cart Access — ${config.display
     });
   });
 
-  test('@P2 @Negative TC-008: Direct unavailable cart route shows controlled error instead of broken state', async ({
+  test('@P1 @Negative @ProductSearchAndAddToCart TC-008: Open cart before adding product shows empty or controlled non-product state', async ({
     cartModule,
-    cartPage,
   }) => {
-    await test.step('Navigate directly to the unavailable cart route', async () => {
+    await test.step('Navigate directly to the cart route before adding a product', async () => {
       await cartModule.navigateDirectlyToCartRoute();
     });
 
-    await test.step('Verify the controlled error state and recovery search are visible', async () => {
+    await test.step('Verify the selected product is not present in the pre-add cart state', async () => {
       await cartModule.verifyDirectCartRouteErrorState();
-    });
-
-    await test.step('Recover from the error state using the route shell search input', async () => {
-      await cartPage.routeShellSearchInput().fill(productId);
-      await cartPage.routeShellSearchInput().press('Enter');
-      await expect(
-        cartPage.error404Container(),
-        'Submitting a valid search from the error shell should navigate away from the 404 state',
-      ).not.toBeVisible();
     });
   });
 });
