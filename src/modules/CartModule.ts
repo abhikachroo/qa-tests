@@ -19,16 +19,20 @@ export class CartModule {
     await this.searchModule.submitSearch(productId);
     await this.searchModule.verifySearchResultsPage(productId);
     await this.cartPage.clickAddToCart(productId);
-    await expect(
-      this.cartPage.addToCartButton(productId),
-      'Add-to-cart control should remain visible or transition to confirmation state',
-    ).toBeVisible();
     this.logger.info(`Add-to-cart action submitted for product: ${productId}`);
+  }
+
+  async verifyAddToCartCompleted(productId: string): Promise<void> {
+    this.logger.info(`Verifying add-to-cart completion for product: ${productId}`);
+    await expect(
+      this.cartPage.addToCartSuccessIndicator().or(this.cartPage.cartEntryPoint()),
+      'Success indication or cart entry point should reflect the added product',
+    ).toBeVisible();
   }
 
   async openCartFromUi(): Promise<void> {
     this.logger.info('Opening cart from UI entry point');
-    await this.cartPage.openCart();
+    await this.cartPage.clickCartEntryPoint();
     await this.cartPage.waitForPageLoad();
     this.logger.info('Cart view opened');
   }
@@ -44,7 +48,7 @@ export class CartModule {
 
   async navigateDirectlyToCartRoute(): Promise<void> {
     this.logger.info('Navigating directly to /cart to verify controlled error handling');
-    await this.cartPage.navigate('/cart');
+    await this.cartPage.navigateToCartRoute();
     await this.cartPage.waitForPageLoad();
     await this.cartPage.dismissCookieBannerIfPresent();
   }
@@ -71,5 +75,25 @@ export class CartModule {
       this.cartPage.cartLineByProductId(productId),
       `Product ${productId} should not be present before it is added`,
     ).not.toBeVisible();
+  }
+
+  async verifyAddToCartFailure(productId: string): Promise<void> {
+    this.logger.info(`Verifying recoverable add-to-cart failure for product: ${productId}`);
+    await expect(
+      this.cartPage.addToCartErrorMessage(),
+      'Recoverable add-to-cart error message should be visible',
+    ).toBeVisible();
+    await expect(
+      this.cartPage.addToCartButton(productId),
+      'Add-to-cart control should be usable again after failure',
+    ).toBeEnabled();
+  }
+
+  async verifyAddToCartPendingState(productId: string): Promise<void> {
+    this.logger.info(`Verifying pending add-to-cart state for product: ${productId}`);
+    await expect(
+      this.cartPage.addToCartButton(productId),
+      'Add-to-cart control should prevent duplicate submissions while pending',
+    ).toBeDisabled();
   }
 }
