@@ -8,8 +8,10 @@ export class CartPage extends BasePage {
 
   headerCartLink = () =>
     this.page
-      .getByRole('link', { name: /cart|basket|bag|panier/i })
-      .or(this.page.getByRole('button', { name: /cart|basket|bag|panier/i }))
+      .getByRole('link', { name: /cart[\s\u00a0]*,[\s\u00a0]*\d+[\s\u00a0]*items?\.?|shopping[\s\u00a0]*cart|cart|basket|bag|panier/i })
+      .or(this.page.getByRole('link').filter({ hasText: /shopping[\s\u00a0]*cart/i }))
+      .or(this.page.getByRole('button', { name: /cart[\s\u00a0]*,[\s\u00a0]*\d+[\s\u00a0]*items?\.?|shopping[\s\u00a0]*cart|cart|basket|bag|panier/i }))
+      .or(this.page.getByRole('button').filter({ hasText: /shopping[\s\u00a0]*cart/i }))
       .first();
   productLineItem = (productId: string) => this.page.getByText(productId, { exact: false }).first();
 
