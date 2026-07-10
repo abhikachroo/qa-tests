@@ -11,14 +11,30 @@ export class SearchResultsPage extends BasePage {
 
   // Product card identified by containing the searched product ID text
   productCard = (productId: string) =>
-    this.page.locator('[data-testid="product-card"]').filter({ hasText: productId }).first();
+    this.page
+      .getByRole('listitem')
+      .filter({ has: this.page.getByRole('button', { name: new RegExp(`Copy productId\\s+${productId}`, 'i') }) })
+      .getByRole('link')
+      .first()
+      .or(
+        this.page
+          .getByRole('article')
+          .filter({ has: this.page.getByRole('button', { name: new RegExp(`Copy productId\\s+${productId}`, 'i') }) })
+          .getByRole('link')
+          .first(),
+      )
+      .first();
 
   // Fallback: any visible element containing the product ID string
   productIdText = (productId: string) =>
     this.page.getByText(productId, { exact: false }).first();
 
   // No-results state varies by localization and routing fallback; keep text alternatives stable.
-  noResultsMessage = () => this.page.getByText(/no results|aucun résultat|we couldn't find that page/i).first();
+  noResultsMessage = () =>
+    this.page
+      .getByRole('heading', { name: /sorry,?\s*no result|no results?|aucun résultat|we couldn't find that page/i })
+      .or(this.page.getByText(/sorry,?\s*no result|no results?|aucun résultat|we couldn't find that page/i))
+      .first();
 
   async clickProductCard(productId: string): Promise<void> {
     await this.productCard(productId).click();
