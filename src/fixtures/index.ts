@@ -1,1 +1,77 @@
-aW1wb3J0IHsgdGVzdCBhcyBiYXNlIH0gICAgIGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwppbXBvcnQgewogIFNlYXJjaFBhZ2UsCiAgSGVhZGVyU2VhcmNoUGFnZSwKICBTZWFyY2hSZXN1bHRzUGFnZSwKICBMb2dpblBhZ2UsCiAgSG9tZVBhZ2UsCiAgUHJvZHVjdERldGFpbHNQYWdlLAogIENhcnRQYWdlLAp9IGZyb20gJ0BwYWdlcy9pbmRleCc7CmltcG9ydCB7IFNlYXJjaE1vZHVsZSwgTG9naW5Nb2R1bGUsIFByb2R1Y3RTZWFyY2hBZGRUb0NhcnRNb2R1bGUgfSBmcm9tICdAbW9kdWxlcy9pbmRleCc7Cgp0eXBlIFRlc3RGaXh0dXJlcyA9IHsKICAvLyBTZWFyY2ggZml4dHVyZXMKICBzZWFyY2hQYWdlOiAgICAgICAgU2VhcmNoUGFnZTsKICBoZWFkZXJTZWFyY2hQYWdlOiAgSGVhZGVyU2VhcmNoUGFnZTsKICBzZWFyY2hSZXN1bHRzUGFnZTogU2VhcmNoUmVzdWx0c1BhZ2U7CiAgc2VhcmNoTW9kdWxlOiAgICAgIFNlYXJjaE1vZHVsZTsKICBwcm9kdWN0RGV0YWlsc1BhZ2U6IFByb2R1Y3REZXRhaWxzUGFnZTsKICBjYXJ0UGFnZTogQ2FydFBhZ2U7CiAgcHJvZHVjdFNlYXJjaEFkZFRvQ2FydE1vZHVsZTogUHJvZHVjdFNlYXJjaEFkZFRvQ2FydE1vZHVsZTsKICBjYXJ0TW9kdWxlOiBQcm9kdWN0U2VhcmNoQWRkVG9DYXJ0TW9kdWxlOwogIC8vIExvZ2luIGZpeHR1cmVzCiAgbG9naW5QYWdlOiAgIExvZ2luUGFnZTsKICBob21lUGFnZTogICAgSG9tZVBhZ2U7CiAgbG9naW5Nb2R1bGU6IExvZ2luTW9kdWxlOwp9OwoKZXhwb3J0IGNvbnN0IHRlc3QgPSBiYXNlLmV4dGVuZDxUZXN0Rml4dHVyZXM+KHsKICAvLyAtLS0gU2VhcmNoIC0tLQogIHNlYXJjaFBhZ2U6IGFzeW5jICh7IHBhZ2UgfSwgdXNlKSA9PiB7CiAgICBhd2FpdCB1c2UobmV3IFNlYXJjaFBhZ2UocGFnZSkpOwogIH0sCgogIGhlYWRlclNlYXJjaFBhZ2U6IGFzeW5jICh7IHBhZ2UgfSwgdXNlKSA9PiB7CiAgICBhd2FpdCB1c2UobmV3IEhlYWRlclNlYXJjaFBhZ2UocGFnZSkpOwogIH0sCgogIHNlYXJjaFJlc3VsdHNQYWdlOiBhc3luYyAoeyBwYWdlIH0sIHVzZSkgPT4gewogICAgYXdhaXQgdXNlKG5ldyBTZWFyY2hSZXN1bHRzUGFnZShwYWdlKSk7CiAgfSwKCiAgc2VhcmNoTW9kdWxlOiBhc3luYyAoeyBzZWFyY2hQYWdlLCBoZWFkZXJTZWFyY2hQYWdlLCBzZWFyY2hSZXN1bHRzUGFnZSB9LCB1c2UpID0+IHsKICAgIGF3YWl0IHVzZShuZXcgU2VhcmNoTW9kdWxlKHNlYXJjaFBhZ2UsIGhlYWRlclNlYXJjaFBhZ2UsIHNlYXJjaFJlc3VsdHNQYWdlKSk7CiAgfSwKCiAgcHJvZHVjdERldGFpbHNQYWdlOiBhc3luYyAoeyBwYWdlIH0sIHVzZSkgPT4gewogICAgYXdhaXQgdXNlKG5ldyBQcm9kdWN0RGV0YWlsc1BhZ2UocGFnZSkpOwogIH0sCgogIGNhcnRQYWdlOiBhc3luYyAoeyBwYWdlIH0sIHVzZSkgPT4gewogICAgYXdhaXQgdXNlKG5ldyBDYXJ0UGFnZShwYWdlKSk7CiAgfSwKCiAgcHJvZHVjdFNlYXJjaEFkZFRvQ2FydE1vZHVsZTogYXN5bmMgKHsgc2VhcmNoTW9kdWxlLCBoZWFkZXJTZWFyY2hQYWdlLCBzZWFyY2hSZXN1bHRzUGFnZSwgcHJvZHVjdERldGFpbHNQYWdlLCBjYXJ0UGFnZSB9LCB1c2UpID0+IHsKICAgIGF3YWl0IHVzZShuZXcgUHJvZHVjdFNlYXJjaEFkZFRvQ2FydE1vZHVsZShzZWFyY2hNb2R1bGUsIGhlYWRlclNlYXJjaFBhZ2UsIHNlYXJjaFJlc3VsdHNQYWdlLCBwcm9kdWN0RGV0YWlsc1BhZ2UsIGNhcnRQYWdlKSk7CiAgfSwKCiAgY2FydE1vZHVsZTogYXN5bmMgKHsgcHJvZHVjdFNlYXJjaEFkZFRvQ2FydE1vZHVsZSB9LCB1c2UpID0+IHsKICAgIGF3YWl0IHVzZShwcm9kdWN0U2VhcmNoQWRkVG9DYXJ0TW9kdWxlKTsKICB9LAoKICAvLyAtLS0gTG9naW4gLS0tCiAgbG9naW5QYWdlOiBhc3luYyAoeyBwYWdlIH0sIHVzZSkgPT4gewogICAgYXdhaXQgdXNlKG5ldyBMb2dpblBhZ2UocGFnZSkpOwogIH0sCgogIGhvbWVQYWdlOiBhc3luYyAoeyBwYWdlIH0sIHVzZSkgPT4gewogICAgYXdhaXQgdXNlKG5ldyBIb21lUGFnZShwYWdlKSk7CiAgfSwKCiAgbG9naW5Nb2R1bGU6IGFzeW5jICh7IGxvZ2luUGFnZSwgaG9tZVBhZ2UgfSwgdXNlKSA9PiB7CiAgICBhd2FpdCB1c2UobmV3IExvZ2luTW9kdWxlKGxvZ2luUGFnZSwgaG9tZVBhZ2UpKTsKICB9LAp9KTsKCmV4cG9ydCB7IGV4cGVjdCB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwo=
+import { test as base }     from '@playwright/test';
+import {
+  SearchPage,
+  HeaderSearchPage,
+  SearchResultsPage,
+  LoginPage,
+  HomePage,
+  ProductDetailsPage,
+  CartPage,
+} from '@pages/index';
+import { SearchModule, LoginModule, ProductSearchAddToCartModule } from '@modules/index';
+
+type TestFixtures = {
+  // Search fixtures
+  searchPage:        SearchPage;
+  headerSearchPage:  HeaderSearchPage;
+  searchResultsPage: SearchResultsPage;
+  searchModule:      SearchModule;
+  productDetailsPage: ProductDetailsPage;
+  cartPage: CartPage;
+  productSearchAddToCartModule: ProductSearchAddToCartModule;
+  cartModule: ProductSearchAddToCartModule;
+  // Login fixtures
+  loginPage:   LoginPage;
+  homePage:    HomePage;
+  loginModule: LoginModule;
+};
+
+export const test = base.extend<TestFixtures>({
+  // --- Search ---
+  searchPage: async ({ page }, use) => {
+    await use(new SearchPage(page));
+  },
+
+  headerSearchPage: async ({ page }, use) => {
+    await use(new HeaderSearchPage(page));
+  },
+
+  searchResultsPage: async ({ page }, use) => {
+    await use(new SearchResultsPage(page));
+  },
+
+  searchModule: async ({ searchPage, headerSearchPage, searchResultsPage }, use) => {
+    await use(new SearchModule(searchPage, headerSearchPage, searchResultsPage));
+  },
+
+  productDetailsPage: async ({ page }, use) => {
+    await use(new ProductDetailsPage(page));
+  },
+
+  cartPage: async ({ page }, use) => {
+    await use(new CartPage(page));
+  },
+
+  productSearchAddToCartModule: async ({ searchModule, headerSearchPage, searchResultsPage, productDetailsPage, cartPage }, use) => {
+    await use(new ProductSearchAddToCartModule(searchModule, headerSearchPage, searchResultsPage, productDetailsPage, cartPage));
+  },
+
+  cartModule: async ({ productSearchAddToCartModule }, use) => {
+    await use(productSearchAddToCartModule);
+  },
+
+  // --- Login ---
+  loginPage: async ({ page }, use) => {
+    await use(new LoginPage(page));
+  },
+
+  homePage: async ({ page }, use) => {
+    await use(new HomePage(page));
+  },
+
+  loginModule: async ({ loginPage, homePage }, use) => {
+    await use(new LoginModule(loginPage, homePage));
+  },
+});
+
+export { expect } from '@playwright/test';
