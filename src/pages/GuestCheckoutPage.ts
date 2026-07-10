@@ -9,7 +9,7 @@ export class GuestCheckoutPage extends BasePage {
   headerSearchInput = (): Locator => this.page.getByRole('searchbox', { name: /search|rechercher/i }).first();
   searchDialogInput = (): Locator => this.page.getByRole('searchbox', { name: /search|rechercher/i }).last();
   searchInputFallback = (): Locator => this.page.getByTestId('search-bar-input');
-  cartButton = (): Locator => this.page.getByTestId('cart-button');
+  cartButton = (): Locator => this.page.getByTestId('header-cart');
   checkoutButton = (): Locator => this.page.getByTestId('checkout-button');
   emptyCartMessageArea = (): Locator => this.page.getByTestId('message-area');
   emptyCartMessageBoard = (): Locator => this.page.getByTestId('message-board');
