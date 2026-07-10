@@ -9,7 +9,11 @@ export class HomePage extends BasePage {
 
   // Header navigation — post-login authenticated state (strategy: data-testid)
   userDetailsButton = () => this.page.getByTestId('user-details-button');
-  cartButton        = () => this.page.getByTestId('cart-button');
+  cartButton        = () => this.page
+    .getByTestId('header-cart')
+    .getByTestId('cart-button')
+    .or(this.page.getByTestId('header-cart-mobile').getByTestId('cart-button'))
+    .filter({ visible: true });
 
   // Homepage hero content (strategy: role+name, level=1)
   welcomeHeading = () => this.page.getByRole('heading', { name: 'Welcome', level: 1 });
@@ -21,6 +25,10 @@ export class HomePage extends BasePage {
 
   async clickHeaderLoginLink(): Promise<void> {
     await this.headerLoginLink().click();
+  }
+
+  async clickCartButton(): Promise<void> {
+    await this.cartButton().click();
   }
 
   async getUserDetailsButtonText(): Promise<string> {

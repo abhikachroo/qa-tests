@@ -6,9 +6,9 @@ export class HeaderSearchPage extends BasePage {
     super(page);
   }
 
-  // Header/root input opens the search dialog when focused.
-  searchInput       = () => this.page.getByTestId('volt-search-box-root').getByTestId('search-bar-input');
-  dialogSearchInput = () => this.page.getByTestId('volt-search-dialog').getByTestId('search-bar-input');
+  // Header/root input is the active search field; no dialog is opened for this flow.
+  searchInput       = () => this.page.getByRole('searchbox', { name: /search/i }).or(this.page.getByLabel(/search/i)).or(this.page.getByPlaceholder(/search/i)).filter({ visible: true }).first();
+  dialogSearchInput = () => this.page.getByRole('searchbox', { name: /search/i }).or(this.page.getByLabel(/search/i)).or(this.page.getByPlaceholder(/search/i)).filter({ visible: true }).first();
 
   async fillSearchInput(keyword: string): Promise<void> {
     await this.searchInput().click();
