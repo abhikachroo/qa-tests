@@ -3,7 +3,6 @@ import { config } from '@config/index';
 
 test.describe(`@P2 @Negative @CartRecommendations @Accessibility Personalized Product Recommendations In Cart — ${config.displayName} on ${config.environment}`, () => {
   test('@P2 @Negative @CartRecommendations @Accessibility TC-013: Navigate recommendation quick link and card actions by keyboard', async ({
-    page,
     loginModule,
     cartRecommendationsModule,
     cartRecommendationsPage,
@@ -13,7 +12,7 @@ test.describe(`@P2 @Negative @CartRecommendations @Accessibility Personalized Pr
     });
 
     await test.step('Verify the header cart control is available', async () => {
-      await expect(page.getByTestId('cart-button')).toBeVisible();
+      await expect(cartRecommendationsPage.headerCartLink()).toBeVisible();
     });
 
     await test.step('Open the signed-in cart from the header', async () => {
@@ -43,7 +42,7 @@ test.describe(`@P2 @Negative @CartRecommendations @Accessibility Personalized Pr
       await expect(firstCardAction, 'Recommendation card action must receive keyboard focus').toBeFocused();
       await expect(firstCardAction, 'Recommendation card action must be keyboard operable').toBeEnabled();
       await firstCardAction.press('Enter');
-      await expect(page.getByTestId('cart-button'), 'Cart control must remain available after keyboard card action').toBeVisible();
+      await expect(cartRecommendationsPage.headerCartLink(), 'Cart control must remain available after keyboard card action').toBeVisible();
     });
   });
 });
