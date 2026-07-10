@@ -1,1 +1,127 @@
-aW1wb3J0IHsgTG9jYXRvciwgUGFnZSB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwppbXBvcnQgeyBCYXNlUGFnZSB9IGZyb20gJ0BwYWdlcy9CYXNlUGFnZSc7CgpleHBvcnQgY2xhc3MgR3Vlc3RDaGVja291dFBhZ2UgZXh0ZW5kcyBCYXNlUGFnZSB7CiAgY29uc3RydWN0b3IocGFnZTogUGFnZSkgewogICAgc3VwZXIocGFnZSk7CiAgfQoKICBoZWFkZXJTZWFyY2hJbnB1dCA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVJvbGUoJ3NlYXJjaGJveCcsIHsgbmFtZTogL3NlYXJjaHxyZWNoZXJjaGVyL2kgfSkuZmlyc3QoKTsKICBzZWFyY2hEaWFsb2dJbnB1dCA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZCgndm9sdC1zZWFyY2gtZGlhbG9nJykuZ2V0QnlUZXN0SWQoJ3NlYXJjaC1iYXItaW5wdXQnKTsKICBzZWFyY2hJbnB1dEZhbGxiYWNrID0gKCk6IExvY2F0b3IgPT4gdGhpcy5wYWdlLmdldEJ5VGVzdElkKCdzZWFyY2gtYmFyLWlucHV0Jyk7CiAgY2FydEJ1dHRvbiA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZCgnY2FydC1idXR0b24nKTsKICBjaGVja291dEJ1dHRvbiA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZCgnY2hlY2tvdXQtYnV0dG9uJyk7CiAgZW1wdHlDYXJ0TWVzc2FnZUFyZWEgPSAoKTogTG9jYXRvciA9PiB0aGlzLnBhZ2UuZ2V0QnlUZXN0SWQoJ21lc3NhZ2UtYXJlYScpOwogIGVtcHR5Q2FydE1lc3NhZ2VCb2FyZCA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZCgnbWVzc2FnZS1ib2FyZCcpOwogIGV4cGxvcmVDYXRlZ29yaWVzQnV0dG9uID0gKCk6IExvY2F0b3IgPT4gdGhpcy5wYWdlLmdldEJ5VGVzdElkKCdtZXNzYWdlYm9hcmQtcHJvY2VlZC1idXR0b24nKTsKICBsb2dpbkJ1dHRvbiA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZCgnbG9naW4tYnV0dG9uJyk7CiAgc2lnblVwQnV0dG9uID0gKCk6IExvY2F0b3IgPT4gdGhpcy5wYWdlLmdldEJ5VGVzdElkKCdzaWdudXAtYnV0dG9uJyk7CiAgcHJvZHVjdENvdW50U3VtbWFyeSA9ICgpOiBMb2NhdG9yID0+IHRoaXMucGFnZS5nZXRCeVRleHQoL1xcZCtcXHMvcHJvZHVjdC9pKTsKICBwcm9kdWN0Q2FyZCA9IChwcm9kdWN0SWQ6IHN0cmluZyk6IExvY2F0b3IgPT4KICAgIHRoaXMucGFnZS5sb2NhdG9yKCdbZGF0YS10ZXN0aWQ9InByb2R1Y3QtY2FyZCJdJykuZmlsdGVyKHsgaGFzVGV4dDogcHJvZHVjdElkIH0pLmZpcnN0KCk7CiAgcHJvZHVjdElkVGV4dCA9IChwcm9kdWN0SWQ6IHN0cmluZyk6IExvY2F0b3IgPT4gdGhpcy5wYWdlLmdldEJ5VGV4dChwcm9kdWN0SWQsIHsgZXhhY3Q6IGZhbHNlIH0pLmZpcnN0KCk7CgogIGFkZFRvQ2FydEJ1dHRvbkZvclByb2R1Y3QgPSAocHJvZHVjdElkOiBzdHJpbmcpOiBMb2NhdG9yID0+CiAgICB0aGlzLnByb2R1Y3RDYXJkKHByb2R1Y3RJZCkuZ2V0QnlSb2xlKCd buttonJywg eyBuYW1lOiAvYWRkfGFqb3V0ZXJ8cGFuaWVyL2kgfSk7IC8vIFRPRE86IHZlcmlmeSBzZWxlY3RvciBhZ2FpbnN0IHBvcHVsYXRlZCBwcm9kdWN0IGNhcmQKICB1bmF2YWlsYWJsZVByb2R1Y3RNZXNzYWdlID0gKCk6IExvY2F0b3IgPT4KICAgIHRoaXMucGFnZS5nZXRCeVRleHQoL3VuYXZhaWxhYmxlfGluZGlzcG9uaWJsZXxub3QgYXZhaWxhYmxlfG5vbiBkaXNwb25pYmxlL2kpLmZpcnN0KCk7IC8vIFRPRE86IHZlcmlmeSBzZWxlY3RvciBvbmNlIHVuYXZhaWxhYmxlIGZpeHR1cmUgZXhpc3RzCiAgY2FydExpbmVJdGVtID0gKHByb2R1Y3RJZDogc3RyaW5nKTogTG9jYXRvciA9PgogICAgdGhpcy5wYWdlLmxvY2F0b3IoJ1tkYXRhLXRlc3RpZD0iY2FydC1saW5lLWl0ZW0iXScpLmZpbHRlcih7IGhhc1RleHQ6IHByb2R1Y3RJZCB9KS5maXJzdCgpOyAvLyBUT0RPOiB2ZXJpZnkgc2VsZWN0b3IgYWdhaW5zdCBub24tZW1wdHkgY2FydAogIGNhcnRRdWFudGl0eUlucHV0ID0gKHByb2R1Y3RJZDogc3RyaW5nKTogTG9jYXRvciA9PgogICAgdGhpcy5jYXJ0TGluZUl0ZW0ocHJvZHVjdElkKS5nZXRCeVJvbGUoJ3NwaW5idXR0b24nKS5maXJzdCgpOyAvLyBUT0RPOiB2ZXJpZnkgc2VsZWN0b3IgYWdhaW5zdCBub24tZW1wdHkgY2FydAoKICBndWVzdENoZWNrb3V0QnV0dG9uID0gKCk6IExvY2F0b3IgPT4KICAgIHRoaXMucGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL2d1ZXN0fGludml0w6l8Y29udGludWVyL2kgfSkuZmlyc3QoKTsgLy8gVE9ETzogdmVyaWZ5IHNlbGVjdG9yIHdoZW4gY2FydCBjb250YWlucyBhbiBpdGVtCiAgZ3Vlc3RFbWFpbElucHV0ID0gKCk6IExvY2F0b3IgPT4KICAgIHRoaXMucGFnZS5nZXRCeUxhYmVsKC9lbWFpbHxlLW1haWwvaSkuZmlyc3QoKTsgLy8gVE9ETzogdmVyaWZ5IGNoZWNrb3V0IGZvcm0gbGFiZWwKICBmaXJzdE5hbWVJbnB1dCA9ICgpOiBMb2NhdG9yID0+CiAgICB0aGlzLnBhZ2UuZ2V0QnlMYWJlbCgvZmlyc3QgbmFtZXxwcsOpbm9tL2kpLmZpcnN0KCk7IC8vIFRPRE86IHZlcmlmeSBjaGVja291dCBmb3JtIGxhYmVsCiAgbGFzdE5hbWVJbnB1dCA9ICgpOiBMb2NhdG9yID0+CiAgICB0aGlzLnBhZ2UuZ2V0QnlMYWJlbCgvbGFzdCBuYW1lfG5vbS9pKS5maXJzdCgpOyAvLyBUT0RPOiB2ZXJpZnkgY2hlY2tvdXQgZm9ybSBsYWJlbAogIHBob25lSW5wdXQgPSAoKTogTG9jYXRvciA9PgogICAgdGhpcy5wYWdlLmdldEJ5TGFiZWwoL3Bob25lfHTDqWzDqXBob25lL2kpLmZpcnN0KCk7IC8vIFRPRE86IHZlcmlmeSBjaGVja291dCBmb3JtIGxhYmVsCiAgYWRkcmVzc0lucHV0ID0gKCk6IExvY2F0b3IgPT4KICAgIHRoaXMucGFnZS5nZXRCeUxhYmVsKC9hZGRyZXNzfGFkcmVzc2UvaSkuZmlyc3QoKTsgLy8gVE9ETzogdmVyaWZ5IGNoZWNrb3V0IGZvcm0gbGFiZWwKICBwb3N0YWxDb2RlSW5wdXQgPSAoKTogTG9jYXRvciA9PgogICAgdGhpcy5wYWdlLmdldEJ5TGFiZWwoL3Bvc3RhbHxwb3N0Y29kZXxjb2RlIHBvc3RhbC9pKS5maXJzdCgpOyAvLyBUT0RPOiB2ZXJpZnkgY2hlY2tvdXQgZm9ybSBsYWJlbAogIGNpdHlJbnB1dCA9ICgpOiBMb2NhdG9yID0+CiAgICB0aGlzLnBhZ2UuZ2V0QnlMYWJlbCgvY2l0eXx2aWxsZS9pKS5maXJzdCgpOyAvLyBUT0RPOiB2ZXJpZnkgY2hlY2tvdXQgZm9ybSBsYWJlbAogIGNvbnRpbnVlQnV0dG9uID0gKCk6IExvY2F0b3IgPT4KICAgIHRoaXMucGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL2NvbnRpbnVlfGNvbnRpbnVlcnxuZXh0fHN1aXZhbnQvaSB9KS5maXJzdCgpOyAvLyBUT0RPOiB2ZXJpZnkgY2hlY2tvdXQgY29udGludWF0aW9uIGxhYmVsCiAgZmluYWxTdWJtaXRCdXR0b24gPSAoKTogTG9jYXRvciA9PgogICAgdGhpcy5wYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvc3VibWl0fHBsYWNlIG9yZGVyfGZpbmFsaXNlcnxjb21tYW5kZXJ8cGF5ZXIvaSB9KS5maXJzdCgpOyAvLyBUT0RPOiB2ZXJpZnkgZmluYWwgc3VibWl0IGxhYmVsIGFuZCBwb2xpY3kKICBvcmRlclN1Y2Nlc3NNZXNzYWdlID0gKCk6IExvY2F0b3IgPT4KICAgIHRoaXMucGFnZS5nZXRCeVRleHQoL3RoYW5rIHlvdXxtZXJjaXxjb25maXJtYXRpb258b3JkZXJ8Y29tbWFuZGUvaSkuZmlyc3QoKTsgLy8gVE9ETzogY29uZmlybSBhZ3JlZWQgc3VjY2VzcyBzaWduYWwKICB2YWxpZGF0aW9uTWVzc2FnZSA9ICgpOiBMb2NhdG9yID0+CiAgICB0aGlzLnBhZ2UuZ2V0QnlUZXh0KC9yZXF1aXJlZHxvYmxpZ2F0b2lyZXxpbnZhbGlkfGludmFsaWRlfGVycmV1ci9pKS5maXJzdCgpOyAvLyBUT0RPOiB2ZXJpZnkgdmFsaWRhdGlvbiBjb3B5CiAgbG9hZGluZ0luZGljYXRvciA9ICgpOiBMb2NhdG9yID0+CiAgICB0aGlzLnBhZ2UuZ2V0QnlUZXh0KC9sb2FkaW5nfGNoYXJnZW1lbnR8cHJvY2Vzc2luZ3x0cmFpdGVtZW50L2kpLmZpcnN0KCk7IC8vIFRPRE86IHZlcmlmeSBsb2FkaW5nIGNvcHkKCiAgYXN5bmMgZm9jdXNIZWFkZXJTZWFyY2goKTogUHJvbWlzZTx2b2lkPiB7CiAgICBhd2FpdCB0aGlzLmhlYWRlclNlYXJjaElucHV0KCkuY2xpY2soKTsKICB9CgogIGFzeW5jIGZpbGxTZWFyY2hEaWFsb2coa2V5d29yZDogc3RyaW5nKTogUHJvbWlzZTx2b2lkPiB7CiAgICBhd2FpdCB0aGlzLnNlYXJjaERpYWxvZ0lucHV0KCkuZmlsbChrZXl3b3JkKTsKICB9CgogIGFzeW5jIHN1Ym1pdFNlYXJjaERpYWxvZygpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMuc2VhcmNoRGlhbG9nSW5wdXQoKS5wcmVzcygnRW50ZXInKTsKICB9CgogIGFzeW5jIGNsaWNrQWRkVG9DYXJ0KHByb2R1Y3RJZDogc3RyaW5nKTogUHJvbWlzZTx2b2lkPiB7CiAgICBhd2FpdCB0aGlzLmFkZFRvQ2FydEJ1dHRvbkZvclByb2R1Y3QocHJvZHVjdElkKS5jbGljaygpOwogIH0KCiAgYXN5bmMgb3BlbkNhcnQoKTogUHJvbWlzZTx2b2lkPiB7CiAgICBhd2FpdCB0aGlzLmNhcnRCdXR0b24oKS5jbGljaygpOwogIH0KCiAgYXN5bmMgY2xpY2tDaGVja291dCgpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMuY2hlY2tvdXRCdXR0b24oKS5jbGljaygpOwogIH0KCiAgYXN5bmMgY2xpY2tFeHBsb3JlQ2F0ZWdvcmllcygpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMuZXhwbG9yZUNhdGVnb3JpZXNCdXR0b24oKS5jbGljaygpOwogIH0KCiAgYXN5bmMgY2xpY2tHdWVzdENoZWNrb3V0KCk6IFByb21pc2U8dm9pZD4gewogICAgYXdhaXQgdGhpcy5ndWVzdENoZWNrb3V0QnV0dG9uKCkuY2xpY2soKTsKICB9CgogIGFzeW5jIGZpbGxHdWVzdEVtYWlsKGVtYWlsOiBzdHJpbmcpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMuZ3Vlc3RFbWFpbElucHV0KCkuZmlsbChlbWFpbCk7CiAgfQoKICBhc3luYyBmaWxsRmlyc3ROYW1lKGZpcnN0TmFtZTogc3RyaW5nKTogUHJvbWlzZTx2b2lkPiB7CiAgICBhd2FpdCB0aGlzLmZpcnN0TmFtZUlucHV0KCkuZmlsbChmaXJzdE5hbWUpOwogIH0KCiAgYXN5bmMgZmlsbExhc3ROYW1lKGxhc3ROYW1lOiBzdHJpbmcpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMubGFzdE5hbWVJbnB1dCgpLmZpbGwobGFzdE5hbWUpOwogIH0KCiAgYXN5bmMgZmlsbFBob25lKHBob25lOiBzdHJpbmcpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMucGhvbmVJbnB1dCgpLmZpbGwocGhvbmUpOwogIH0KCiAgYXN5bmMgZmlsbEFkZHJlc3MoYWRkcmVzczogc3RyaW5nKTogUHJvbWlzZTx2b2lkPiB7CiAgICBhd2FpdCB0aGlzLmFkZHJlc3NJbnB1dCgpLmZpbGwoYWRkcmVzcyk7CiAgfQoKICBhc3luYyBmaWxsUG9zdGFsQ29kZShwb3N0YWxDb2RlOiBzdHJpbmcpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMucG9zdGFsQ29kZUlucHV0KCkuZmlsbChwb3N0YWxDb2RlKTsKICB9CgogIGFzeW5jIGZpbGxDaXR5KGNpdHk6IHN0cmluZyk6IFByb21pc2U8dm9pZD4gewogICAgYXdhaXQgdGhpcy5jaXR5SW5wdXQoKS5maWxsKGNpdHkpOwogIH0KCiAgYXN5bmMgY2xpY2tDb250aW51ZSgpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMuY29udGludWVCdXR0b24oKS5jbGljaygpOwogIH0KCiAgYXN5bmMgY2xpY2tGaW5hbFN1Ym1pdCgpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMuZmluYWxTdWJtaXRCdXR0b24oKS5jbGljaygpOwogIH0KfQo=
+import { Locator, Page } from '@playwright/test';
+import { BasePage } from '@pages/BasePage';
+
+export class GuestCheckoutPage extends BasePage {
+  constructor(page: Page) {
+    super(page);
+  }
+
+  headerSearchInput = (): Locator => this.page.getByRole('searchbox', { name: /search|rechercher/i }).first();
+  searchDialogInput = (): Locator => this.page.getByTestId('volt-search-dialog').getByTestId('search-bar-input');
+  searchInputFallback = (): Locator => this.page.getByTestId('search-bar-input');
+  cartButton = (): Locator => this.page.getByTestId('cart-button');
+  checkoutButton = (): Locator => this.page.getByTestId('checkout-button');
+  emptyCartMessageArea = (): Locator => this.page.getByTestId('message-area');
+  emptyCartMessageBoard = (): Locator => this.page.getByTestId('message-board');
+  exploreCategoriesButton = (): Locator => this.page.getByTestId('messageboard-proceed-button');
+  loginButton = (): Locator => this.page.getByTestId('login-button');
+  signUpButton = (): Locator => this.page.getByTestId('signup-button');
+  productCountSummary = (): Locator => this.page.getByText(/\d+\s+product/i);
+  productCard = (productId: string): Locator =>
+    this.page.locator('[data-testid="product-card"]').filter({ hasText: productId }).first();
+  productIdText = (productId: string): Locator => this.page.getByText(productId, { exact: false }).first();
+
+  addToCartButtonForProduct = (productId: string): Locator =>
+    this.productCard(productId).getByRole('button', { name: /add|ajouter|panier/i }); // TODO: verify selector against populated product card
+  unavailableProductMessage = (): Locator =>
+    this.page.getByText(/unavailable|indisponible|not available|non disponible/i).first(); // TODO: verify selector once unavailable fixture exists
+  cartLineItem = (productId: string): Locator =>
+    this.page.locator('[data-testid="cart-line-item"]').filter({ hasText: productId }).first(); // TODO: verify selector against non-empty cart
+  cartQuantityInput = (productId: string): Locator =>
+    this.cartLineItem(productId).getByRole('spinbutton').first(); // TODO: verify selector against non-empty cart
+
+  guestCheckoutButton = (): Locator =>
+    this.page.getByRole('button', { name: /guest|invité|continuer/i }).first(); // TODO: verify selector when cart contains an item
+  guestEmailInput = (): Locator =>
+    this.page.getByLabel(/email|e-mail/i).first(); // TODO: verify checkout form label
+  firstNameInput = (): Locator =>
+    this.page.getByLabel(/first name|prénom/i).first(); // TODO: verify checkout form label
+  lastNameInput = (): Locator =>
+    this.page.getByLabel(/last name|nom/i).first(); // TODO: verify checkout form label
+  phoneInput = (): Locator =>
+    this.page.getByLabel(/phone|téléphone/i).first(); // TODO: verify checkout form label
+  addressInput = (): Locator =>
+    this.page.getByLabel(/address|adresse/i).first(); // TODO: verify checkout form label
+  postalCodeInput = (): Locator =>
+    this.page.getByLabel(/postal|postcode|code postal/i).first(); // TODO: verify checkout form label
+  cityInput = (): Locator =>
+    this.page.getByLabel(/city|ville/i).first(); // TODO: verify checkout form label
+  continueButton = (): Locator =>
+    this.page.getByRole('button', { name: /continue|continuer|next|suivant/i }).first(); // TODO: verify checkout continuation label
+  finalSubmitButton = (): Locator =>
+    this.page.getByRole('button', { name: /submit|place order|finaliser|commander|payer/i }).first(); // TODO: verify final submit label and policy
+  orderSuccessMessage = (): Locator =>
+    this.page.getByText(/thank you|merci|confirmation|order|commande/i).first(); // TODO: confirm agreed success signal
+  validationMessage = (): Locator =>
+    this.page.getByText(/required|obligatoire|invalid|invalide|erreur/i).first(); // TODO: verify validation copy
+  loadingIndicator = (): Locator =>
+    this.page.getByText(/loading|chargement|processing|traitement/i).first(); // TODO: verify loading copy
+
+  async focusHeaderSearch(): Promise<void> {
+    await this.headerSearchInput().click();
+  }
+
+  async fillSearchDialog(keyword: string): Promise<void> {
+    await this.searchDialogInput().fill(keyword);
+  }
+
+  async submitSearchDialog(): Promise<void> {
+    await this.searchDialogInput().press('Enter');
+  }
+
+  async clickAddToCart(productId: string): Promise<void> {
+    await this.addToCartButtonForProduct(productId).click();
+  }
+
+  async openCart(): Promise<void> {
+    await this.cartButton().click();
+  }
+
+  async clickCheckout(): Promise<void> {
+    await this.checkoutButton().click();
+  }
+
+  async clickExploreCategories(): Promise<void> {
+    await this.exploreCategoriesButton().click();
+  }
+
+  async clickGuestCheckout(): Promise<void> {
+    await this.guestCheckoutButton().click();
+  }
+
+  async fillGuestEmail(email: string): Promise<void> {
+    await this.guestEmailInput().fill(email);
+  }
+
+  async fillFirstName(firstName: string): Promise<void> {
+    await this.firstNameInput().fill(firstName);
+  }
+
+  async fillLastName(lastName: string): Promise<void> {
+    await this.lastNameInput().fill(lastName);
+  }
+
+  async fillPhone(phone: string): Promise<void> {
+    await this.phoneInput().fill(phone);
+  }
+
+  async fillAddress(address: string): Promise<void> {
+    await this.addressInput().fill(address);
+  }
+
+  async fillPostalCode(postalCode: string): Promise<void> {
+    await this.postalCodeInput().fill(postalCode);
+  }
+
+  async fillCity(city: string): Promise<void> {
+    await this.cityInput().fill(city);
+  }
+
+  async clickContinue(): Promise<void> {
+    await this.continueButton().click();
+  }
+
+  async clickFinalSubmit(): Promise<void> {
+    await this.finalSubmitButton().click();
+  }
+}
