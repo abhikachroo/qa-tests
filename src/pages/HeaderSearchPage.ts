@@ -6,9 +6,9 @@ export class HeaderSearchPage extends BasePage {
     super(page);
   }
 
-  // Header/root input opens the search dialog when focused.
-  searchInput       = () => this.page.getByRole('searchbox', { name: /search/i }).or(this.page.getByLabel(/search/i)).or(this.page.getByPlaceholder(/search/i)).first();
-  dialogSearchInput = () => this.page.getByRole('dialog').getByRole('searchbox', { name: /search/i }).or(this.page.getByRole('dialog').getByLabel(/search/i)).or(this.page.getByRole('dialog').getByPlaceholder(/search/i)).first();
+  // Header/root input is the active search field; no dialog is opened for this flow.
+  searchInput       = () => this.page.getByRole('searchbox', { name: /search/i }).or(this.page.getByLabel(/search/i)).or(this.page.getByPlaceholder(/search/i)).filter({ visible: true }).first();
+  dialogSearchInput = () => this.page.getByRole('searchbox', { name: /search/i }).or(this.page.getByLabel(/search/i)).or(this.page.getByPlaceholder(/search/i)).filter({ visible: true }).first();
 
   async fillSearchInput(keyword: string): Promise<void> {
     await this.searchInput().click();
