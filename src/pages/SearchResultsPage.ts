@@ -23,6 +23,7 @@ export class SearchResultsPage extends BasePage {
           .getByRole('link')
           .first(),
       )
+      .or(this.page.getByRole('link', { name: new RegExp(productId, 'i') }).first())
       .first();
 
   // Fallback: any visible element containing the product ID string
@@ -34,6 +35,13 @@ export class SearchResultsPage extends BasePage {
     this.page
       .getByRole('heading', { name: /sorry,?\s*no result|no results?|aucun résultat|we couldn't find that page/i })
       .or(this.page.getByText(/sorry,?\s*no result|no results?|aucun résultat|we couldn't find that page/i))
+      .first();
+
+  // Compatibility alias used by generated specs to verify the results page did not render an error state.
+  errorPageContainer = () =>
+    this.page
+      .getByRole('heading', { name: /we couldn't find that page|page not found|404|sorry,?\s*no result|no results?|aucun résultat/i })
+      .or(this.page.getByText(/we couldn't find that page|page not found|404|sorry,?\s*no result|no results?|aucun résultat/i))
       .first();
 
   async clickProductCard(productId: string): Promise<void> {
