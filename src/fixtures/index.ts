@@ -5,8 +5,9 @@ import {
   SearchResultsPage,
   LoginPage,
   HomePage,
+  GuestCheckoutPage,
 } from '@pages/index';
-import { SearchModule, LoginModule } from '@modules/index';
+import { SearchModule, LoginModule, GuestCheckoutModule } from '@modules/index';
 
 type TestFixtures = {
   // Search fixtures
@@ -18,6 +19,9 @@ type TestFixtures = {
   loginPage:   LoginPage;
   homePage:    HomePage;
   loginModule: LoginModule;
+  // Guest checkout fixtures
+  guestCheckoutPage:   GuestCheckoutPage;
+  guestCheckoutModule: GuestCheckoutModule;
 };
 
 export const test = base.extend<TestFixtures>({
@@ -49,6 +53,15 @@ export const test = base.extend<TestFixtures>({
 
   loginModule: async ({ loginPage, homePage }, use) => {
     await use(new LoginModule(loginPage, homePage));
+  },
+
+  // --- Guest checkout ---
+  guestCheckoutPage: async ({ page }, use) => {
+    await use(new GuestCheckoutPage(page));
+  },
+
+  guestCheckoutModule: async ({ guestCheckoutPage }, use) => {
+    await use(new GuestCheckoutModule(guestCheckoutPage));
   },
 });
 
