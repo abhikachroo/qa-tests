@@ -23,6 +23,10 @@ export class HomePage extends BasePage {
     await this.headerLoginLink().click();
   }
 
+  async clickCartButton(): Promise<void> {
+    await this.cartButton().click();
+  }
+
   async getUserDetailsButtonText(): Promise<string> {
     return (await this.userDetailsButton().textContent()) ?? '';
   }
