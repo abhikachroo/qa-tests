@@ -13,10 +13,19 @@ export class CartRecommendationsModule {
     this.logger = new Logger('CartRecommendationsModule');
   }
 
+  private async waitForSignedInHeaderCartReady(): Promise<void> {
+    this.logger.info('Waiting for signed-in header cart control to be ready');
+    await this.page.waitForLoadState('domcontentloaded');
+    const cartButton = this.cartRecommendationsPage.headerCartLink();
+    await expect(cartButton).toBeVisible();
+    await expect(cartButton).toBeEnabled();
+  }
+
   async openCart(): Promise<void> {
     this.logger.info(`[${config.opco}][${config.environment}] Opening cart from header`);
-    await this.cartRecommendationsPage.openCartFromHeader();
-    await this.cartRecommendationsPage.waitForPageLoad();
+    await this.waitForSignedInHeaderCartReady();
+    await this.cartRecommendationsPage.headerCartLink().click();
+    await this.page.waitForLoadState('domcontentloaded');
   }
 
   async verifyRecommendationsVisible(): Promise<void> {
@@ -68,7 +77,7 @@ export class CartRecommendationsModule {
     const beforeUrl = this.page.url();
     await this.cartRecommendationsPage.clickFirstRecommendationAddToCart();
     await expect(this.cartRecommendationsPage.recommendationCards().first()).toBeVisible();
-    await expect(this.cartRecommendationsPage.headerCartLink()).toBeVisible();
+    await this.waitForSignedInHeaderCartReady();
     await expect(this.page).toHaveURL(beforeUrl);
   }
 
@@ -93,7 +102,7 @@ export class CartRecommendationsModule {
 
   async verifyCartUsableWithoutRecommendations(): Promise<void> {
     this.logger.info('Verifying cart remains usable when recommendations are unavailable');
-    await expect(this.cartRecommendationsPage.headerCartLink()).toBeVisible();
+    await this.waitForSignedInHeaderCartReady();
     await expect(this.cartRecommendationsPage.cartLineItems().first()).toBeVisible();
   }
 
