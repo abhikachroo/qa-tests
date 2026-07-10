@@ -4,8 +4,8 @@ import { BasePage } from '@pages/BasePage';
 export class CartRecommendationsPage extends BasePage {
   constructor(page: Page) { super(page); }
 
-  // Header cart link / cart count (strategy: data-testid from extracted locator map)
-  headerCartLink = (): Locator => this.page.getByTestId('cart-button');
+  // Header cart link / cart count (strategy: visible desktop/mobile header cart test id)
+  headerCartLink = (): Locator => this.page.getByTestId('header-cart').or(this.page.getByTestId('header-cart-mobile')).filter({ visible: true }).first();
 
   // Recommendations section container (strategy: data-testid/CMS text fallback; selector must be verified in seeded authenticated cart state)
   recommendationsSection = (): Locator => this.page.locator('[data-testid="recommendations-section"], [data-testid="cart-recommendations"], section:has-text("Recommended for you"), section:has-text("Recommandé")');
