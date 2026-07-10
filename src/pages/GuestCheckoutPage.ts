@@ -33,7 +33,7 @@ export class GuestCheckoutPage extends BasePage {
   guestCheckoutButton = (): Locator =>
     this.page.getByRole('button', { name: /guest|invité|continuer/i }).first(); // TODO: verify selector when cart contains an item
   guestEmailInput = (): Locator =>
-    this.page.getByLabel(/email|e-mail/i).first(); // TODO: verify checkout form label
+    this.page.getByRole('textbox', { name: /email|e-mail/i }).first(); // TODO: verify checkout form label
   firstNameInput = (): Locator =>
     this.page.getByLabel(/first name|prénom/i).first(); // TODO: verify checkout form label
   lastNameInput = (): Locator =>
