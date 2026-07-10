@@ -13,7 +13,17 @@ export class SearchResultsPage extends BasePage {
   productCard = (productId: string) =>
     this.page.locator('[data-testid="product-card"]').filter({ hasText: productId }).first();
 
+  // Product card add-to-cart action. TODO: verify selector against live checkout route.
+  productCardAddToCartButton = (productId: string) =>
+    this.productCard(productId)
+      .getByRole('button', { name: /add|cart|basket|panier/i })
+      .first();
+
   // Fallback: any visible element containing the product ID string
   productIdText = (productId: string) =>
     this.page.getByText(productId, { exact: false }).first();
+
+  async clickProductCardAddToCart(productId: string): Promise<void> {
+    await this.productCardAddToCartButton(productId).click();
+  }
 }
