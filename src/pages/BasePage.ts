@@ -23,7 +23,8 @@ export abstract class BasePage {
   }
 
   async waitForPageLoad(): Promise<void> {
-    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForLoadState('networkidle', { timeout: 5_000 }).catch(() => undefined);
   }
 
   async takeScreenshot(name: string): Promise<Buffer> {
