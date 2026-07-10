@@ -7,7 +7,7 @@ export class GuestCheckoutPage extends BasePage {
   }
 
   headerSearchInput = (): Locator => this.page.getByRole('searchbox', { name: /search|rechercher/i }).first();
-  searchDialogInput = (): Locator => this.page.getByTestId('volt-search-dialog').getByTestId('search-bar-input');
+  searchDialogInput = (): Locator => this.page.getByRole('searchbox', { name: /search|rechercher/i }).last();
   searchInputFallback = (): Locator => this.page.getByTestId('search-bar-input');
   cartButton = (): Locator => this.page.getByTestId('cart-button');
   checkoutButton = (): Locator => this.page.getByTestId('checkout-button');
