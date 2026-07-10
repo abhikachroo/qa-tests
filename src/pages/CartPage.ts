@@ -1,1 +1,36 @@
-aW1wb3J0IHsgUGFnZSB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwppbXBvcnQgeyBCYXNlUGFnZSB9IGZyb20gJy4vQmFzZVBhZ2UnOwoKZXhwb3J0IGNsYXNzIENhcnRQYWdlIGV4dGVuZHMgQmFzZVBhZ2UgewogIGNvbnN0cnVjdG9yKHBhZ2U6IFBhZ2UpIHsKICAgIHN1cGVyKHBhZ2UpOwogIH0KCiAgaGVhZGVyQ2FydExpbmsgPSAoKSA9PgogICAgdGhpcy5wYWdlCiAgICAgIC5nZXRCeVJvbGUoJ2xpbmsnLCB7IG5hbWU6IC9jYXJ0fGJhc2tldHxiYWd8cGFuaWVyL2kgfSkKICAgICAgLm9yKHRoaXMucGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL2NhcnR8YmFza2V0fGJhZ3xwYW5pZXIvaSB9KSkKICAgICAgLmZpcnN0KCk7CiAgcHJvZHVjdExpbmVJdGVtID0gKHByb2R1Y3RJZDogc3RyaW5nKSA9PiB0aGlzLnBhZ2UuZ2V0QnlUZXh0KHByb2R1Y3RJZCwgeyBleGFjdDogZmFsc2UgfSkuZmlyc3QoKTsKCiAgLy8gVE9ETzogdmVyaWZ5IHNlbGVjdG9yIGFnYWluc3QgY2hlY2tvdXQgY2FydCBwYWdlIG9uY2UgZGlyZWN0IGNoZWNrb3V0IGJyb3dzaW5nIGlzIHN0YWJsZS4KICBlbXB0eUNhcnRNZXNzYWdlID0gKCkgPT4gdGhpcy5wYWdlLmdldEJ5VGV4dCgvZW1wdHkgY2FydHx5b3VyIGNhcnQgaXMgZW1wdHl8cGFuaWVyIHZpZGUvaSkuZmlyc3QoKTsKCiAgLy8gVE9ETzogdmVyaWZ5IHNlbGVjdG9yIGFnYWluc3QgY2hlY2tvdXQgY2FydCBwYWdlIG9uY2UgZGlyZWN0IGNoZWNrb3V0IGJyb3dzaW5nIGlzIHN0YWJsZS4KICBxdWFudGl0eUlucHV0Rm9yUHJvZHVjdCA9IChwcm9kdWN0SWQ6IHN0cmluZykgPT4KICAgIHRoaXMucGFnZS5sb2NhdG9yKCdbZGF0YS10ZXN0aWQ9ImNhcnQtbGluZS1pdGVtIl0sIFtjbGFzcyo9ImNhcnQtbGluZSJdLCBbY2xhc3MqPSJiYXNrZXQtbGluZSJdJykuZmlsdGVyKHsgaGFzVGV4dDogcHJvZHVjdElkIH0pLmxvY2F0b3IoJ2lucHV0W3R5cGU9Im51bWJlciJdLCBbZGF0YS10ZXN0aWQqPSJxdWFudGl0eSJdJykuZmlyc3QoKTsKCiAgbm90Rm91bmRNZXNzYWdlID0gKCkgPT4gdGhpcy5wYWdlLmdldEJ5VGV4dCgvcGFnZSBub3QgZm91bmR8NDA0fG5vdCBmb3VuZC9pKS5maXJzdCgpOwoKICBhc3luYyBjbGlja0hlYWRlckNhcnRMaW5rKCk6IFByb21pc2U8dm9pZD4gewogICAgYXdhaXQgdGhpcy5oZWFkZXJDYXJ0TGluaygpLmNsaWNrKCk7CiAgfQoKICBhc3luYyBwcmVzc0hlYWRlckNhcnRMaW5rKCk6IFByb21pc2U8dm9pZD4gewogICAgYXdhaXQgdGhpcy5oZWFkZXJDYXJ0TGluaygpLnByZXNzKCdFbnRlcicpOwogIH0KCiAgYXN5bmMgd2FpdEZvckNoZWNrb3V0Um91dGUoKTogUHJvbWlzZTx2b2lkPiB7CiAgICBhd2FpdCB0aGlzLnBhZ2Uud2FpdEZvclVSTCgvXFwvY2hlY2tvdXRcXC9lbi1nYlxcLy8sIHsgdGltZW91dDogMzBfMDAwIH0pOwogIH0KfQo=
+import { Page } from '@playwright/test';
+import { BasePage } from './BasePage';
+
+export class CartPage extends BasePage {
+  constructor(page: Page) {
+    super(page);
+  }
+
+  headerCartLink = () =>
+    this.page
+      .getByRole('link', { name: /cart|basket|bag|panier/i })
+      .or(this.page.getByRole('button', { name: /cart|basket|bag|panier/i }))
+      .first();
+  productLineItem = (productId: string) => this.page.getByText(productId, { exact: false }).first();
+
+  // TODO: verify selector against checkout cart page once direct checkout browsing is stable.
+  emptyCartMessage = () => this.page.getByText(/empty cart|your cart is empty|panier vide/i).first();
+
+  // TODO: verify selector against checkout cart page once direct checkout browsing is stable.
+  quantityInputForProduct = (productId: string) =>
+    this.page.locator('[data-testid="cart-line-item"], [class*="cart-line"], [class*="basket-line"]').filter({ hasText: productId }).locator('input[type="number"], [data-testid*="quantity"]').first();
+
+  notFoundMessage = () => this.page.getByText(/page not found|404|not found/i).first();
+
+  async clickHeaderCartLink(): Promise<void> {
+    await this.headerCartLink().click();
+  }
+
+  async pressHeaderCartLink(): Promise<void> {
+    await this.headerCartLink().press('Enter');
+  }
+
+  async waitForCheckoutRoute(): Promise<void> {
+    await this.page.waitForURL(/\/checkout\/en-gb\//, { timeout: 30_000 });
+  }
+}
