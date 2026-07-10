@@ -1,1 +1,30 @@
-aW1wb3J0IHsgUGFnZSB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwppbXBvcnQgeyBCYXNlUGFnZSB9IGZyb20gJy4vQmFzZVBhZ2UnOwoKZXhwb3J0IGNsYXNzIEhlYWRlclNlYXJjaFBhZ2UgZXh0ZW5kcyBCYXNlUGFnZSB7CiAgY29uc3RydWN0b3IocGFnZTogUGFnZSkgewogICAgc3VwZXIocGFnZSk7CiAgfQoKICAvLyBIZWFkZXIvcm9vdCBpbnB1dCBvcGVucyB0aGUgc2VhcmNoIGRpYWxvZyB3aGVuIGZvY3VzZWQuCiAgc2VhcmNoSW5wdXQgICAgICAgPSAoKSA9PiB0aGlzLnBhZ2UuZ2V0QnlUZXN0SWQoJ3ZvbHQtc2VhcmNoLWJveC1yb290JykuZ2V0QnlUZXN0SWQoJ3NlYXJjaC1iYXItaW5wdXQnKTsKICBkaWFsb2dTZWFyY2hJbnB1dCA9ICgpID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZCgndm9sdC1zZWFyY2gtZGlhbG9nJykuZ2V0QnlUZXN0SWQoJ3NlYXJjaC1iYXItaW5wdXQnKTsKICBzZWFyY2hTdWJtaXRCdXR0b24gPSAoKSA9PiB0aGlzLnBhZ2UuZ2V0QnlUZXN0SWQoJ3ZvbHQtc2VhcmNoLWRpYWxvZycpLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvc2VhcmNofHN1Ym1pdC9pIH0pOwoKICBhc3luYyBmaWxsU2VhcmNoSW5wdXQoa2V5d29yZDogc3RyaW5nKTogUHJvbWlzZTx2b2lkPiB7CiAgICBhd2FpdCB0aGlzLnNlYXJjaElucHV0KCkuY2xpY2soKTsKICAgIGF3YWl0IHRoaXMuZGlhbG9nU2VhcmNoSW5wdXQoKS5maWxsKGtleXdvcmQpOwogIH0KCiAgYXN5bmMgY2xpY2tTdWJtaXRCdXR0b24oKTogUHJvbWlzZTx2b2lkPiB7CiAgICBhd2FpdCB0aGlzLnNlYXJjaFN1Ym1pdEJ1dHRvbigpLmNsaWNrKCk7CiAgfQoKICBhc3luYyB3YWl0Rm9yU2VhcmNoTmF2aWdhdGlvbihrZXl3b3JkOiBzdHJpbmcpOiBQcm9taXNlPHZvaWQ+IHsKICAgIGF3YWl0IHRoaXMucGFnZS53YWl0Rm9yVVJMKGAqKi9zZWFyY2gvJHtrZXl3b3JkfSoqYCwgeyB0aW1lb3V0OiAzMF8wMDAgfSk7CiAgfQoKICBhc3luYyBnZXRTZWFyY2hJbnB1dFZhbHVlKCk6IFByb21pc2U8c3RyaW5nPiB7CiAgICByZXR1cm4gKGF3YWl0IHRoaXMuZGlhbG9nU2VhcmNoSW5wdXQoKS5pbnB1dFZhbHVlKCkpID8/ICcnOwogIH0KfQo=
+import { Page } from '@playwright/test';
+import { BasePage } from './BasePage';
+
+export class HeaderSearchPage extends BasePage {
+  constructor(page: Page) {
+    super(page);
+  }
+
+  // Header/root input opens the search dialog when focused.
+  searchInput       = () => this.page.getByTestId('volt-search-box-root').getByTestId('search-bar-input');
+  dialogSearchInput = () => this.page.getByTestId('volt-search-dialog').getByTestId('search-bar-input');
+  searchSubmitButton = () => this.page.getByTestId('volt-search-dialog').getByRole('button', { name: /search|submit/i });
+
+  async fillSearchInput(keyword: string): Promise<void> {
+    await this.searchInput().click();
+    await this.dialogSearchInput().fill(keyword);
+  }
+
+  async clickSubmitButton(): Promise<void> {
+    await this.searchSubmitButton().click();
+  }
+
+  async waitForSearchNavigation(keyword: string): Promise<void> {
+    await this.page.waitForURL(`**/search/${keyword}**`, { timeout: 30_000 });
+  }
+
+  async getSearchInputValue(): Promise<string> {
+    return (await this.dialogSearchInput().inputValue()) ?? '';
+  }
+}
