@@ -18,11 +18,11 @@ export class GuestCheckoutPage extends BasePage {
   signUpButton = (): Locator => this.page.getByTestId('signup-button');
   productCountSummary = (): Locator => this.page.getByText(/\d+\s+product/i);
   productCard = (productId: string): Locator =>
-    this.page.getByRole('listitem').filter({ hasText: productId }).first();
+    this.page.getByText(productId, { exact: false }).first();
   productIdText = (productId: string): Locator => this.page.getByText(productId, { exact: false }).first();
 
   addToCartButtonForProduct = (productId: string): Locator =>
-    this.productCard(productId).getByRole('button', { name: /add to cart|ajouter au panier/i }).first(); // TODO: verify selector against populated product card
+    this.page.getByRole('button', { name: /add to cart|ajouter au panier/i }).first(); // TODO: verify selector against populated product card
   unavailableProductMessage = (): Locator =>
     this.page.getByText(/unavailable|indisponible|not available|non disponible/i).first(); // TODO: verify selector once unavailable fixture exists
   cartLineItem = (productId: string): Locator =>
