@@ -1,1 +1,37 @@
-aW1wb3J0IHsgUGFnZSB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwppbXBvcnQgeyBCYXNlUGFnZSB9IGZyb20gJy4vQmFzZVBhZ2UnOwoKZXhwb3J0IGNsYXNzIEhvbWVQYWdlIGV4dGVuZHMgQmFzZVBhZ2UgewogIGNvbnN0cnVjdG9yKHBhZ2U6IFBhZ2UpIHsgc3VwZXIocGFnZSk7IH0KCiAgLy8gSGVhZGVyIG5hdmlnYXRpb24g4oCUIHByZS1sb2dpbiBzdGF0ZSAoc3RyYXRlZ3k6IGRhdGEtdGVzdGlkLCB1bmlxdWUgb24gcGFnZSkKICBoZWFkZXJMb2dpbkxpbmsgPSAoKSA9PiB0aGlzLnBhZ2UuZ2V0QnlUZXN0SWQoJ2xvZ2luLWJ1dHRvbicpOwoKICAvLyBIZWFkZXIgbmF2aWdhdGlvbiDigJQgcG9zdC1sb2dpbiBhdXRoZW50aWNhdGVkIHN0YXRlIChzdHJhdGVneTogZGF0YS10ZXN0aWQpCiAgdXNlckRldGFpbHNCdXR0b24gPSAoKSA9PiB0aGlzLnBhZ2UuZ2V0QnlUZXN0SWQoJ3VzZXItZGV0YWlscy1idXR0b24nKTsKICBjYXJ0QnV0dG9uICAgICAgICA9ICgpID0+IHRoaXMucGFnZQogICAgLmdldEJ5VGVzdElkKCdoZWFkZXItY2FydCcpCiAgICAuZ2V0QnlUZXN0SWQoJ2NhcnQtYnV0dG9uJykKICAgIC5vcih0aGlzLnBhZ2UuZ2V0QnlUZXN0SWQoJ2hlYWRlci1jYXJ0LW1vYmlsZScpLmdldEJ5VGVzdElkKCdjYXJ0LWJ1dHRvbicpKQogICAgLmZpbHRlcih7IHZpc2libGU6IHRydWUgfSk7CgogIC8vIEhvbWVwYWdlIGhlcm8gY29udGVudCAoc3RyYXRlZ3k6IHJvbGUrbmFtZSwgbGV2ZWw9MSkKICB3ZWxjb21lSGVhZGluZyA9ICgpID0+IHRoaXMucGFnZS5nZXRCeVJvbGUoJ2hlYWRpbmcnLCB7IG5hbWU6ICdXZWxjb21lJywgbGV2ZWw6IDEgfSk7CgogIC8vIFNlYXJjaCBiYXIgKHN0cmF0ZWd5OiBkYXRhLXRlc3RpZCkKICBzZWFyY2hCYXJJbnB1dCA9ICgpID0+IHRoaXMucGFnZS5nZXRCeVRlc3RJZCgnc2VhcmNoLWJhci1pbnB1dCcpOwoKICAvLyAtLS0gU2ltcGxlIFVJIGFjdGlvbnMgLS0tCgogIGFzeW5jIGNsaWNrSGVhZGVyTG9naW5MaW5rKCk6IFByb21pc2U8dm9pZD4gewogICAgYXdhaXQgdGhpcy5oZWFkZXJMb2dpbkxpbmsoKS5jbGljaygpOwogIH0KCiAgYXN5bmMgY2xpY2tDYXJ0QnV0dG9uKCk6IFByb21pc2U8dm9pZD4gewogICAgYXdhaXQgdGhpcy5jYXJ0QnV0dG9uKCkuY2xpY2soKTsKICB9CgogIGFzeW5jIGdldFVzZXJEZXRhaWxzQnV0dG9uVGV4dCgpOiBQcm9taXNlPHN0cmluZz4gewogICAgcmV0dXJuIChhd2FpdCB0aGlzLnVzZXJEZXRhaWxzQnV0dG9uKCkudGV4dENvbnRlbnQoKSkgPz8gJyc7CiAgfQp9Cg==
+import { Page } from '@playwright/test';
+import { BasePage } from './BasePage';
+
+export class HomePage extends BasePage {
+  constructor(page: Page) { super(page); }
+
+  // Header navigation — pre-login state (strategy: data-testid, unique on page)
+  headerLoginLink = () => this.page.getByTestId('login-button');
+
+  // Header navigation — post-login authenticated state (strategy: data-testid)
+  userDetailsButton = () => this.page.getByTestId('user-details-button');
+  cartButton        = () => this.page
+    .getByTestId('header-cart')
+    .getByTestId('cart-button')
+    .or(this.page.getByTestId('header-cart-mobile').getByTestId('cart-button'))
+    .filter({ visible: true });
+
+  // Homepage hero content (strategy: role+name, level=1)
+  welcomeHeading = () => this.page.getByRole('heading', { name: 'Welcome', level: 1 });
+
+  // Search bar (strategy: data-testid)
+  searchBarInput = () => this.page.getByTestId('search-bar-input');
+
+  // --- Simple UI actions ---
+
+  async clickHeaderLoginLink(): Promise<void> {
+    await this.headerLoginLink().click();
+  }
+
+  async clickCartButton(): Promise<void> {
+    await this.cartButton().click();
+  }
+
+  async getUserDetailsButtonText(): Promise<string> {
+    return (await this.userDetailsButton().textContent()) ?? '';
+  }
+}
