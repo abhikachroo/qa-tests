@@ -17,14 +17,14 @@ export class SearchResultsPage extends BasePage {
   productIdText = (productId: string) =>
     this.page.getByText(productId, { exact: false }).first();
 
-  // Add-to-cart control exposed as a visible role button on the results list.
-  addToCartButton = (productId: string) =>
-    this.page.getByRole('button', { name: /^Add to cart$/i }).first();
+  // No-results state varies by localization and routing fallback; keep text alternatives stable.
+  noResultsMessage = () => this.page.getByText(/no results|aucun résultat|we couldn't find that page/i).first();
 
-  // Generic error page locator observed during route extraction.
-  errorPageContainer = () => this.page.getByTestId('Error404');
+  async clickProductCard(productId: string): Promise<void> {
+    await this.productCard(productId).click();
+  }
 
-  async clickAddToCart(productId: string): Promise<void> {
-    await this.addToCartButton(productId).click();
+  async pressProductCard(productId: string): Promise<void> {
+    await this.productCard(productId).press('Enter');
   }
 }

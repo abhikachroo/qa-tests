@@ -6,21 +6,27 @@ export class HeaderSearchPage extends BasePage {
     super(page);
   }
 
-  // Header/root search control and dialog submit button.
-  searchInput = () => this.page.getByRole('searchbox', { name: /search input/i }).first();
-  dialogSearchInput = () => this.page.getByRole('searchbox', { name: /search input/i }).first();
+  // Header/root input opens the search dialog when focused.
+  searchInput       = () => this.page.getByTestId('volt-search-box-root').getByTestId('search-bar-input');
+  dialogSearchInput = () => this.page.getByTestId('volt-search-dialog').getByTestId('search-bar-input');
+  submitSearchButton = () => this.page.getByLabel('Submit search');
 
   async fillSearchInput(keyword: string): Promise<void> {
     await this.searchInput().click();
     await this.dialogSearchInput().fill(keyword);
   }
 
+  async clearSearchInput(): Promise<void> {
+    await this.searchInput().click();
+    await this.dialogSearchInput().clear();
+  }
+
   async clickSubmitButton(): Promise<void> {
-    await this.page.getByRole('button', { name: /submit search/i }).click();
+    await this.dialogSearchInput().press('Enter');
   }
 
   async waitForSearchNavigation(keyword: string): Promise<void> {
-    await this.page.waitForURL(`**/search/${encodeURIComponent(keyword)}**`, { timeout: 30_000 });
+    await this.page.waitForURL(`**/search/${keyword}**`, { timeout: 30_000 });
   }
 
   async getSearchInputValue(): Promise<string> {
