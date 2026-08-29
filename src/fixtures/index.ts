@@ -5,8 +5,9 @@ import {
   SearchResultsPage,
   LoginPage,
   HomePage,
+  CartPage,
 } from '@pages/index';
-import { SearchModule, LoginModule } from '@modules/index';
+import { SearchModule, LoginModule, CartModule } from '@modules/index';
 
 type TestFixtures = {
   // Search fixtures
@@ -18,6 +19,9 @@ type TestFixtures = {
   loginPage:   LoginPage;
   homePage:    HomePage;
   loginModule: LoginModule;
+  // Cart recommendation fixtures
+  cartPage:   CartPage;
+  cartModule: CartModule;
 };
 
 export const test = base.extend<TestFixtures>({
@@ -49,6 +53,15 @@ export const test = base.extend<TestFixtures>({
 
   loginModule: async ({ loginPage, homePage }, use) => {
     await use(new LoginModule(loginPage, homePage));
+  },
+
+  // --- Cart recommendations ---
+  cartPage: async ({ page }, use) => {
+    await use(new CartPage(page));
+  },
+
+  cartModule: async ({ cartPage }, use) => {
+    await use(new CartModule(cartPage));
   },
 });
 
