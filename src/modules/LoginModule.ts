@@ -23,7 +23,7 @@ export class LoginModule {
    *   3. Click the header login link — redirects to Azure B2C domain
    *   4. Fill email and password on the Azure B2C form
    *   5. Click submit — Azure B2C redirects back to the app
-   *   6. Wait for page load
+   *   6. Wait for authenticated header state
    *
    * @param username - Defaults to config.username (from config.json)
    * @param password - Defaults to config.password (from config.json)
@@ -34,16 +34,25 @@ export class LoginModule {
   ): Promise<void> {
     this.logger.info(`[${config.opco}][${config.environment}] Starting login for: ${username}`);
     await this.homePage.navigate('/');
-    await this.homePage.waitForPageLoad();
+    await expect(
+      this.homePage.headerLoginLink(),
+      'Header login link should be visible before starting authentication',
+    ).toBeVisible();
     await this.homePage.dismissCookieBannerIfPresent();
     await this.homePage.clickHeaderLoginLink();
-    await this.loginPage.waitForPageLoad();
+    await expect(
+      this.loginPage.emailInput(),
+      'Azure B2C email input should be visible before entering credentials',
+    ).toBeVisible();
     this.logger.info('Azure B2C login form loaded');
     await this.loginPage.fillEmail(username);
     await this.loginPage.fillPassword(password);
     await this.loginPage.clickSubmit();
-    await this.homePage.waitForPageLoad();
-    this.logger.info('Login flow completed — post-login state pending verification');
+    await expect(
+      this.homePage.userDetailsButton(),
+      'Authenticated user details button should be visible after login redirect',
+    ).toBeVisible({ timeout: 30000 });
+    this.logger.info('Login flow completed — authenticated header is visible');
   }
 
   /**
